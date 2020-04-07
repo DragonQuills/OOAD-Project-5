@@ -2,16 +2,15 @@ import java.util.ArrayList; //Referenced https://www.w3schools.com/java/java_arr
 
 public class Room{
 // attributes
-public:
-  String name;
-private:
-  ArrayList<PlantPot> plants;
-  ArrayList<WaterReservoir> reservoirs;
-  TempuratureSensor temp_sensor;
-  int lowest_temp;
-  int highest_temp;
-  PlantFactory plant_factory;
-  ArrayList<App> observers;
+  public String name;
+
+  private ArrayList<PlantPot> plants;
+  private ArrayList<WaterReservoir> reservoirs;
+  private TempuratureSensor temp_sensor;
+  private int lowest_temp;
+  private int highest_temp;
+  private PlantFactory plant_factory;
+  private ArrayList<App> observers;
 
 //methods
   private void manage_room(){}
@@ -29,5 +28,5 @@ private:
   public void update(){}
 
 // constructor
-public Room(String name, TempuratureSensor temp_sensor, int lowest_temp, int highest_temp){}
+  public Room(String name, TempuratureSensor temp_sensor, int lowest_temp, int highest_temp){}
 }
