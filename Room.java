@@ -27,4 +27,7 @@ private:
   public void add_observer(App app){}
   public void remove_observer(App app){}
   public void update(){}
+
+// constructor
+public Room(String name, TempuratureSensor temp_sensor, int lowest_temp, int highest_temp){}
 }
