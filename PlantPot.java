@@ -2,8 +2,10 @@ class PlantPot{
 //attributes
   public String name;
   public String plant_type;
-    // Timer timer;
-    // WaterSensor water_sensor;
+  private Light light;
+  private Hose hose;
+  private Timer timer;
+  private WaterSensor water_sensor;
   private int desired_soil_humidity; // this determines how much the plant will be watered
   private int min_soil_humidity; //this is the level at or below which the plant will be watered
 
