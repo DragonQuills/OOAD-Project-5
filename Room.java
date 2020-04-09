@@ -1,6 +1,6 @@
 import java.util.ArrayList; //Referenced https://www.w3schools.com/java/java_arraylist.asp
 
-public class Room{
+class Room{
 // attributes
   public String name;
 
