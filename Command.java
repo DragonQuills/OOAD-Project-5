@@ -9,28 +9,28 @@ public interface Command {
 
 //Theoretically we could use a pattern to implement on and off functions
 //We don't need to but its an option
-public class Light{
+class Light{
   public void on(){}
   public void off(){}
 }
 
-public class AC {
+class AC {
   public void on() {}
   public void off() {}
 }
 
-public class Heater{
+class Heater{
   public void on(){}
   public void off(){}
 }
 
-public class Hose{
+class Hose{
   public void on(){}
   public void off(){  }
 }
 
 //Specific Commands
-public class LightOnCommand implements Command {
+class LightOnCommand implements Command {
   Light light;
 
   public LightOnCommand(Light light) {
@@ -42,7 +42,7 @@ public class LightOnCommand implements Command {
   }
 }
 
-public class LightOffCommand implements Command {
+class LightOffCommand implements Command {
   Light light;
 
   public LightOffCommand(Light light) {
@@ -54,7 +54,7 @@ public class LightOffCommand implements Command {
   }
 }
 
-public class WaterOnCommand implements Command {
+class WaterOnCommand implements Command {
   Hose hose;
 
   public WaterOnCommand(Hose hose) {
@@ -66,7 +66,7 @@ public class WaterOnCommand implements Command {
   }
 }
 
-public class WaterOffCommand implements Command {
+class WaterOffCommand implements Command {
   Hose hose;
 
   public WaterOffCommand(Hose hose) {
@@ -78,7 +78,7 @@ public class WaterOffCommand implements Command {
   }
 }
 
-public class HeatUpCommand implements Command {
+class HeatUpCommand implements Command {
   AC ac;
   Heater heater;
 
@@ -93,7 +93,7 @@ public class HeatUpCommand implements Command {
   }
 }
 
-public class CoolDownCommand implements Command {
+class CoolDownCommand implements Command {
   AC ac;
   Heater heater;
 
@@ -108,7 +108,7 @@ public class CoolDownCommand implements Command {
   }
 }
 
-public class SameTempCommand implements Command {
+class SameTempCommand implements Command {
   AC ac;
   Heater heater;
 
