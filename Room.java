@@ -6,11 +6,14 @@ class Room{
 
   private ArrayList<PlantPot> plants;
   private ArrayList<WaterReservoir> reservoirs;
-  private TempuratureSensor temp_sensor;
   private int lowest_temp;
   private int highest_temp;
   private PlantFactory plant_factory;
   private ArrayList<App> observers;
+  private AC ac;
+  private Heater heater;
+  private TempuratureSensor temp_sensor;
+
 
 //methods
   private void manage_room(){}
