@@ -6,8 +6,8 @@ class WaterSensor{
 // methods
   // PlantPot will take a reading, then water if the humidity is below the min soil humitity.
   // PlantPot will continue to take a reading, then water until the level is at the desired humidity.
-  public take_reading(){}
-  public water_plant(){}
+  public void take_reading(){}
+  public void water_plant(){}
 // constructor
-  public WaterSensor(WaterReservoir res, Command hose_on, Command hose_off)
+  public WaterSensor(WaterReservoir res, Command hose_on, Command hose_off){}
 }
