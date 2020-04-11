@@ -4,7 +4,7 @@ class TempuratureSensor{
   private Command cool_room;
   private Command hold_temp;
 // methods
-  public float take_reading(){}
+  //public float take_reading(){}
 // constructor
   public TempuratureSensor(Command heat, Command cool, Command hold){}
 }
