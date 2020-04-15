@@ -39,6 +39,10 @@ class PlantPot{
     water_sensor = new WaterSensor(hose_on, hose_off);
   }
 
+  public void time_passes(int hours){
+    // timer.time_passes(hours);
+    water_sensor.time_passes(hours);
+  }
 //constructor
   public PlantPot(String new_name, String new_plant_type){
       name = new_name;
