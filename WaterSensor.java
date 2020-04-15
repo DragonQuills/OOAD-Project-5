@@ -20,6 +20,8 @@ class WaterSensor{
     hose_off.execute();
   }
 
+  // normally this would be actual time passing and the water level lowering
+  // but sicne we have no actual hardware we're simulating it this way.
   public void time_passes(int hours){
     current_humidity -= hours*5;
     if(current_humidity < 0){
