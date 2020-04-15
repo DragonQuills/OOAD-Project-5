@@ -4,7 +4,7 @@ class PlantPot{
   public String plant_type;
 
   private Light light;
-  private Hose hose;
+  // private Hose hose;
   private WaterReservoir res;
   private Timer timer;
   private WaterSensor water_sensor;
@@ -33,7 +33,7 @@ class PlantPot{
 
   public void set_water_reservoir(WaterReservoir new_res){
     res = new_res;
-    hose = new Hose(res);
+    Hose hose = new Hose(res);
     Command hose_on = new WaterOnCommand(hose);
     Command hose_off = new WaterOffCommand(hose);
     water_sensor = new WaterSensor(hose_on, hose_off);
