@@ -25,8 +25,17 @@ class Heater{
 }
 
 class Hose{
-  public void on(){}
-  public void off(){  }
+  WaterReservoir res;
+  public void on(){
+    System.out.println("The hose is on.");
+    res.water_used(5);
+    System.out.println(res.report_current_level());
+  }
+  public void off(){
+    System.out.println("The hose is off.");
+  }
+
+  Hose(WaterReservoir wr){res = wr;}
 }
 
 //Specific Commands
