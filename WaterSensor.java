@@ -1,6 +1,5 @@
 class WaterSensor{
 // attributes
-  // private WaterReservoir res;
   private float current_humidity;
   private Command hose_on;
   private Command hose_off;
@@ -10,6 +9,7 @@ class WaterSensor{
   public float take_reading(){
     return current_humidity;
   }
+
   public void water_plant(){
     current_humidity += 5;
 
@@ -19,10 +19,17 @@ class WaterSensor{
     hose_on.execute();
     hose_off.execute();
   }
+
+  public void time_passes(int hours){
+    current_humidity -= hours*5;
+    if(current_humidity < 0){
+      current_humidity = 0;
+    }
+  }
 // constructor
-  public WaterSensor(/*WaterReservoir new_res,*/ Command new_hose_on, Command new_hose_off){
-    // res = new_res;
+  public WaterSensor(Command new_hose_on, Command new_hose_off){
     hose_on = new_hose_on;
     hose_off = new_hose_off;
+    current_humidity = 0;
   }
 }
