@@ -27,7 +27,6 @@ class PlantPot{
 
   //this checks the water sensor and then tells it to water the plant if the water level is too low
   public void check_water(){
-    System.out.println("Checking water for " + name + "...");
     float current_water_level = water_sensor.take_reading();
     if(current_water_level < min_soil_humidity){
       while(current_water_level < desired_soil_humidity){
@@ -51,6 +50,7 @@ class PlantPot{
   // Used to make water "evaporate" and turn the light on or off.
   public void time_passes(int hours){
     for(int i = 0; i < hours; i++){
+      System.out.println("Passing time for " + name);
       timer.hour_passed();
       water_sensor.hour_passed();
     }
