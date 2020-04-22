@@ -7,6 +7,7 @@ class TempuratureSensor{
   private int current_temp;
   private int min_temp;
   private int max_temp;
+  private int median_temp;
   private int temp_modification;
   private boolean temp_modification_from_me;
 // methods
@@ -20,15 +21,17 @@ class TempuratureSensor{
     max_temp = new_max;
   }
   public void set_temp_modification(int new_modification){
-    temp_modification = new_modification;
-    temp_modification_from_me = false;
+    if(temp_modification == 0){ // the heater and ac are off
+      temp_modification = new_modification;
+      temp_modification_from_me = false;
+    }
   }
 
   public void check_temp(){
-    if(current_temp < max_temp && current_temp > min_temp){
+    if(current_temp == median_temp){
       // Used to simulate external tempurature changes effecting the rooms
       if (temp_modification != 0 && temp_modification_from_me == true){
-        System.out.println("Tempurature is in desired range, turning off AC and heater.");
+        System.out.println("Tempurature is at median tempurature, turning off AC and heater.");
         hold_temp.execute();
         temp_modification = 0;
         temp_modification_from_me = true;
@@ -61,5 +64,6 @@ class TempuratureSensor{
 
     current_temp = max_temp - 10;
     temp_modification = 0;
+    median_temp = min_temp + (max_temp - min_temp)/2;
   }
 }

@@ -52,7 +52,7 @@ class test_file{
       System.out.println("");
 
       // It got hot out!
-      if (i == 24){
+      if (i >= 24){
         System.out.println("It's hot outside!");
         temp_sensor.set_temp_modification(3);
       }
