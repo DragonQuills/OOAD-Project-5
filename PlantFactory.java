@@ -6,7 +6,9 @@ import java.io.IOException;
 class PlantFactory{
 // methods
   public PlantPot get_plant(String name, String type){
-
+    PlantPot plantPot;
+    plantPot.min_soil_humidity = query_api(type)[0];
+    plantPot.max_soil_humidity = query_api(type)[1];
 
   }
   private PlantPot query_api(String type){
@@ -25,6 +27,7 @@ class PlantFactory{
           String min_soil_humidity = data[3];
           String min_temp = data[4];
           String max_Temp = data[5];
+          return [min_soil_humidity,max_soil_humidity];
         }
 
       }
@@ -32,7 +35,6 @@ class PlantFactory{
       e.printStackTrace();
     }
 
-    return [min_soil_humidity,max_soil_humidity];
   }
   public boolean conditions_ok_for_plant(PlantPot p, Room r){
     if (r.lowest_temp > p.min_temp && r.highest_temp < p.max_temp){
@@ -44,10 +46,9 @@ class PlantFactory{
 
   }
 // constructor
+//I was not sure how we plan to handle the plant type input
+//this seems like one possible way
   public PlantFactory(){
-    Scanner scanner = new Scanner(System.in);
-    System.out.println("Add Plant:");
-
-    String nationality = scanner.nextLine();
+    S
   }
 }
