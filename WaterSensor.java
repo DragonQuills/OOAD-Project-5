@@ -11,7 +11,7 @@ class WaterSensor{
   }
 
   public void water_plant(){
-    current_humidity += 5;
+    current_humidity += 10;
 
     // In a real greenhouse system, this would water for a certain amount of time
     // which would determine how much water the plant gets.
