@@ -6,7 +6,22 @@ class Timer{
   private int time_left;
   private boolean is_light_on;
 //methods
-  public void hour_passed(){}
+  public void hour_passed(){
+    time_left --;
+    if(time_left <= 0){
+      if(is_light_on){
+        light_off.execute();
+        time_left = hours_on;
+        is_light_on = false;
+      }
+      else{
+        light_on.execute();
+        time_left = 24 - hours_on;
+        is_light_on = true;
+      }
+    }
+  }
+  
   public float get_hours_on(){return hours_on;}
   public void set_hours_on(float hours_on){}
 //constructor
