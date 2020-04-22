@@ -22,18 +22,26 @@ class PlantPot{
 
 
   }
+
+  public void set_timer(Timer t){
+    timer = t;
+  }
+
   //this checks the water sensor and then tells it to water the plant if the water level is too low
   public void check_water(){
+    System.out.println("Checking water for " + name + "...");
     float current_water_level = water_sensor.take_reading();
     if(current_water_level < min_soil_humidity){
       while(current_water_level < desired_soil_humidity){
+        System.out.println("Water is too low at " + current_water_level + ", watering plant.");
         water_sensor.water_plant();
         current_water_level = water_sensor.take_reading();
       }
+      System.out.println("Water is now at " + current_water_level + ", finished watering.");
     }
   }
 
-  // this connect the plant to a new water reservoir and sets up the sensors and hose and whatnot
+  // this connects the plant to a new water reservoir and sets up the sensors and hose and whatnot
   public void set_water_reservoir(WaterReservoir new_res){
     res = new_res;
     Hose hose = new Hose(res);
@@ -42,9 +50,10 @@ class PlantPot{
     water_sensor = new WaterSensor(hose_on, hose_off);
   }
 
+  // Used to make water "evaporate" and turn the light on or off.
   public void time_passes(int hours){
     for(int i = 0; i < hours; i++){
-      // timer.hour_passed();
+      timer.hour_passed();
       water_sensor.hour_passed();
     }
   }
