@@ -59,7 +59,7 @@ public class Main {
         scanner.close();
     }
 
-    private static boolean registerUser(){
+    private static int registerUser(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter a username: ");
         String username = scanner.next();
@@ -82,7 +82,7 @@ public class Main {
                 }
                 if(splitLine[1].equals(username)){
                     System.out.println("Username already registered");
-                    return false;
+                    return -1;
                 }
                 if(Integer.parseInt(splitLine[0]) > maxId){
                     maxId = Integer.parseInt(splitLine[0]);
@@ -92,11 +92,11 @@ public class Main {
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
-            return false;
+            return -1;
         }     
         catch(IOException e){
             e.printStackTrace();
-            return false;
+            return -1;
         }   
         //If the code has reached this point that username is not registered
         try{
@@ -109,8 +109,8 @@ public class Main {
         }
         catch(IOException e){
             e.printStackTrace();
-            return false;
+            return -1;
         }
-        return true;
+        return maxId+1;
     }
 }
