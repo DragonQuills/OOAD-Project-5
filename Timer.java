@@ -21,11 +21,11 @@ class Timer{
       }
     }
   }
-  
-  public float get_hours_on(){return hours_on;}
+
+  public int get_hours_on(){return hours_on;}
   public void set_hours_on(float hours_on){}
 //constructor
-  public Timer(Command new_light_on, Command new_light_off, float new_hours_on){
+  public Timer(Command new_light_on, Command new_light_off, int new_hours_on){
     light_on = new_light_on;
     light_off = new_light_off;
     hours_on = new_hours_on;
