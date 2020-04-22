@@ -44,7 +44,13 @@ public class Main {
                 //Add room
             }
             else if(intInput == 2){
-                createReservoir(userId);
+                System.out.println("Enter reservoir name: ");
+                String reservoirName = scanner.next();
+                System.out.println("Max capacity: ");
+                int capacity = scanner.nextInt();
+                System.out.println("Warning level: ");
+                int warning = scanner.nextInt();
+                createReservoir(userId, reservoirName, capacity, warning);
             }
             else if(intInput == 3){
                 //Add plant
@@ -157,14 +163,7 @@ public class Main {
         return -1;
     }
 
-    private static WaterReservoir createReservoir(int userId){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter reservoir name: ");
-        String name = scanner.next();
-        System.out.println("Max capacity: ");
-        int capacity = scanner.nextInt();
-        System.out.println("Warning level: ");
-        int warning = scanner.nextInt();
+    private static WaterReservoir createReservoir(int userId, String name, int capacity, int warning){
         File reservoirsFile = new File("./storage/reservoirs.csv");
         int maxId = 0;
         try{
