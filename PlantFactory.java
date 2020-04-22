@@ -21,7 +21,7 @@ class PlantFactory{
         String[] data = line.split(delimiter);
         if data[0] == type{
           String light_time = data[1];
-          String desired_soil_humidity = data[2];
+          String max_soil_humidity = data[2];
           String min_soil_humidity = data[3];
           String min_temp = data[4];
           String max_Temp = data[5];
@@ -31,6 +31,8 @@ class PlantFactory{
     } catch (IOException e) {
       e.printStackTrace();
     }
+
+    return [min_soil_humidity,max_soil_humidity];
   }
   public boolean conditions_ok_for_plant(PlantPot p, Room r){
     if (r.lowest_temp > p.min_temp && r.highest_temp < p.max_temp){
@@ -42,5 +44,10 @@ class PlantFactory{
 
   }
 // constructor
-  public PlantFactory(){}
+  public PlantFactory(){
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("Add Plant:");
+
+    String nationality = scanner.nextLine();
+  }
 }
