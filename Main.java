@@ -113,4 +113,42 @@ public class Main {
         }
         return maxId+1;
     }
+
+    private static int loginUser(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a username: ");
+        String username = scanner.next();
+        System.out.println("Enter a password: ");
+        String password = scanner.next();
+        File usersFile = new File("./storage/users.csv");
+        try{
+            FileInputStream f = new FileInputStream(usersFile);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            boolean firstLine = true;
+            while((line = br.readLine()) != null){
+                String[] splitLine = line.split(",");
+                if(firstLine){
+                    firstLine = false;
+                    continue;
+                }
+                if(splitLine[1].equals(username) && splitLine[2].equals(password)){
+                    br.close(); 
+                    return Integer.parseInt(splitLine[0]);
+                }
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+            return -1;
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+            return -1;
+        }
+        // This reaching this point means that username/password combo was not found
+        System.out.println("Username does not exist or incorrect password was entered");
+        return -1;
+    }
 }
