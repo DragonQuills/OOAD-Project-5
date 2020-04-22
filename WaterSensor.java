@@ -11,7 +11,7 @@ class WaterSensor{
   }
 
   public void water_plant(){
-    current_humidity += 5;
+    current_humidity += 10;
 
     // In a real greenhouse system, this would water for a certain amount of time
     // which would determine how much water the plant gets.
@@ -22,8 +22,8 @@ class WaterSensor{
 
   // normally this would be actual time passing and the water level lowering
   // but sicne we have no actual hardware we're simulating it this way.
-  public void time_passes(int hours){
-    current_humidity -= hours*5;
+  public void hour_passed(){
+    current_humidity -= 1;
     if(current_humidity < 0){
       current_humidity = 0;
     }
