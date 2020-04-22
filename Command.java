@@ -6,22 +6,31 @@ public interface Command {
 
 //Physical Objects used by Commands
 
-
-//Theoretically we could use a pattern to implement on and off functions
-//We don't need to but its an option
 class Light{
-  public void on(){}
-  public void off(){}
+  public void on(){
+    System.out.println("The light is on.")
+  }
+  public void off(){
+    System.out.println("The light is off.")
+  }
 }
 
 class AC {
-  public void on() {}
-  public void off() {}
+  public void on() {
+    System.out.println("The AC is on.")
+  }
+  public void off() {
+    System.out.println("The AC is off.")
+  }
 }
 
 class Heater{
-  public void on(){}
-  public void off(){}
+  public void on(){
+    System.out.println("The Heater is on")
+  }
+  public void off(){
+    System.out.println("The Heater is off")
+  }
 }
 
 class Hose{
