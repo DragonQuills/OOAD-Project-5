@@ -43,8 +43,10 @@ class PlantPot{
   }
 
   public void time_passes(int hours){
-    // timer.time_passes(hours);
-    water_sensor.time_passes(hours);
+    for(int i = 0; i < hours; i++){
+      // timer.hour_passed();
+      water_sensor.hour_passed();
+    }
   }
 //constructor
   public PlantPot(String new_name, String new_plant_type){
