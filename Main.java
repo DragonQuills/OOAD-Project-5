@@ -14,14 +14,14 @@ public class Main {
             System.out.println("2. Register");
             int intInput = scanner.nextInt();
             if(intInput == 1){
-                while(userId.equals(-1)){
+                while(userId == -1){
                     userId = loginUser();
                 }
                 validInput = true;
             }
             else if(intInput == 2){
                 //Redirect to register
-                while(userId.equals(-1)){
+                while(userId == -1){
                     userId = registerUser();
                 }
                 validInput = true;
@@ -44,7 +44,7 @@ public class Main {
                 //Add room
             }
             else if(intInput == 2){
-                //Add reservoir
+                createReservoir(userId);
             }
             else if(intInput == 3){
                 //Add plant
@@ -155,5 +155,54 @@ public class Main {
         // This reaching this point means that username/password combo was not found
         System.out.println("Username does not exist or incorrect password was entered");
         return -1;
+    }
+
+    private static WaterReservoir createReservoir(int userId){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter reservoir name: ");
+        String name = scanner.next();
+        System.out.println("Max capacity: ");
+        int capacity = scanner.nextInt();
+        System.out.println("Warning level: ");
+        int warning = scanner.nextInt();
+        File reservoirsFile = new File("./storage/reservoirs.csv");
+        int maxId = 0;
+        try{
+            FileInputStream f = new FileInputStream(reservoirsFile);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            boolean firstLine = true;
+            while((line = br.readLine()) != null){
+                String[] splitLine = line.split(",");
+                if(firstLine){
+                    firstLine = false;
+                    continue;
+                }
+                if(Integer.parseInt(splitLine[0]) > maxId){
+                    maxId = Integer.parseInt(splitLine[0]);
+                }
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+        try{
+            FileWriter fw = new FileWriter(reservoirsFile, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            String line = (maxId+1)+","+String.valueOf(userId)+","+name+","+String.valueOf(capacity)+","+String.valueOf(warning);
+            pw.println(line);
+            pw.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+        return new WaterReservoir(name, capacity, warning);
     }
 }
