@@ -7,18 +7,23 @@ public class Main {
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in); //For terminal input, reference: https://alvinalexander.com/java/edu/pj/pj010005/
         boolean validInput = false;
+        int userId = -1;
         while(!validInput){
             System.out.println("Select an option:");
             System.out.println("1. Login");
             System.out.println("2. Register");
             int intInput = scanner.nextInt();
             if(intInput == 1){
-                //Redirect to login
+                while(userId.equals(-1)){
+                    userId = loginUser();
+                }
                 validInput = true;
             }
             else if(intInput == 2){
                 //Redirect to register
-                registerUser();
+                while(userId.equals(-1)){
+                    userId = registerUser();
+                }
                 validInput = true;
             }
             else{
