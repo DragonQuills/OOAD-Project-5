@@ -8,28 +8,28 @@ public interface Command {
 
 class Light{
   public void on(){
-    System.out.println("The light is on.")
+    System.out.println("The light is on.");
   }
   public void off(){
-    System.out.println("The light is off.")
+    System.out.println("The light is off.");
   }
 }
 
 class AC {
   public void on() {
-    System.out.println("The AC is on.")
+    System.out.println("The AC is on.");
   }
   public void off() {
-    System.out.println("The AC is off.")
+    System.out.println("The AC is off.");
   }
 }
 
 class Heater{
   public void on(){
-    System.out.println("The Heater is on")
+    System.out.println("The Heater is on");
   }
   public void off(){
-    System.out.println("The Heater is off")
+    System.out.println("The Heater is off");
   }
 }
 
@@ -38,7 +38,7 @@ class Hose{
   public void on(){
     System.out.println("The hose is on.");
     res.water_used(5);
-    System.out.println(res.report_current_level());
+    // System.out.println(res.report_current_level());
   }
   public void off(){
     System.out.println("The hose is off.");
