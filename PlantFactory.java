@@ -7,27 +7,34 @@ class PlantFactory{
 // methods
   public PlantPot get_plant(String name, String type){
     PlantPot plantPot;
-    plantPot.min_soil_humidity = query_api(type)[0];
-    plantPot.max_soil_humidity = query_api(type)[1];
+    data = query_csv(type);
+    plantPot.min_soil_humidity = data[0];
+    plantPot.max_soil_humidity = data[1];
+    plantPot.min_Temp = data[2];
+    plantPot.max_Temp = data[3];
 
   }
-  private PlantPot query_api(String type){
+  private PlantPot query_csv(String type){
 
 
-    String csvFile = "./fake_plant_data.csv";
+    String csvFile = "fake_plant_data.csv";
     String line = "";
     String delimiter = ",";
 
     try (BufferedReader br = new BufferedReader(new FileReader(csvFile))){
       while ((line = br.readLine()) != null) {
         String[] data = line.split(delimiter);
-        if data[0] == type{
-          String light_time = data[1];
-          String max_soil_humidity = data[2];
-          String min_soil_humidity = data[3];
-          String min_temp = data[4];
-          String max_Temp = data[5];
-          return [min_soil_humidity,max_soil_humidity];
+        if (data[0] == type){
+          String max_soil_humidity = data[1];
+          String min_soil_humidity = data[2];
+          String min_temp = data[3];
+          String max_Temp = data[4];
+          ArrayList<String> return_data = new ArrayList<String>();
+          return_data.add(min_soil_humidity);
+          return_data.add(max_soil_humidity);
+          return_data.add(min_temp);
+          return_data.add(max_temp);
+          return return_data;
         }
 
       }
@@ -38,10 +45,10 @@ class PlantFactory{
   }
   public boolean conditions_ok_for_plant(PlantPot p, Room r){
     if (r.lowest_temp > p.min_temp && r.highest_temp < p.max_temp){
-      return True;
+      return true;
     }
     else {
-      return False;
+      return false;
     }
 
   }
@@ -49,6 +56,6 @@ class PlantFactory{
 //I was not sure how we plan to handle the plant type input
 //this seems like one possible way
   public PlantFactory(){
-    S
+
   }
 }

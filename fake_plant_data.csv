@@ -1,4 +1,4 @@
-,light_time,max_soil_humidity,min_soil_humidity,min_temp,max_temp
-Rose,12,60,55,50,80
-Basil,12,65,50,50,80
-Cactus,15,50,10,65,110
+,max_soil_humidity,min_soil_humidity,min_temp,max_temp
+Rose,60,55,50,80
+Basil,65,50,50,80
+Succulent,50,10,65,110
