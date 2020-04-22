@@ -18,9 +18,8 @@ class PlantPot{
   public void set_desired_humidity(float new_humid){
     desired_soil_humidity = new_humid;
   }
-  public void set_light_hours(){ //this doesn't change any of Plant's variables, it effects the Timer.
-
-
+  public void set_light_hours(int new_hours_on){ //this doesn't change any of Plant's variables, it effects the Timer.
+    timer.set_hours_on(new_hours_on);
   }
 
   public void set_timer(Timer t){
