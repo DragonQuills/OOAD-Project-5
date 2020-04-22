@@ -10,10 +10,12 @@ public class StorageHandler {
 
     private File usersFile;
     private File reservoirsFile;
+    private File roomsFile;
 
     private StorageHandler(){
         usersFile = new File("./storage/users.csv");
         reservoirsFile = new File("./storage/reservoirs.csv");
+        roomsFile = new File("./storage/rooms.csv");
     }
 
     public static StorageHandler getInstance(){
@@ -185,6 +187,48 @@ public class StorageHandler {
             e.printStackTrace();
         }
         return reservoirs;
+    }
+
+    public void createRoom(int ownerId, String name){
+        //TODO: Change return type to room
+        int maxId = 0;
+        try{
+            FileInputStream f = new FileInputStream(roomsFile);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            boolean firstLine = true;
+            while((line = br.readLine()) != null){
+                String[] splitLine = line.split(",");
+                if(firstLine){
+                    firstLine = false;
+                    continue;
+                }
+                if(Integer.parseInt(splitLine[0]) > maxId){
+                    maxId = Integer.parseInt(splitLine[0]);
+                }
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+        try{
+            FileWriter fw = new FileWriter(roomsFile, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            String line = (maxId+1)+","+String.valueOf(userId)+","+name;
+            pw.println(line);
+            pw.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+        //TODO: return new room
     }
 
 }
