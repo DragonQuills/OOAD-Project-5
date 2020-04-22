@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.io.*; //reference: https://www.tutorialspoint.com/java/java_files_io.htm
 import java.nio.file.*;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -203,5 +204,37 @@ public class Main {
         }
 
         return new WaterReservoir(name, capacity, warning);
+    }
+
+    private static ArrayList<WaterReservoir> getReservoirs(int ownerId){
+        File reservoirsFile = new File("./storage/reservoirs.csv");
+        ArrayList<WaterReservoir> reservoirs = new ArrayList<WaterReservoir>();
+        try{
+            FileInputStream f = new FileInputStream(reservoirsFile);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            boolean firstLine = true;
+            while((line = br.readLine()) != null){
+                String[] splitLine = line.split(",");
+                if(firstLine){
+                    firstLine = false;
+                    continue;
+                }
+                if(Integer.parseInt(splitLine[1]) == ownerId){
+                    String name = splitLine[2];
+                    int capacity = Integer.parseInt(splitLine[3]);
+                    int warning = Integer.parseInt(splitLine[4]);
+                    reservoirs.add(new WaterReservoir(name, capacity, warning));
+                }
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        return reservoirs;
     }
 }
