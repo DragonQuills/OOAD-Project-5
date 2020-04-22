@@ -4,7 +4,6 @@ class PlantPot{
   public String plant_type;
 
   private Light light;
-  // private Hose hose;
   private WaterReservoir res;
   private Timer timer;
   private WaterSensor water_sensor;
@@ -18,10 +17,10 @@ class PlantPot{
   public void set_desired_humidity(float new_humid){
     desired_soil_humidity = new_humid;
   }
-  public void set_light_hours(int new_hours_on){ //this doesn't change any of Plant's variables, it effects the Timer.
+  //this doesn't change any of Plant's variables, it effects the Timer.
+  public void set_light_hours(int new_hours_on){
     timer.set_hours_on(new_hours_on);
   }
-
   public void set_timer(Timer t){
     timer = t;
   }
@@ -57,6 +56,9 @@ class PlantPot{
     }
   }
 //constructor
+  //The constructor is very light because the factory will talk to a mock API to get
+  // most of the data, the user only needs to enter the name and type of plant
+  // normally.
   public PlantPot(String new_name, String new_plant_type){
       name = new_name;
       plant_type = new_plant_type;

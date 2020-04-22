@@ -6,6 +6,7 @@ public interface Command {
 
 //Physical Objects used by Commands
 
+
 class Light{
   public void on(){
     System.out.println("The light is on.");
@@ -14,6 +15,7 @@ class Light{
     System.out.println("The light is off.");
   }
 }
+
 
 class AC {
   public void on() {
@@ -24,6 +26,7 @@ class AC {
   }
 }
 
+
 class Heater{
   public void on(){
     System.out.println("The Heater is on");
@@ -33,12 +36,12 @@ class Heater{
   }
 }
 
+
 class Hose{
   WaterReservoir res;
   public void on(){
     System.out.println("The hose is on.");
     res.water_used(5);
-    // System.out.println(res.report_current_level());
   }
   public void off(){
     System.out.println("The hose is off.");
@@ -46,6 +49,7 @@ class Hose{
 
   Hose(WaterReservoir wr){res = wr;}
 }
+
 
 //Specific Commands
 class LightOnCommand implements Command {
@@ -60,6 +64,7 @@ class LightOnCommand implements Command {
   }
 }
 
+
 class LightOffCommand implements Command {
   Light light;
 
@@ -71,6 +76,7 @@ class LightOffCommand implements Command {
     light.off();
   }
 }
+
 
 class WaterOnCommand implements Command {
   Hose hose;
@@ -84,6 +90,7 @@ class WaterOnCommand implements Command {
   }
 }
 
+
 class WaterOffCommand implements Command {
   Hose hose;
 
@@ -95,6 +102,7 @@ class WaterOffCommand implements Command {
     hose.off();
   }
 }
+
 
 class HeatUpCommand implements Command {
   AC ac;
@@ -111,6 +119,7 @@ class HeatUpCommand implements Command {
   }
 }
 
+
 class CoolDownCommand implements Command {
   AC ac;
   Heater heater;
@@ -125,6 +134,7 @@ class CoolDownCommand implements Command {
     heater.off();
   }
 }
+
 
 class SameTempCommand implements Command {
   AC ac;

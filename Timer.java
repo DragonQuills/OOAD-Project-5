@@ -6,6 +6,7 @@ class Timer{
   private int time_left;
   private boolean is_light_on;
 //methods
+  //This simulates an hour passing and turns the light on or off if need be
   public void hour_passed(){
     time_left --;
     if(time_left <= 0){
@@ -22,8 +23,12 @@ class Timer{
     }
   }
 
-  public int get_hours_on(){return hours_on;}
-  public void set_hours_on(float hours_on){}
+  public int get_hours_on(){
+    return hours_on;
+  }
+  public void set_hours_on(int new_hours_on){
+    hours_on = new_hours_on;
+  }
 //constructor
   public Timer(Command new_light_on, Command new_light_off, int new_hours_on){
     light_on = new_light_on;
