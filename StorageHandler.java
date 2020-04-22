@@ -30,7 +30,6 @@ public class StorageHandler {
         String username = scanner.next();
         System.out.println("Enter a password: ");
         String password = scanner.next();
-        File usersFile = new File("./storage/users.csv");
         //Ref: https://tutoref.com/how-to-read-and-write-files-in-java-8/
         int maxId;
         try{
@@ -85,7 +84,6 @@ public class StorageHandler {
         String username = scanner.next();
         System.out.println("Enter a password: ");
         String password = scanner.next();
-        File usersFile = new File("./storage/users.csv");
         try{
             FileInputStream f = new FileInputStream(usersFile);
             BufferedReader br = new BufferedReader(new InputStreamReader(f));
@@ -118,7 +116,6 @@ public class StorageHandler {
     }
 
     public WaterReservoir createReservoir(int userId, String name, int capacity, int warning){
-        File reservoirsFile = new File("./storage/reservoirs.csv");
         int maxId = 0;
         try{
             FileInputStream f = new FileInputStream(reservoirsFile);
@@ -160,7 +157,6 @@ public class StorageHandler {
     }
 
     public ArrayList<WaterReservoir> getReservoirs(int ownerId){
-        File reservoirsFile = new File("./storage/reservoirs.csv");
         ArrayList<WaterReservoir> reservoirs = new ArrayList<WaterReservoir>();
         try{
             FileInputStream f = new FileInputStream(reservoirsFile);
