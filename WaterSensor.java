@@ -20,6 +20,11 @@ class WaterSensor{
     hose_off.execute();
   }
 
+  // Used for the PlantPot status report
+  public float get_current_humidity(){
+    return current_humidity;
+  }
+
   // normally this would be actual time passing and the water level lowering
   // but sicne we have no actual hardware we're simulating it this way.
   public void hour_passed(){

@@ -26,8 +26,13 @@ class Timer{
   public int get_hours_on(){
     return hours_on;
   }
+
   public void set_hours_on(int new_hours_on){
     hours_on = new_hours_on;
+  }
+
+  public boolean get_light_status(){
+    return is_light_on;
   }
 //constructor
   public Timer(Command new_light_on, Command new_light_off, int new_hours_on){

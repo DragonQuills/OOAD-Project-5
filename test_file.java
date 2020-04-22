@@ -15,6 +15,7 @@ class test_file{
     Timer rosemary_timer = new Timer(light_on, light_off, 8);
 
     rosemary.set_timer(rosemary_timer);
+    System.out.println(rosemary.status_report());
 
     for(int i = 0; i < 48; i++){
       int time = i%24;
@@ -23,5 +24,6 @@ class test_file{
       rosemary.check_water();
       System.out.println("");
     }
+    System.out.println(rosemary.status_report());
   }
 }
