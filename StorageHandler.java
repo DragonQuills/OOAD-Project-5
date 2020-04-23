@@ -189,14 +189,14 @@ public class StorageHandler {
         //TODO: return new room
     }
 
-    public PlantPot createPlant(int room, int reservoirId, WaterReservoir reservoir, String name, String type){
+    public PlantPot createPlant(int reservoirId, WaterReservoir reservoir, String name, String type){
         int maxId = getMaxId(plantsFile);
-
+        //room is not needed as reservoir manages that relation
         try{
             FileWriter fw = new FileWriter(plantsFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            String line = (maxId+1)+","+room+","+reservoirId+","+name+","+type;
+            String line = (maxId+1)+","+reservoirId+","+name+","+type+",0"; //0 indicates a plant with no recorded moisture
             pw.println(line);
             pw.close();
         }
