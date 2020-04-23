@@ -16,6 +16,7 @@ public class StorageHandler {
         usersFile = new File("./storage/users.csv");
         reservoirsFile = new File("./storage/reservoirs.csv");
         roomsFile = new File("./storage/rooms.csv");
+        plantsFile = new File("./storage/plants.csv");
     }
 
     public static StorageHandler getInstance(){
@@ -229,6 +230,53 @@ public class StorageHandler {
         }
 
         //TODO: return new room
+    }
+
+    public PlantPot createPlant(int room, int reservoirId, WaterReservoir reservoir, String name, String type){
+        int maxId = 0;
+        try{
+            FileInputStream f = new FileInputStream(plantsFile);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            boolean firstLine = true;
+            while((line = br.readLine()) != null){
+                String[] splitLine = line.split(",");
+                if(firstLine){
+                    firstLine = false;
+                    continue;
+                }
+                if(Integer.parseInt(splitLine[0]) > maxId){
+                    maxId = Integer.parseInt(splitLine[0]);
+                }
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+        try{
+            FileWriter fw = new FileWriter(plantsFile, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            String line = (maxId+1)+","+room+","+reservoirId+","+name+","+type;
+            pw.println(line);
+            pw.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+        //TODO: New constructor for plant?  I am not sure how this function will best interact with the factory.
+        // Maybe a function that is called at runtime that bypasses the factory w/ information stored in the database
+
+        PlantPot newPlant = new PlantPot(name, type);
+        newPlant.set_water_reservoir(reservoir);
+
+        return newPlant;
     }
 
 }
