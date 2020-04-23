@@ -16,20 +16,40 @@ class Room{
 
 
 //methods
-  private void manage_room(){}
-  private void notify_observers(){}
+  // I think this is better off in the UI file?
+  // private void manage_room(){}
 
-  public ArrayList<PlantPot> get_plants(){return plants;}
+
+  public ArrayList<PlantPot> get_plants(){
+    return plants;
+  }
   public void add_plant(PlantPot p){}
   public void remove_plant(String name){}
   public void rename_plant(String old_name, String new_name){}
+
   public void add_res(WaterReservoir res){}
   public void remove_res(String name){}
   public void rename_res(String name){}
+
   public void add_observer(User app){}
   public void remove_observer(User app){}
-  public void update(){}
+  private void notify_observers(){}
+  // public void update(){}
 
 // constructor
-  public Room(String name, TempuratureSensor temp_sensor, int lowest_temp, int highest_temp){}
+  public Room(String new_name, int new_lowest_temp, int new_highest_temp){
+    name = new_name;
+    lowest_temp = new_lowest_temp;
+    highest_temp = new_highest_temp;
+
+    plants = new ArrayList<PlantPot>();
+
+    ac = new AC();
+    heater = new Heater();
+
+    Command heat_up = new HeatUpCommand(ac, heater);
+    Command cool_down = new CoolDownCommand(ac, heater);
+    Command same_temp = new SameTempCommand(ac, heater);
+    temp_sensor = new TempuratureSensor(heat_up, cool_down, same_temp, 60, 75);
+  }
 }
