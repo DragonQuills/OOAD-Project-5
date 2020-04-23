@@ -4,6 +4,7 @@ import java.util.ArrayList; //Referenced https://www.w3schools.com/java/java_arr
 class User{
 // attributes
   private ArrayList<Room> rooms;
+  public int id;
 // methods
   public String status_report(){ return "";}
   public void update(){}

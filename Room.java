@@ -3,6 +3,7 @@ import java.util.ArrayList; //Referenced https://www.w3schools.com/java/java_arr
 class Room{
 // attributes
   public String name;
+  public int id;
 
   private ArrayList<PlantPot> plants;
   private ArrayList<WaterReservoir> reservoirs;
@@ -69,13 +70,16 @@ class Room{
     return false;
   }
 
-  public void add_observer(User app){}
+  public void add_observer(User app){
+    observers.add(app)
+  }
   public void remove_observer(User app){}
   private void notify_observers(){}
   // public void update(){}
 
 // constructor
-  public Room(String new_name, int new_lowest_temp, int new_highest_temp){
+  public Room(int new_id, String new_name, int new_lowest_temp, int new_highest_temp){
+    id = new_id;
     name = new_name;
     lowest_temp = new_lowest_temp;
     highest_temp = new_highest_temp;
