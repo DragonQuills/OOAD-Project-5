@@ -120,30 +120,7 @@ public class StorageHandler {
     }
 
     public WaterReservoir createReservoir(int userId, String name, int capacity, int warning){
-        int maxId = 0;
-        try{
-            FileInputStream f = new FileInputStream(reservoirsFile);
-            BufferedReader br = new BufferedReader(new InputStreamReader(f));
-            String line;
-            boolean firstLine = true;
-            while((line = br.readLine()) != null){
-                String[] splitLine = line.split(",");
-                if(firstLine){
-                    firstLine = false;
-                    continue;
-                }
-                if(Integer.parseInt(splitLine[0]) > maxId){
-                    maxId = Integer.parseInt(splitLine[0]);
-                }
-            }
-            br.close();        
-        }
-        catch(FileNotFoundException e){
-            e.printStackTrace();
-        }     
-        catch(IOException e){
-            e.printStackTrace();
-        }
+        int maxId = getMaxId(reservoirsFile);
 
         try{
             FileWriter fw = new FileWriter(reservoirsFile, true);
@@ -193,30 +170,7 @@ public class StorageHandler {
 
     public void createRoom(int ownerId, String name){
         //TODO: Change return type to room
-        int maxId = 0;
-        try{
-            FileInputStream f = new FileInputStream(roomsFile);
-            BufferedReader br = new BufferedReader(new InputStreamReader(f));
-            String line;
-            boolean firstLine = true;
-            while((line = br.readLine()) != null){
-                String[] splitLine = line.split(",");
-                if(firstLine){
-                    firstLine = false;
-                    continue;
-                }
-                if(Integer.parseInt(splitLine[0]) > maxId){
-                    maxId = Integer.parseInt(splitLine[0]);
-                }
-            }
-            br.close();        
-        }
-        catch(FileNotFoundException e){
-            e.printStackTrace();
-        }     
-        catch(IOException e){
-            e.printStackTrace();
-        }
+        int maxId = getMaxId(roomsFile);
 
         try{
             FileWriter fw = new FileWriter(roomsFile, true);
@@ -234,30 +188,7 @@ public class StorageHandler {
     }
 
     public PlantPot createPlant(int room, int reservoirId, WaterReservoir reservoir, String name, String type){
-        int maxId = 0;
-        try{
-            FileInputStream f = new FileInputStream(plantsFile);
-            BufferedReader br = new BufferedReader(new InputStreamReader(f));
-            String line;
-            boolean firstLine = true;
-            while((line = br.readLine()) != null){
-                String[] splitLine = line.split(",");
-                if(firstLine){
-                    firstLine = false;
-                    continue;
-                }
-                if(Integer.parseInt(splitLine[0]) > maxId){
-                    maxId = Integer.parseInt(splitLine[0]);
-                }
-            }
-            br.close();        
-        }
-        catch(FileNotFoundException e){
-            e.printStackTrace();
-        }     
-        catch(IOException e){
-            e.printStackTrace();
-        }
+        int maxId = getMaxId(plantsFile);
 
         try{
             FileWriter fw = new FileWriter(plantsFile, true);
@@ -319,5 +250,33 @@ public class StorageHandler {
             e.printStackTrace();
         }
         
+    }
+
+    private int getMaxId(File file){
+        int maxId = 0;
+        try{
+            FileInputStream f = new FileInputStream(file);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            boolean firstLine = true;
+            while((line = br.readLine()) != null){
+                String[] splitLine = line.split(",");
+                if(firstLine){
+                    firstLine = false;
+                    continue;
+                }
+                if(Integer.parseInt(splitLine[0]) > maxId){
+                    maxId = Integer.parseInt(splitLine[0]);
+                }
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        return maxId;
     }
 }
