@@ -48,6 +48,6 @@ class PlantFactory{
 // constructor
 
   public PlantFactory(String name, String type){
-    return get_plant(name, type)
+    return get_plant(name, type);
   }
 }
