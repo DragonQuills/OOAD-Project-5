@@ -11,6 +11,7 @@ public class StorageHandler {
     private File usersFile;
     private File reservoirsFile;
     private File roomsFile;
+    private File plantsFile;
 
     private StorageHandler(){
         usersFile = new File("./storage/users.csv");
@@ -221,7 +222,7 @@ public class StorageHandler {
             FileWriter fw = new FileWriter(roomsFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            String line = (maxId+1)+","+String.valueOf(userId)+","+name;
+            String line = (maxId+1)+","+String.valueOf(ownerId)+","+name;
             pw.println(line);
             pw.close();
         }
@@ -279,4 +280,44 @@ public class StorageHandler {
         return newPlant;
     }
 
+    public void deleteById(File file, int id){
+        //Use function overloading in place of default parameters
+        deleteById(file, id, 0);
+    }
+
+    public void deleteById(File file, int id, int index){
+        ArrayList<String> original = new ArrayList<String>();
+        try{
+            FileInputStream f = new FileInputStream(file);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            while((line = br.readLine()) != null){
+                original.add(line);
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+        try{
+            FileWriter fw = new FileWriter(file, false); //False overwrites
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            for(int i = 0; i < original.size(); i++){
+                if(original.get(i).split(",")[index].equals(String.valueOf(id))){
+                    continue;
+                }
+                pw.println(original.get(i));
+            }
+            pw.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        
+    }
 }
