@@ -63,9 +63,28 @@ public class Main {
                 String plant_type = scanner.next();
                 System.out.println("Checking our database of recommendations...");
                 PlantFactory new_factory = new PlantFactory(plant_name,plant_type);
+                //Get the recommended info from PlantFactory.query_csv()
+                //Print that info
 
-                
+                System.out.println("Accept? (y/n)")
+                while(true){
+                  String user_likes_data = scanner.next();
+                  if (user_likes_data == "y"){
+                    //continue with default data
 
+                    break;
+                  }
+                  if (user_likes_data == "n"){
+                    System.out.println("Please enter your custom maintenance settings:");
+                    System.out.println("Minimum soil humidity percentage:");
+                    //need to validate data types here somehow
+                    float min_soil_humidity = scanner.next();
+                    System.out.println("Ideal soil humidity percentage:");
+
+                  else {
+                    System.out.println("Invalid Input. Please type y or n and press Enter.")
+                  }
+                }
 
             }
             else if(intInput == 4){
