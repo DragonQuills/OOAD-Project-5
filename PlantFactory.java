@@ -48,6 +48,6 @@ class PlantFactory{
 // constructor
 
   public PlantFactory(String name, String type){
-    PlantPot plantPot = get_plant(name, type);
+     PlantPot plantPot = get_plant(name, type);
   }
 }
