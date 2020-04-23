@@ -7,6 +7,13 @@ import java.util.Arrays;
 class PlantFactory{
 // methods
   public PlantPot get_plant(String name, String type){
+    PlantPot plantPot = new PlantPot(name, type);
+    String[] data = query_csv(type);
+    plantPot.set_min_soil_humidity(Float.valueOf(data[0]));
+    plantPot.set_desired_soil_humidity(Float.valueOf(data[1]));
+    plantPot.set_light_hours(Float.valueOf(data[2]));
+    plantPot.set_min_temp(Float.valueOf(data[3]));
+    plantPot.set_max_temp(Float.valueOf(data[4]));
     return plantPot;
   }
   private Float[] query_csv(String type){
@@ -41,12 +48,6 @@ class PlantFactory{
 // constructor
 
   public PlantFactory(String name, String type){
-    PlantPot plantPot = new PlantPot(name, type);
-    String[] data = query_csv(type);
-    plantPot.set_min_soil_humidity(Float.valueOf(data[0]));
-    plantPot.set_desired_soil_humidity(Float.valueOf(data[1]));
-    plantPot.set_light_hours(Float.valueOf(data[2]));
-    plantPot.set_min_temp(Float.valueOf(data[3]));
-    plantPot.set_max_temp(Float.valueOf(data[4]));
+    return get_plant(name, type)
   }
 }
