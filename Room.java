@@ -71,7 +71,7 @@ class Room{
   }
 
   public void add_observer(User new_user){
-    observers.add(new_user)
+    observers.add(new_user);
   }
   public boolean remove_observer(int user_id){
     for( int i = 0; i < observers.size(); i++){
@@ -83,8 +83,8 @@ class Room{
     return false;
   }
   private void notify_observers(){
-    for (Observer i : observers){
-      i.update(this)
+    for (User i : observers){
+      i.update(this);
     }
   }
 
