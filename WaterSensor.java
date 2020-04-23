@@ -25,6 +25,9 @@ class WaterSensor{
     return current_humidity;
   }
 
+  public void set_current_humidity(float new_current_humidity){
+    current_humidity = new_current_humidity;
+  }
   // normally this would be actual time passing and the water level lowering
   // but sicne we have no actual hardware we're simulating it this way.
   public void hour_passed(){

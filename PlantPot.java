@@ -2,6 +2,7 @@ class PlantPot{
 //attributes
   public String name;
   public String plant_type;
+  public int id;
 
   private Light light;
   private WaterReservoir res;

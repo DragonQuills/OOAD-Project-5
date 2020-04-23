@@ -1,6 +1,7 @@
 class WaterReservoir{
 //attributes
   public String name;
+  public int id;
 
   private float max_capacity;
   private float current_water;

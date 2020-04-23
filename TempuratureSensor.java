@@ -14,6 +14,9 @@ class TempuratureSensor{
   public int get_current_temp(){
     return current_temp;
   }
+  public void set_current_temp(int new_current_temp){
+    current_temp = new_current_temp;
+  }
   public void set_min_temp(int new_min){
     min_temp = new_min;
   }
