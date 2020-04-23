@@ -54,6 +54,19 @@ public class Main {
             }
             else if(intInput == 3){
                 //Add plant
+                System.out.println("Select Room:");
+                //List out the available Rooms
+
+                System.out.println("Enter plant name:");//This has to be first as input for PlantFactory
+                String plant_name = scanner.next();
+                System.out.println("Enter plant type");
+                String plant_type = scanner.next();
+                System.out.println("Checking our database of recommendations...");
+                PlantFactory new_factory = new PlantFactory(plant_name,plant_type);
+
+                
+
+
             }
             else if(intInput == 4){
                 //View rooms
