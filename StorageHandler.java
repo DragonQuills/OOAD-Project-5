@@ -319,5 +319,7 @@ public class StorageHandler {
         catch(IOException e){
             e.printStackTrace();
         }
+
+        return true;
     }
 }
