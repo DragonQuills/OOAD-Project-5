@@ -9,6 +9,8 @@ class PlantPot{
   private WaterSensor water_sensor;
   private float desired_soil_humidity; // this determines how much the plant will be watered
   private float min_soil_humidity; //this is the level at or below which the plant will be watered
+  private float max_temp;
+  private float min_temp;
 
 //methods
   public void set_min_soil_humidity(float new_min){
@@ -16,6 +18,12 @@ class PlantPot{
   }
   public void set_desired_humidity(float new_humid){
     desired_soil_humidity = new_humid;
+  }
+  public void set_min_temp(float new_min_temp){
+    min_temp = new_min_temp;
+  }
+  public void set_max_temp(float new_max_temp){
+    max_temp = new_max_temp;
   }
   //this doesn't change any of Plant's variables, it effects the Timer.
   public void set_light_hours(int new_hours_on){
