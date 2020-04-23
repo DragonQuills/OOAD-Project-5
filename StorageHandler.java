@@ -12,12 +12,14 @@ public class StorageHandler {
     private File reservoirsFile;
     private File roomsFile;
     private File plantsFile;
+    private File ownersFile;
 
     private StorageHandler(){
         usersFile = new File("./storage/users.csv");
         reservoirsFile = new File("./storage/reservoirs.csv");
         roomsFile = new File("./storage/rooms.csv");
         plantsFile = new File("./storage/plants.csv");
+        ownersFile = new File("./storage/owners.csv");
     }
 
     public static StorageHandler getInstance(){
@@ -278,5 +280,44 @@ public class StorageHandler {
             e.printStackTrace();
         }
         return maxId;
+    }
+
+    public boolean addOwnership(int user, int room){
+        try{
+            FileInputStream f = new FileInputStream(ownersFile);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            boolean firstLine = true;
+            while((line = br.readLine()) != null){
+                String[] splitLine = line.split(",");
+                if(firstLine){
+                    firstLine = false;
+                    continue;
+                }
+                if(Integer.parseInt(splitLine[0]) == user && Integer.parseInt(splitLine[1]) == room){
+                    System.out.println("Relation already exists");
+                    return false;
+                }
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+        try{
+            FileWriter fw = new FileWriter(ownersFile, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            String line = user+","+room;
+            pw.println(line);
+            pw.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }
