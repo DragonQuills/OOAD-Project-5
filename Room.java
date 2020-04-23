@@ -23,9 +23,28 @@ class Room{
   public ArrayList<PlantPot> get_plants(){
     return plants;
   }
-  public void add_plant(PlantPot p){}
-  public void remove_plant(String name){}
-  public void rename_plant(String old_name, String new_name){}
+  public void add_plant(PlantPot p){
+    plants.add(p);
+  }
+  public boolean remove_plant(String name){
+    for( int i = 0; i < plants.size(); i++){
+      if (plants.get(i).name == name){
+        plants.remove(i);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public boolean rename_plant(String old_name, String new_name){
+    for( int i = 0; i < plants.size(); i++){
+      if (plants.get(i).name == old_name){
+        plants.get(i).name = new_name;
+        return true;
+      }
+    }
+    return false;
+  }
 
   public void add_res(WaterReservoir res){}
   public void remove_res(String name){}
