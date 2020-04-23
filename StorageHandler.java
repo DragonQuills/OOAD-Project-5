@@ -170,7 +170,7 @@ public class StorageHandler {
         return reservoirs;
     }
 
-    public void createRoom(int ownerId, String name){
+    public void createRoom(String name){
         //TODO: Change return type to room
         int maxId = getMaxId(roomsFile);
 
@@ -178,7 +178,7 @@ public class StorageHandler {
             FileWriter fw = new FileWriter(roomsFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            String line = (maxId+1)+","+String.valueOf(ownerId)+","+name;
+            String line = (maxId+1)+","+name+",0"; //0 indicates a room that hasn't had a temperature measurement yet
             pw.println(line);
             pw.close();
         }
