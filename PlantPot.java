@@ -2,6 +2,7 @@ class PlantPot{
 //attributes
   public String name;
   public String plant_type;
+  public int id;
 
   private Light light;
   private WaterReservoir res;
@@ -72,6 +73,22 @@ class PlantPot{
       water_sensor.hour_passed();
     }
   }
+
+  // Gives a staus report to the Room to print for the User
+  public String status_report(){
+    String status = name + " the " + plant_type + " plant";
+    status += " has " + water_sensor.get_current_humidity() + " oz of water";
+    status += " and the light is currently ";
+    boolean light_on = timer.get_light_status();
+    if (light_on){
+      status += "on.";
+    }
+    else{
+      status += "off.";
+    }
+    return status;
+  }
+
 //constructor
   //The constructor is very light because the factory will talk to a mock API to get
   // most of the data, the user only needs to enter the name and type of plant
