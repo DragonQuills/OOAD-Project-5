@@ -46,9 +46,28 @@ class Room{
     return false;
   }
 
-  public void add_res(WaterReservoir res){}
-  public void remove_res(String name){}
-  public void rename_res(String name){}
+  public void add_res(WaterReservoir wr){
+    reservoirs.add(wr);
+  }
+  public boolean remove_res(String name){
+    for( int i = 0; i < reservoirs.size(); i++){
+      if (reservoirs.get(i).name == name){
+        reservoirs.remove(i);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public boolean rename_res(String old_name, String new_name){
+    for( int i = 0; i < reservoirs.size(); i++){
+      if (reservoirs.get(i).name == old_name){
+        reservoirs.get(i).name = new_name;
+        return true;
+      }
+    }
+    return false;
+  }
 
   public void add_observer(User app){}
   public void remove_observer(User app){}
