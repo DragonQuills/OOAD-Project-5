@@ -30,6 +30,13 @@ class Room{
   public void remove_observer(User app){}
   public void update(){}
 
+//temp getter functions for PlantFactory.conditions_ok_for_plant()
+  public float get_lowest_temp(){
+    return lowest_temp;
+  }
+  public float get_highest_temp(){
+    return highest_temp;
+  }
 // constructor
   public Room(String name, TempuratureSensor temp_sensor, int lowest_temp, int highest_temp){}
 }
