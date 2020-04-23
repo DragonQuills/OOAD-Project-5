@@ -70,12 +70,23 @@ class Room{
     return false;
   }
 
-  public void add_observer(User app){
-    observers.add(app)
+  public void add_observer(User new_user){
+    observers.add(new_user)
   }
-  public void remove_observer(User app){}
-  private void notify_observers(){}
-  // public void update(){}
+  public boolean remove_observer(int user_id){
+    for( int i = 0; i < observers.size(); i++){
+      if (observers.get(i).id == user_id){
+        observers.remove(i);
+        return true;
+      }
+    }
+    return false;
+  }
+  private void notify_observers(){
+    for (Observer i : observers){
+      i.update(this)
+    }
+  }
 
 // constructor
   public Room(int new_id, String new_name, int new_lowest_temp, int new_highest_temp){
