@@ -74,40 +74,95 @@ public class Main {
 
                     break;
                   }
+                  //Case: User wants to enter their own data
                   if (user_likes_data == "n"){
                       System.out.println("Please enter your custom maintenance settings:");
-                        while(true){
-                          System.out.println("Minimum soil humidity percentage (0-100):");
-                          String min_soil_humidity = scanner.next();
-                          try {
-                            Float.parseFloat(min_soil_humidity);
-                            if (min_soil_humidity < 1 || min_soil_humidity > 99){
-                              System.out.println("Humidity percentage must be between 0 and 100. Please try again.");
-                            }
-                            else{
-                              break;
-                            }
+                      //User Input Soil Humidity Input Validation
+                      while(true){
+                        System.out.println("Minimum soil humidity percentage (0-100):");
+                        String min_soil_humidity = scanner.next();
+                        try {
+                          Float.parseFloat(min_soil_humidity);
+                          if (min_soil_humidity < 1 || min_soil_humidity > 99){
+                            System.out.println("Humidity percentage must be between 0 and 100. Please try again.");
                           }
-                          catch(NumberFormatException e) {
-                            System.out.println("Input must be a number. Please try again:")
+                          else{
+                            break;
                           }
                         }
-                        while(true){
-                          System.out.println("Ideal/Maximum soil humidity percentage(0-100):");
-                          String desired_soil_humidity = scanner.next();
-                          try {
-                            Float.parseFloat(min_soil_humidity);
-                            if (desired_soil_humidity < 1 || desired_soil_humidity > 99){
-                              System.out.println("Humidity percentage must be between 0 and 100. Please try again.");
-                            }
-                            else{
-                              break;
-                            }
+                        catch(NumberFormatException e) {
+                          System.out.println("Input must be a number. Please try again:")
+                        }
+                      }
+                      while(true){
+                        System.out.println("Ideal/Maximum soil humidity percentage(0-100):");
+                        String desired_soil_humidity = scanner.next();
+                        try {
+                          Float.parseFloat(min_soil_humidity);
+                          if (desired_soil_humidity < 1 || desired_soil_humidity > 99){
+                            System.out.println("Humidity percentage must be between 0 and 100. Please try again.");
                           }
-                          catch(NumberFormatException e) {
-                            System.out.println("Input must be a number. Please try again:")
+                          else{
+                            break;
                           }
                         }
+                        catch(NumberFormatException e) {
+                          System.out.println("Input must be a number. Please try again:")
+                        }
+                      }
+                      //User Input Light Time Input Validation
+                      while(true){
+                        System.out.println("Number of hours of light per day:");
+                        String light_hours = scanner.next();
+                        try {
+                          Float.parseFloat(light_hours);
+                          if (light_hours < 1 || light_hours > 24){
+                            System.out.println("Lights must be on for 1-24 hours per day. Please try again.");
+                          }
+                          else{
+                            break;
+                          }
+                        }
+                        catch(NumberFormatException e) {
+                          System.out.println("Input must be a number. Please try again:")
+                        }
+                      }
+                      //User Input Temperature Input Validation
+                      while(true){
+                        System.out.println("Minimum Room Temperature (Fahrenheit):");
+                        String min_temp = scanner.next();
+                        try {
+                          Float.parseFloat(min_temp);
+                          if (min_temp < 0 || min_temp > 120){
+                            System.out.println("We are currently unable to provide the environment you have requested.");
+                            System.out.println("Please enter a temperature between 0 and 120 degrees Fahrenheit.");
+                          }
+                          else{
+                            break;
+                          }
+                        }
+                        catch(NumberFormatException e) {
+                          System.out.println("Input must be a number. Please try again:")
+                        }
+                      }
+                      while(true){
+                        System.out.println("Maximum Room Temperature (Fahrenheit):");
+                        String max_temp = scanner.next();
+                        try {
+                          Float.parseFloat(max_temp);
+                          if (max_temp < 0 || max_temp > 120){
+                            System.out.println("We are currently unable to provide the environment you have requested.");
+                            System.out.println("Please enter a temperature between 0 and 120 degrees Fahrenheit.");
+                          }
+                          else{
+                            break;
+                          }
+                        }
+                        catch(NumberFormatException e) {
+                          System.out.println("Input must be a number. Please try again:")
+                        }
+                      }
+                    }
 
                   else {
                         System.out.println("Invalid Input. Please type y or n and press Enter.")
@@ -123,7 +178,7 @@ public class Main {
                 break;
             }
             else{
-                System.out.println("Input not valid");
+                System.out.println("Input not valid. Please type a number 1-5 and press Enter.");
             }
 
         }
