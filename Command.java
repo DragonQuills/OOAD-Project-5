@@ -17,7 +17,7 @@ class Light{
 }
 
 
-class AC {
+ class AC {
   public void on() {
     System.out.println("The AC is on.");
   }
@@ -27,7 +27,7 @@ class AC {
 }
 
 
-class Heater{
+ class Heater{
   public void on(){
     System.out.println("The Heater is on");
   }
