@@ -40,4 +40,12 @@ class WaterReservoir{
     current_water = max;
     warning_level = warning;
   }
+
+  public WaterReservoir(String new_name, float max, float warning, int inputId){
+    name = new_name;
+    max_capacity = max;
+    current_water = max;
+    warning_level = warning;
+    id = inputId;
+  }
 }

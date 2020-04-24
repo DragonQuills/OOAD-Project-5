@@ -33,8 +33,12 @@ public class Main {
 
         User user = new User(userId);
         ArrayList<Room> userRooms = storage.roomsFromUser(userId);
-        for(int r = 0; r < userRooms.size(); r++){
-            user.add_room(userRooms.get(r));
+        for(int room = 0; room < userRooms.size(); room++){
+            ArrayList<WaterReservoir> reservoirs = storage.reservoirsFromRoom(userRooms.get(room).id);
+            for(int res = 0; res < reservoirs.size(); res++){
+                userRooms.get(room).add_res(reservoirs.get(res));
+            }
+            user.add_room(userRooms.get(room));
         }
         
         while(true){

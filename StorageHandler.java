@@ -121,14 +121,14 @@ public class StorageHandler {
         return -1;
     }
 
-    public WaterReservoir createReservoir(int userId, String name, int capacity, int warning){
+    public WaterReservoir createReservoir(int roomId, String name, int capacity, int warning){
         int maxId = getMaxId(reservoirsFile);
 
         try{
             FileWriter fw = new FileWriter(reservoirsFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            String line = (maxId+1)+","+String.valueOf(userId)+","+name+","+String.valueOf(capacity)+","+String.valueOf(warning);
+            String line = (maxId+1)+","+String.valueOf(roomId)+","+name+","+String.valueOf(capacity)+","+String.valueOf(warning);
             pw.println(line);
             pw.close();
         }
@@ -384,5 +384,39 @@ public class StorageHandler {
         }
 
         return rooms;
+    }
+
+    public ArrayList<WaterReservoir> reservoirsFromRoom(int roomId){
+        ArrayList<WaterReservoir> reservoirs = new ArrayList<WaterReservoir>();
+
+        try{
+            FileInputStream f = new FileInputStream(reservoirsFile);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            boolean firstLine = true;
+            while((line = br.readLine()) != null){
+                String[] splitLine = line.split(",");
+                if(firstLine){
+                    firstLine = false;
+                    continue;
+                }
+                if(Integer.parseInt(splitLine[1]) == roomId){
+                    int id = Integer.parseInt(splitLine[0]);
+                    String name = splitLine[2];
+                    float capacity = Float.parseFloat(splitLine[3]);
+                    float warning = Float.parseFloat(splitLine[4]);
+                    reservoirs.add(new WaterReservoir(name, capacity, warning, id));
+                }
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+        return reservoirs;
     }
 }
