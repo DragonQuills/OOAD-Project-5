@@ -162,6 +162,12 @@ public class Main {
                           System.out.println("Input must be a number. Please try again:")
                         }
                       }
+                      String[] user_data_input = min_soil_humidity;
+                      user_data_input.add(desired_soil_humidity);
+                      user_data_input.add(light_time);
+                      user_data_input.add(min_temp);
+                      user_data_input.add(max_temp):
+
                     }
 
                   else {
