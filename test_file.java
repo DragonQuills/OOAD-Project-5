@@ -1,7 +1,8 @@
 class test_file{
   public static void main(String args[]){
     // test_single_plant();
-    test_temp_sensor();
+    // test_temp_sensor();
+    test_room();
   }
 
   public static void test_single_plant(){
@@ -57,5 +58,31 @@ class test_file{
         temp_sensor.set_temp_modification(3);
       }
     }
+  }
+
+  public static void test_room(){
+    Room r1 = new Room(1, "Kitchen", 55, 85);
+
+    WaterReservoir res = new WaterReservoir("Reservoir 1", 1000, 100);
+
+
+    PlantPot rosemary = new PlantPot("Rosemary1", "rosemary");
+    rosemary.set_water_reservoir(res);
+    rosemary.set_min_soil_humidity(10);
+    rosemary.set_desired_humidity(50);
+    // rosemary.check_water();
+
+    Light rosemary_light = new Light();
+    Command light_on = new LightOnCommand(rosemary_light);
+    Command light_off = new LightOffCommand(rosemary_light);
+
+    Timer rosemary_timer = new Timer(light_on, light_off, 8);
+
+    rosemary.set_timer(rosemary_timer);
+
+    r1.add_res(res);
+    r1.add_plant(rosemary);
+
+    System.out.println(r1.status_report());
   }
 }
