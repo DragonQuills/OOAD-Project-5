@@ -8,7 +8,11 @@ class User{
 
 // methods
   public String status_report(){
-
+    String report = "";
+    for (Room r : rooms){
+      report += r.status_report + "\n";
+    }
+    return report;
   }
 
   public void add_room(Room r){
