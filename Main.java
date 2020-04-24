@@ -75,16 +75,44 @@ public class Main {
                     break;
                   }
                   if (user_likes_data == "n"){
-                    System.out.println("Please enter your custom maintenance settings:");
-                    System.out.println("Minimum soil humidity percentage:");
-                    //need to validate data types here somehow
-                    float min_soil_humidity = scanner.next();
-                    System.out.println("Ideal soil humidity percentage:");
+                      System.out.println("Please enter your custom maintenance settings:");
+                        while(true){
+                          System.out.println("Minimum soil humidity percentage (0-100):");
+                          String min_soil_humidity = scanner.next();
+                          try {
+                            Float.parseFloat(min_soil_humidity);
+                            if (min_soil_humidity < 1 || min_soil_humidity > 99){
+                              System.out.println("Humidity percentage must be between 0 and 100. Please try again.");
+                            }
+                            else{
+                              break;
+                            }
+                          }
+                          catch(NumberFormatException e) {
+                            System.out.println("Input must be a number. Please try again:")
+                          }
+                        }
+                        while(true){
+                          System.out.println("Ideal/Maximum soil humidity percentage(0-100):");
+                          String desired_soil_humidity = scanner.next();
+                          try {
+                            Float.parseFloat(min_soil_humidity);
+                            if (desired_soil_humidity < 1 || desired_soil_humidity > 99){
+                              System.out.println("Humidity percentage must be between 0 and 100. Please try again.");
+                            }
+                            else{
+                              break;
+                            }
+                          }
+                          catch(NumberFormatException e) {
+                            System.out.println("Input must be a number. Please try again:")
+                          }
+                        }
 
                   else {
-                    System.out.println("Invalid Input. Please type y or n and press Enter.")
+                        System.out.println("Invalid Input. Please type y or n and press Enter.")
+                      }
                   }
-                }
 
             }
             else if(intInput == 4){
