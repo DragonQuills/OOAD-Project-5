@@ -41,7 +41,7 @@ public class Main {
             System.out.println("5. Quit");
             int intInput = scanner.nextInt();
             if(intInput == 1){
-                //Add room
+                //TODO:Add room
             }
             else if(intInput == 2){
                 System.out.println("Enter reservoir name: ");
@@ -55,7 +55,7 @@ public class Main {
             else if(intInput == 3){
                 //Add plant
                 System.out.println("Select Room:");
-                //List out the available Rooms
+                //TODO:List out the available Rooms
 
                 System.out.println("Enter plant name:");//This has to be first as input for PlantFactory
                 String plant_name = scanner.next();
@@ -63,12 +63,12 @@ public class Main {
                 String plant_type = scanner.next();
                 System.out.println("Checking our database of recommendations...");
                 PlantPot new_plant = PlantFactory.get_plant(plant_name, plant_type);
-                if (new_plant)
+                //TODO: Deal with plant_type not found in fake_plant_data.csv
                 System.out.println("Accept? (y/n)")
                 while(true){
                   String user_likes_data = scanner.next();
                   if (user_likes_data == "y"){
-                    //continue with default data
+                    //TODO:continue with default data pulled from csv
 
                     break;
                   }
@@ -165,7 +165,7 @@ public class Main {
                       user_data_input.add(light_time);
                       user_data_input.add(min_temp);
                       user_data_input.add(max_temp):
-
+                      //TODO: Create a plant using the user_data_input
                     }
 
                   else {
@@ -175,7 +175,7 @@ public class Main {
 
             }
             else if(intInput == 4){
-                //View rooms
+                //TODO: View rooms
             }
             else if(intInput == 5){
                 //Quit
