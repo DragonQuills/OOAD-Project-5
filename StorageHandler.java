@@ -141,7 +141,7 @@ public class StorageHandler {
         return new WaterReservoir(name, capacity, warning);
     }
 
-    public Room createRoom(String name, int lowestTemp, int highestTemp){
+    public Room createRoom(String name, int lowestTemp, int highestTemp, int userId){
         int maxId = getMaxId(roomsFile);
 
         try{
@@ -155,6 +155,8 @@ public class StorageHandler {
         catch(IOException e){
             e.printStackTrace();
         }
+
+        addOwnership(userId, maxId+1);
 
         return new Room(maxId+1, name, lowestTemp, highestTemp);
     }
