@@ -139,37 +139,6 @@ public class StorageHandler {
         return new WaterReservoir(name, capacity, warning);
     }
 
-    public ArrayList<WaterReservoir> getReservoirs(int ownerId){
-        ArrayList<WaterReservoir> reservoirs = new ArrayList<WaterReservoir>();
-        try{
-            FileInputStream f = new FileInputStream(reservoirsFile);
-            BufferedReader br = new BufferedReader(new InputStreamReader(f));
-            String line;
-            boolean firstLine = true;
-            while((line = br.readLine()) != null){
-                String[] splitLine = line.split(",");
-                if(firstLine){
-                    firstLine = false;
-                    continue;
-                }
-                if(Integer.parseInt(splitLine[1]) == ownerId){
-                    String name = splitLine[2];
-                    int capacity = Integer.parseInt(splitLine[3]);
-                    int warning = Integer.parseInt(splitLine[4]);
-                    reservoirs.add(new WaterReservoir(name, capacity, warning));
-                }
-            }
-            br.close();        
-        }
-        catch(FileNotFoundException e){
-            e.printStackTrace();
-        }     
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        return reservoirs;
-    }
-
     public Room createRoom(String name, int lowestTemp, int highestTemp){
         //TODO: Change return type to room
         int maxId = getMaxId(roomsFile);
