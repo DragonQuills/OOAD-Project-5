@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.io.*; //reference: https://www.tutorialspoint.com/java/java_files_io.htm
-import java.nio.file.*;
 import java.util.ArrayList;
 
 //Referenced https://www.geeksforgeeks.org/singleton-class-java/
@@ -36,6 +35,7 @@ public class StorageHandler {
         String username = scanner.next();
         System.out.println("Enter a password: ");
         String password = scanner.next();
+        scanner.close();
         //Ref: https://tutoref.com/how-to-read-and-write-files-in-java-8/
         int maxId;
         try{
@@ -52,6 +52,7 @@ public class StorageHandler {
                 }
                 if(splitLine[1].equals(username)){
                     System.out.println("Username already registered");
+                    br.close();
                     return -1;
                 }
                 if(Integer.parseInt(splitLine[0]) > maxId){
@@ -90,6 +91,7 @@ public class StorageHandler {
         String username = scanner.next();
         System.out.println("Enter a password: ");
         String password = scanner.next();
+        scanner.close();
         try{
             FileInputStream f = new FileInputStream(usersFile);
             BufferedReader br = new BufferedReader(new InputStreamReader(f));
@@ -140,7 +142,6 @@ public class StorageHandler {
     }
 
     public Room createRoom(String name, int lowestTemp, int highestTemp){
-        //TODO: Change return type to room
         int maxId = getMaxId(roomsFile);
 
         try{
@@ -265,6 +266,7 @@ public class StorageHandler {
                 }
                 if(Integer.parseInt(splitLine[0]) == user && Integer.parseInt(splitLine[1]) == room){
                     System.out.println("Relation already exists");
+                    br.close();
                     return false;
                 }
             }
