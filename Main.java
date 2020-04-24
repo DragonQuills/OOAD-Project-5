@@ -30,6 +30,12 @@ public class Main {
                 System.out.println("Input not valid");
             }
         }
+
+        User user = new User(userId);
+        ArrayList<Room> userRooms = storage.roomsFromUser(userId);
+        for(int r = 0; r < userRooms.size(); r++){
+            user.add_room(userRooms.get(r));
+        }
         
         while(true){
             //Print main menu

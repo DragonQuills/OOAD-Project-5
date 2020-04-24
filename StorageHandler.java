@@ -322,4 +322,67 @@ public class StorageHandler {
 
         return true;
     }
+
+    private Room roomFromId(int roomId){
+        try{
+            FileInputStream f = new FileInputStream(roomsFile);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            boolean firstLine = true;
+            while((line = br.readLine()) != null){
+                String[] splitLine = line.split(",");
+                if(firstLine){
+                    firstLine = false;
+                    continue;
+                }
+                if(Integer.parseInt(splitLine[0]) == roomId){
+                    br.close();
+                    int id = Integer.parseInt(splitLine[0]);
+                    String name = splitLine[1];
+                    int lowest = Integer.parseInt(splitLine[2]);
+                    int highest = Integer.parseInt(splitLine[3]);
+                    return new Room(id, name, lowest, highest);
+                }
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public ArrayList<Room> roomsFromUser(int userId){
+        ArrayList<Room> rooms = new ArrayList<Room>();
+
+        try{
+            FileInputStream f = new FileInputStream(ownersFile);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            boolean firstLine = true;
+            while((line = br.readLine()) != null){
+                String[] splitLine = line.split(",");
+                if(firstLine){
+                    firstLine = false;
+                    continue;
+                }
+                if(Integer.parseInt(splitLine[0]) == userId){
+                    rooms.add(roomFromId(Integer.parseInt(splitLine[1])));
+                }
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+        return rooms;
+    }
 }
