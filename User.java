@@ -5,9 +5,11 @@ class User{
 // attributes
   private ArrayList<Room> rooms;
   public int id;
-  
+
 // methods
-  public String status_report(){ return "";}
+  public String status_report(){
+
+  }
 
   public void add_room(Room r){
     rooms.add(r);
@@ -30,5 +32,10 @@ class User{
       }
     }
     return false;
+  }
+
+  public User(int new_id){
+    id = new_id;
+    rooms = new ArrayList<Room>();
   }
 }
