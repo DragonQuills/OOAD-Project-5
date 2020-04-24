@@ -62,10 +62,8 @@ public class Main {
                 System.out.println("Enter plant type");
                 String plant_type = scanner.next();
                 System.out.println("Checking our database of recommendations...");
-                PlantFactory new_factory = new PlantFactory(plant_name,plant_type);
-                //Get the recommended info from PlantFactory.query_csv()
-                //Print that info
-
+                PlantPot new_plant = PlantFactory.get_plant(plant_name, plant_type);
+                if (new_plant)
                 System.out.println("Accept? (y/n)")
                 while(true){
                   String user_likes_data = scanner.next();
