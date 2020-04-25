@@ -68,7 +68,7 @@ public class Main {
                 min_temp = scanner.next();
                 try {
                   temp_min = Integer.parseInt(min_temp);
-                  if (temp_min < 1 || temp_max > 120){
+                  if (temp_min < 1 || temp_min > 120){
                     System.out.println("Temperature must be between 0 and 120. Please try again.");
                   }
                   else{
@@ -95,7 +95,7 @@ public class Main {
                   System.out.println("Input must be a number. Please try again:");
                 }
               }
-              storage.createRoom(room_name, temp_min, temp_max);
+              storage.createRoom(room_name, temp_min, temp_max, userId);
             }
             //Add Reservoir
             else if(intInput == 2){
@@ -113,40 +113,50 @@ public class Main {
 
                 //Display existing room options and request room selection for new plant
                 ArrayList<Room> rooms_list = user.get_rooms_list();
-                Room selected_room;
+                
                 for (Room room : rooms_list) {
                   System.out.println(room.status_report());
                 }
-                System.out.println("Which room would you like to add your plant to?");
-                while(true){
+				System.out.println("Which room would you like to add your plant to?");
+				boolean validRoom = false;
+				int roomIndex = -1;
+                while(!validRoom){
                   String input_room = scanner.next();
                   for (int i = 0; i < rooms_list.size(); i++){
                     if (rooms_list.get(i).name == input_room){
-                      selected_room = rooms_list.get(i);
+					  roomIndex = i;
+					  validRoom = true;
                       break;
                     }
                   }
                   System.out.println("Room"+input_room+" does not exist, please try again.");
-                }
+				}
+				
+				Room selected_room = rooms_list.get(roomIndex);
 
                 //Display Reservoirs available in selected room and request reservoir selection for new plant
                 System.out.println("Here are your available reservoirs in " + selected_room.name);
                 ArrayList<WaterReservoir> reservoir_list = selected_room.get_reservoir_list();
-                for (Reservoir reservoir : reservoir_list){
+                for (WaterReservoir reservoir : reservoir_list){
                   System.out.println(reservoir.status_report());
                 }
                 System.out.println("Which reservoir would you like to use for your new plant?");
-                Reservoir selected_reservoir;
-                while(true) {
+				
+				boolean validRes = false;
+				int resIndex = -1;
+                while(!validRes) {
                   String input_reservoir = scanner.next();
                   for (int i = 0; i < reservoir_list.size(); i++){
                     if (reservoir_list.get(i).name == input_reservoir){
-                      selected_reservoir = reservoir_list.get(i);
+					  validRes = true;
+					  resIndex = i;
                       break;
                     }
                   }
                   System.out.println("Reservoir" + input_reservoir + " does not exist. Please try again.");
-                }
+				}
+				
+				WaterReservoir selected_reservoir = reservoir_list.get(resIndex);
 
                 System.out.println("Enter plant name:");//This has to be first as input for PlantFactory
                 String plant_name = scanner.next();
@@ -289,7 +299,7 @@ public class Main {
                 boolean quitView = false;
                 while(!quitView){
                     boolean validRoom = false;
-                    int roomChoice;
+                    int roomChoice = -1;
                     while(!validRoom){
                         System.out.println("Select a room: ");
                         System.out.println(user.roomNames());
