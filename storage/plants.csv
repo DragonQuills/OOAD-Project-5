@@ -1,1 +1,1 @@
-id,reservoirId,name,type,moisture
+id,reservoirId,name,type,desiredHumidity,minHumidity,maxTemp,minTemp,currentHumidity

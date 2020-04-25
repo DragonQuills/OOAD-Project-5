@@ -1,2 +1,2 @@
-id,ownerid,name,capacity,warning
+id,roomId,name,capacity,warning
 1,1,testReservoir,100,20
