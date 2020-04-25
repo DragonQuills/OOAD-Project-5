@@ -41,8 +41,8 @@ public class Main {
             System.out.println("4. View Rooms");
             System.out.println("5. Quit");
             int intInput = scanner.nextInt();
+            //Add Room
             if(intInput == 1){
-                //TODO:Add room
                 System.out.println("Enter the name of your new room: ");
                 String room_name = scanner.next();
                 String new_room = user.add_room(room_name);
@@ -58,16 +58,32 @@ public class Main {
             }
             else if(intInput == 3){
                 //Add plant
-                System.out.println("Select Room:");
+                System.out.println("Here are your available Rooms:");
                 //TODO:List out the available Rooms
-                //Not sure how to do this?
-
+                ArrayList<Room> rooms_list = user.get_rooms_list();
+                String selected_room;
+                for (type room : rooms_list) {
+                  System.out.println(room.status_report());
+                }
+                System.out.println("Which room would you like to add your plant to?")
+                while(true){
+                  String input_room = scanner.next();
+                  if (rooms_list.contains(input_room)){
+                    selected_room = input_room;
+                    break;
+                  }
+                  else {
+                    System.out.println("Room does not exist, please try again:");
+                  }
+                }
                 System.out.println("Enter plant name:");//This has to be first as input for PlantFactory
                 String plant_name = scanner.next();
                 System.out.println("Enter plant type");
                 String plant_type = scanner.next();
                 System.out.println("Checking our database of recommendations...");
                 PlantPot new_plant = factory.get_plant(plant_name, plant_type);
+                selected_room.add_plant(new_plant);
+                
                 //If data is found in query_csv(), print that data
                 String user_likes_data = "";
                 if (new_plant.get_min_temp() > 0) {
