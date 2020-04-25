@@ -38,6 +38,10 @@ public class Main {
             ArrayList<WaterReservoir> reservoirs = storage.reservoirsFromRoom(userRooms.get(room).id);
             for(int res = 0; res < reservoirs.size(); res++){
                 userRooms.get(room).add_res(reservoirs.get(res));
+                ArrayList<PlantPot> plants = storage.plantFromReservoir(reservoirs.get(res));
+                for(int plant = 0; plant < plants.size(); plant++){
+                    userRooms.get(room).add_plant(plants.get(plant));
+                }
             }
             user.add_room(userRooms.get(room));
         }

@@ -424,4 +424,42 @@ public class StorageHandler {
 
         return reservoirs;
     }
+
+    public ArrayList<PlantPot> plantFromReservoir(WaterReservoir res){
+        ArrayList<PlantPot> plants = new ArrayList<PlantPot>();
+        int resId = res.id;
+
+        try{
+            FileInputStream f = new FileInputStream(plantsFile);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            boolean firstLine = true;
+            while((line = br.readLine()) != null){
+                String[] splitLine = line.split(",");
+                if(firstLine){
+                    firstLine = false;
+                    continue;
+                }
+                if(Integer.parseInt(splitLine[1]) == resId){
+                    int id = Integer.parseInt(splitLine[0]);
+                    String name = splitLine[2];
+                    String type = splitLine[3];
+                    Float desHum = Float.parseFloat(splitLine[4]);
+                    Float minHum = Float.parseFloat(splitLine[5]);
+                    Float maxTem = Float.parseFloat(splitLine[6]);
+                    Float minTem = Float.parseFloat(splitLine[7]);
+                    plants.add(new PlantPot(id, res, name, type, desHum, minHum, maxTem, minTem));
+                }
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+        return plants;
+    }
 }
