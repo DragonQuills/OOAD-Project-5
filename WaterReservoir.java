@@ -33,6 +33,14 @@ class WaterReservoir{
     return report;
   }
 
+  public Float get_max_cpacity(){
+    return max_capacity;
+  }
+
+  public Float get_warning_level(){
+    return warning_level;
+  }
+
 //constructor
   public WaterReservoir(String new_name, float max, float warning){
     name = new_name;

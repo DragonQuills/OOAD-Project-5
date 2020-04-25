@@ -161,14 +161,21 @@ public class StorageHandler {
         return new Room(maxId+1, name, lowestTemp, highestTemp);
     }
 
-    public PlantPot createPlant(int reservoirId, WaterReservoir reservoir, String name, String type){
+    public void createPlant(PlantPot plant){
         int maxId = getMaxId(plantsFile);
+        int reservoirId = idFromReservoir(plant.get_res());
+        String name = plant.name;
+        String type = plant.plant_type;
+        Float desiredHumidity = plant.get_desired_soil_humidity();
+        Float minHumidity = plant.get_min_soil_humidity();
+        Float maxTemp = plant.get_max_temp();
+        Float minTemp = plant.get_min_temp();
         //room is not needed as reservoir manages that relation
         try{
             FileWriter fw = new FileWriter(plantsFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            String line = (maxId+1)+","+reservoirId+","+name+","+type+",0"; //0 indicates a plant with no recorded moisture
+            String line = (maxId+1)+","+reservoirId+","+name+","+type+","+desiredHumidity+","+minHumidity+","+maxTemp+","+minTemp+",0"; //0 indicates a plant with no recorded moisture
             pw.println(line);
             pw.close();
         }
@@ -179,10 +186,35 @@ public class StorageHandler {
         //TODO: New constructor for plant?  I am not sure how this function will best interact with the factory.
         // Maybe a function that is called at runtime that bypasses the factory w/ information stored in the database
 
-        PlantPot newPlant = new PlantPot(name, type);
-        newPlant.set_water_reservoir(reservoir);
+        plant.id = maxId+1;
+    }
 
-        return newPlant;
+    public int idFromReservoir(WaterReservoir res){
+        try{
+            FileInputStream f = new FileInputStream(reservoirsFile);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            boolean firstLine = true;
+            while((line = br.readLine()) != null){
+                String[] splitLine = line.split(",");
+                if(firstLine){
+                    firstLine = false;
+                    continue;
+                }
+                if(splitLine[2] == res.name && Float.parseFloat(splitLine[3]) == res.get_max_cpacity() && Float.parseFloat(splitLine[4]) == res.get_warning_level()){
+                    br.close();
+                    return Integer.parseInt(splitLine[0]);
+                }
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        return -1;
     }
 
     public void deleteById(File file, int id){
