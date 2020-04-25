@@ -312,10 +312,44 @@ public class Main {
 						System.out.println("4 Return to main menu");
 						int menuChoice = scanner.nextInt();
 						if(menuChoice == 1){
-							// view plants
+							boolean quitPlants = false;
+							ArrayList<PlantPot> plants = selectedRoom.get_plants();
+							while(!quitPlants){
+								for(int i = 0; i < plants.size(); i++){
+									System.out.println((i+1)+" Delete "+plants.get(i).name);
+								}
+								System.out.println((plants.size()+1)+" Return to main menu");
+								int plantChoice = scanner.nextInt();
+								if(plantChoice > 0 && plantChoice <= plants.size()){
+									storage.deletePlant(selectedRoom.get_plant(plantChoice-1).id);
+								}
+								else if(plantChoice == (plants.size()+1)){
+									quitPlants = true;
+								}
+								else{
+									System.out.println("Not a valid choice");
+								}
+							}
 						}
 						else if(menuChoice == 2){
-							// view reservoirs
+							boolean quitRes = false;
+							ArrayList<WaterReservoir> resList = selectedRoom.get_reservoir_list();
+							while(!quitRes){
+								for(int i = 0; i < resList.size(); i++){
+									System.out.println((i+1)+" Delete "+resList.get(i).name);
+								}
+								System.out.println((resList.size()+1)+" Return to main menu");
+								int resChoice = scanner.nextInt();
+								if(resChoice > 0 && resChoice <= resList.size()){
+									storage.deleteReservoir(selectedRoom.get_reservoir(resChoice-1).id);
+								}
+								else if(resChoice == (resList.size()+1)){
+									quitRes = true;
+								}
+								else{
+									System.out.println("Not a valid choice");
+								}
+							}
 						}
 						else if(menuChoice == 3){
 							storage.deleteRoom(selectedRoom.id);

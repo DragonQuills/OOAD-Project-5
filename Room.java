@@ -24,8 +24,17 @@ class Room{
   public ArrayList<PlantPot> get_plants(){
     return plants;
   }
+
+  public PlantPot get_plant(int n){
+    return plants.get(n);
+  }
+
   public ArrayList<WaterReservoir> get_reservoir_list(){
     return reservoirs;
+  }
+
+  public WaterReservoir get_reservoir(int n){
+    return reservoirs.get(n);
   }
 
   public void add_plant(PlantPot p){
