@@ -17,8 +17,14 @@ class PlantPot{
   public void set_min_soil_humidity(float new_min){
     min_soil_humidity = new_min;
   }
+  public float get_min_soil_humidity(){
+    return min_soil_humidity;
+  }
   public void set_desired_soil_humidity(float new_humid){
     desired_soil_humidity = new_humid;
+  }
+  public float get_desired_soil_humidity(){
+    return desired_soil_humidity;
   }
 
   //temp getter and setter functions for PlantFactory.conditions_ok_for_plant() and PlantFactory.get_plant()
@@ -33,6 +39,10 @@ class PlantPot{
   }
   public float get_max_temp(){
     return max_temp;
+  }
+
+  public float get_light_hours(){
+    return light_hours;
   }
 
   //this doesn't change any of Plant's variables, it effects the Timer.

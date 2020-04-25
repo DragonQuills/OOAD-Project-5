@@ -28,7 +28,7 @@ class PlantFactory{
         String[] data = line.split(delimiter);
         String[] return_data;
         if (data[0] == type){
-          return_data = Arrays.copyOfRange(data,1,4);
+          return_data = Arrays.copyOfRange(data,1,5);
         }
       }
     } catch (IOException e) {

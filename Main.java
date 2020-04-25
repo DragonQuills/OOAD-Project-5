@@ -63,13 +63,27 @@ public class Main {
                 String plant_type = scanner.next();
                 System.out.println("Checking our database of recommendations...");
                 PlantPot new_plant = PlantFactory.get_plant(plant_name, plant_type);
-                //TODO: Deal with plant_type not found in fake_plant_data.csv
-                System.out.println("Accept? (y/n)")
-                while(true){
+                //If data is found in query_csv(), print that data
+                if (new_plant.get_min_temp() > 0) {
+                  System.out.println("Here's what we found:")
+                  System.out.println("Minimum Soil Humidity: ", new_plant.get_min_soil_humidity());
+                  System.out.println("Desired/Max Soil Humidity: ", new_plant.get_desired_soil_humidity());
+                  System.out.println("Light Hours: ", new_plant.get_light_hours());
+                  System.out.println("Minimum Room Temperature: ", new_plant.get_min_temp());
+                  System.out.println("Maximum Room Temperature: ", new_plant.get_max_temp());
+                  System.out.println("Accept? (y/n)");
                   String user_likes_data = scanner.next();
-                  if (user_likes_data == "y"){
-                    //TODO:continue with default data pulled from csv
+                }
+                //else, tell the use they must enter data
+                else {
+                  System.out.println("No data about plant type ", plant_type, ". Please enter custom data: ");
+                  String user_likes_data = "n";
+                }
 
+
+                while(true){
+                  //If user likes data, continue with new_plant as-is
+                  if (user_likes_data == "y"){
                     break;
                   }
                   //Case: User wants to enter their own data
@@ -160,16 +174,18 @@ public class Main {
                           System.out.println("Input must be a number. Please try again:")
                         }
                       }
-                      String[] user_data_input = min_soil_humidity;
-                      user_data_input.add(desired_soil_humidity);
-                      user_data_input.add(light_time);
-                      user_data_input.add(min_temp);
-                      user_data_input.add(max_temp):
-                      //TODO: Create a plant using the user_data_input
+                      new_plant.set_min_soil_humidity(min_soil_humidity);
+                      new_plant.set_desired_soil_humidity(desired_soil_humidity);
+                      new_plant.set_light_hours(light_hours);
+                      new_plant.set_min_temp(min_temp);
+                      new_plant.set_max_temp(max_temp);
+                      
                     }
-
+                  //Catch invalid input, request new input
+                  //Should re-iterate at top of the "parent" while loop with new user_likes_data value
                   else {
                         System.out.println("Invalid Input. Please type y or n and press Enter.")
+                        user_likes_data = scanner.next();
                       }
                   }
 
