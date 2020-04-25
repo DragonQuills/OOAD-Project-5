@@ -83,6 +83,13 @@ class Room{
     return report;
   }
 
+//temp getter functions for PlantFactory.conditions_ok_for_plant()
+  public float get_lowest_temp(){
+    return lowest_temp;
+  }
+  public float get_highest_temp(){
+    return highest_temp;
+  }
 // constructor
   public Room(int new_id, String new_name, int new_lowest_temp, int new_highest_temp){
     id = new_id;

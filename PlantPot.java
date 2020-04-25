@@ -10,14 +10,41 @@ class PlantPot{
   private WaterSensor water_sensor;
   private float desired_soil_humidity; // this determines how much the plant will be watered
   private float min_soil_humidity; //this is the level at or below which the plant will be watered
+  private float max_temp;
+  private float min_temp;
 
 //methods
   public void set_min_soil_humidity(float new_min){
     min_soil_humidity = new_min;
   }
-  public void set_desired_humidity(float new_humid){
+  public float get_min_soil_humidity(){
+    return min_soil_humidity;
+  }
+  public void set_desired_soil_humidity(float new_humid){
     desired_soil_humidity = new_humid;
   }
+  public float get_desired_soil_humidity(){
+    return desired_soil_humidity;
+  }
+
+  //temp getter and setter functions for PlantFactory.conditions_ok_for_plant() and PlantFactory.get_plant()
+  public void set_min_temp(float new_min_temp){
+    min_temp = new_min_temp;
+  }
+  public float get_min_temp(){
+    return min_temp;
+  }
+  public void set_max_temp(float new_max_temp){
+    max_temp = new_max_temp;
+  }
+  public float get_max_temp(){
+    return max_temp;
+  }
+
+  public float get_light_hours(){
+    return timer.get_hours_on();
+  }
+
   //this doesn't change any of Plant's variables, it effects the Timer.
   public void set_light_hours(int new_hours_on){
     timer.set_hours_on(new_hours_on);
