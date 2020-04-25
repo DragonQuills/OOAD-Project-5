@@ -49,6 +49,7 @@ class User{
 
   public Room get_room(int n){
     return rooms.get(n);
+  }
   public ArrayList<Room> get_rooms_list(){
     return rooms;
   }
