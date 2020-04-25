@@ -59,7 +59,8 @@ public class Main {
             else if(intInput == 3){
                 //Add plant
                 System.out.println("Here are your available Rooms:");
-                //TODO:List out the available Rooms
+
+                //Display existing room options and request room selection for new plant
                 ArrayList<Room> rooms_list = user.get_rooms_list();
                 Room selected_room;
                 for (type room : rooms_list) {
@@ -76,6 +77,8 @@ public class Main {
                   }
                   System.out.println("Room"+input_room+" does not exist, please try again.");
                 }
+
+                //Display Reservoirs available in selected room and request reservoir selection for new plant
                 System.out.println("Here are your available reservoirs in " + selected_room.name);
                 ArrayList<WaterReservoir> reservoir_list = selected_room.get_reservoir_list();
                 for (type reservoir : reservoir_list){
@@ -93,9 +96,6 @@ public class Main {
                   }
                   System.out.println("Reservoir" + input_reservoir + " does not exist. Please try again.");
                 }
-
-
-                System.out.println("Which reservoir would you like to connect your plant to?");
 
                 System.out.println("Enter plant name:");//This has to be first as input for PlantFactory
                 String plant_name = scanner.next();
@@ -232,13 +232,13 @@ public class Main {
                         user_likes_data = scanner.next();
                       }
                   }
-                  //Add the plant to the selected room
-                  //TODO: Implement selected room
-                  selected_room.add_plant(new_plant);
 
             }
             else if(intInput == 4){
-                //TODO: View rooms
+                ArrayList<Room> rooms_list = user.get_rooms_list();
+                for (type room : rooms_list){
+                  System.out.println(room.status_report());
+                }
             }
             else if(intInput == 5){
                 //Quit
