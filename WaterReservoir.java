@@ -25,7 +25,7 @@ class WaterReservoir{
     return current_water<=warning_level;
   }
 
-  public String report_current_level(){
+  public String status_report(){
     String report = "Reservoir " + name + "'s current level is " + current_water + " oz. ";
     if (current_water <= warning_level){
       report += "This is below the warning level, please refill immediately.";

@@ -27,6 +27,7 @@ class Room{
   public void add_plant(PlantPot p){
     plants.add(p);
   }
+
   public boolean remove_plant(String name){
     for( int i = 0; i < plants.size(); i++){
       if (plants.get(i).name == name){
@@ -70,22 +71,16 @@ class Room{
     return false;
   }
 
-  public void add_observer(User new_user){
-    observers.add(new_user);
-  }
-  public boolean remove_observer(int user_id){
-    for( int i = 0; i < observers.size(); i++){
-      if (observers.get(i).id == user_id){
-        observers.remove(i);
-        return true;
-      }
+  public String status_report(){
+    String report = "";
+    report += "The room " + name + " is at " + temp_sensor.get_current_temp() + " degrees F.\n";
+    for( WaterReservoir wr : reservoirs){
+      report += "\t" + wr.status_report() + "\n";
     }
-    return false;
-  }
-  private void notify_observers(){
-    for (User i : observers){
-      i.update(this);
+    for( PlantPot p : plants){
+      report += "\t" + p.status_report() + "\n";
     }
+    return report;
   }
 
 //temp getter functions for PlantFactory.conditions_ok_for_plant()
@@ -103,6 +98,7 @@ class Room{
     highest_temp = new_highest_temp;
 
     plants = new ArrayList<PlantPot>();
+    reservoirs = new ArrayList<WaterReservoir>();
 
     ac = new AC();
     heater = new Heater();
