@@ -287,7 +287,7 @@ public class Main {
             }
             else if(intInput == 4){
                 ArrayList<Room> rooms_list = user.get_rooms_list();
-                for (type room : rooms_list){
+                for (Room room : rooms_list){
                   System.out.println(room.status_report());
                 }
             }
