@@ -45,6 +45,10 @@ class PlantPot{
     return timer.get_hours_on();
   }
 
+  public WaterReservoir get_res(){
+    return res;
+  }
+
   //this doesn't change any of Plant's variables, it effects the Timer.
   public void set_light_hours(int new_hours_on){
     timer.set_hours_on(new_hours_on);
@@ -106,5 +110,17 @@ class PlantPot{
   public PlantPot(String new_name, String new_plant_type){
       name = new_name;
       plant_type = new_plant_type;
+  }
+
+  //constructor used when creating a plant from the database
+  public PlantPot(int newId, WaterReservoir newRes, String newName, String type, Float desiredHumidity, Float minHumidity, Float maxTemp, float minTemp){
+    id = newId;
+    res = newRes;
+    name = newName;
+    plant_type = type;
+    desired_soil_humidity = desiredHumidity;
+    min_soil_humidity = minHumidity;
+    max_temp = maxTemp;
+    min_temp = minTemp;
   }
 }
