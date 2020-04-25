@@ -114,10 +114,10 @@ public class Main {
                 //Display existing room options and request room selection for new plant
                 ArrayList<Room> rooms_list = user.get_rooms_list();
                 Room selected_room;
-                for (type room : rooms_list) {
+                for (Room room : rooms_list) {
                   System.out.println(room.status_report());
                 }
-                System.out.println("Which room would you like to add your plant to?")
+                System.out.println("Which room would you like to add your plant to?");
                 while(true){
                   String input_room = scanner.next();
                   for (int i = 0; i < rooms_list.size(); i++){
@@ -132,7 +132,7 @@ public class Main {
                 //Display Reservoirs available in selected room and request reservoir selection for new plant
                 System.out.println("Here are your available reservoirs in " + selected_room.name);
                 ArrayList<WaterReservoir> reservoir_list = selected_room.get_reservoir_list();
-                for (type reservoir : reservoir_list){
+                for (Reservoir reservoir : reservoir_list){
                   System.out.println(reservoir.status_report());
                 }
                 System.out.println("Which reservoir would you like to use for your new plant?");

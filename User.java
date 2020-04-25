@@ -8,7 +8,7 @@ class User{
 
 // methods
   public String status_report(){
-
+    return "";
   }
 
   public void add_room(Room r){
