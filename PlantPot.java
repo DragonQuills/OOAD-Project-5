@@ -42,7 +42,7 @@ class PlantPot{
   }
 
   public float get_light_hours(){
-    return light_hours;
+    return timer.get_hours_on();
   }
 
   //this doesn't change any of Plant's variables, it effects the Timer.
