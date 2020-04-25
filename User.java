@@ -7,8 +7,9 @@ class User{
   public int id;
 
 // methods
+//TODO: Something with this!!!
   public String status_report(){
-
+    return "";
   }
 
   public void add_room(Room r){
@@ -32,6 +33,10 @@ class User{
       }
     }
     return false;
+  }
+
+  public ArrayList<Room> get_rooms_list(){
+    return rooms;
   }
 
   public User(int new_id){
