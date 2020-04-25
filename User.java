@@ -34,6 +34,10 @@ class User{
     return false;
   }
 
+  public ArrayList<Room> get_rooms_list(){
+    return rooms;
+  }
+
   public User(int new_id){
     id = new_id;
     rooms = new ArrayList<Room>();
