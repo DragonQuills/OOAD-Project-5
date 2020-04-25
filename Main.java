@@ -45,7 +45,46 @@ public class Main {
             if(intInput == 1){
                 System.out.println("Enter the name of your new room: ");
                 String room_name = scanner.next();
-                Room new_room = user.add_room(room_name);
+                String min_temp;
+                String max_temp;
+                int temp_min;
+                int temp_max;
+                while(true){
+                  System.out.println("Minimum Temperature of new room: ");
+                  min_temp = scanner.next();
+                  try {
+                    temp_min = Integer.parseInt(min_temp);
+                    if (temp_min < 1 || temp_max > 120){
+                      System.out.println("Temperature must be between 0 and 120. Please try again.");
+                    }
+                    else{
+                      break;
+                    }
+                  }
+                  catch(NumberFormatException e) {
+                    System.out.println("Input must be a number. Please try again:");
+                  }
+                }
+                while(true){
+                  System.out.println("Maximum Temperature of new room: ");
+                  max_temp = scanner.next();
+                  try {
+                    temp_max = Integer.parseInt(min_temp);
+                    if (temp_max < 1 || temp_max > 120){
+                      System.out.println("Temperature must be between 0 and 120. Please try again.");
+                    }
+                    else{
+                      break;
+                    }
+                  }
+                  catch(NumberFormatException e) {
+                    System.out.println("Input must be a number. Please try again:");
+                  }
+                }
+                //TODO: create the room with the
+
+
+
             }
             else if(intInput == 2){
                 System.out.println("Enter reservoir name: ");
