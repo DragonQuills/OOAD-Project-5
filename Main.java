@@ -56,6 +56,7 @@ public class Main {
                 //Add plant
                 System.out.println("Select Room:");
                 //TODO:List out the available Rooms
+                //Not sure how to do this?
 
                 System.out.println("Enter plant name:");//This has to be first as input for PlantFactory
                 String plant_name = scanner.next();
@@ -179,7 +180,7 @@ public class Main {
                       new_plant.set_light_hours(light_hours);
                       new_plant.set_min_temp(min_temp);
                       new_plant.set_max_temp(max_temp);
-                      
+
                     }
                   //Catch invalid input, request new input
                   //Should re-iterate at top of the "parent" while loop with new user_likes_data value
@@ -188,6 +189,8 @@ public class Main {
                         user_likes_data = scanner.next();
                       }
                   }
+                  //Add the plant to the selected room
+                  selected_room.add_plant(new_plant);
 
             }
             else if(intInput == 4){
