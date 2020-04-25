@@ -258,6 +258,77 @@ public class StorageHandler {
         
     }
 
+    public void deletePlant(int id){
+        deleteById(plantsFile, id);
+    }
+
+    public void deleteReservoir(int id){
+        ArrayList<Integer> plantsToDelete = new ArrayList<Integer>();
+        try{
+            FileInputStream f = new FileInputStream(plantsFile);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            boolean firstLine = true;
+            while((line = br.readLine()) != null){
+                String[] splitLine = line.split(",");
+                if(firstLine){
+                    firstLine = false;
+                    continue;
+                }
+                if(Integer.parseInt(splitLine[1]) == id){
+                    plantsToDelete.add(Integer.parseInt(splitLine[0]));
+                }
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+        for(int i = 0; i < plantsToDelete.size(); i++){
+            deletePlant(plantsToDelete.get(i));
+        }
+
+        deleteById(reservoirsFile, id);
+    }
+
+    public void deleteRoom(int id){
+        ArrayList<Integer> resToDelete = new ArrayList<Integer>();
+        try{
+            FileInputStream f = new FileInputStream(reservoirsFile);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            boolean firstLine = true;
+            while((line = br.readLine()) != null){
+                String[] splitLine = line.split(",");
+                if(firstLine){
+                    firstLine = false;
+                    continue;
+                }
+                if(Integer.parseInt(splitLine[1]) == id){
+                    resToDelete.add(Integer.parseInt(splitLine[0]));
+                }
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+        for(int i = 0; i < resToDelete.size(); i++){
+            deleteReservoir(resToDelete.get(i));
+        }
+
+        deleteById(roomsFile, id);
+        deleteById(ownersFile, id, 1);
+    }
+
     private int getMaxId(File file){
         int maxId = 0;
         try{

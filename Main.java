@@ -214,7 +214,51 @@ public class Main {
 
             }
             else if(intInput == 4){
-                //TODO: View rooms
+                boolean quitView = false;
+                while(!quitView){
+                    boolean validRoom = false;
+                    int roomChoice;
+                    while(!validRoom){
+                        System.out.println("Select a room: ");
+                        System.out.println(user.roomNames());
+                        roomChoice = scanner.nextInt();
+                        if(roomChoice > 0 && roomChoice <= user.numRooms()){
+                            validRoom = true;
+                        }
+                        else{
+                            System.out.println("Not a valid room");
+                        }
+                    }
+                    Room selectedRoom = user.get_room(roomChoice-1);
+					//At this point a room has been selected
+					boolean quitSubmenu = false;
+                    while(!quitSubmenu){
+                        System.out.println("Select an option:");
+                        System.out.println("1 View plants");
+                        System.out.println("2 View reservoirs");
+						System.out.println("3 Delete room");
+						System.out.println("4 Return to main menu");
+						int menuChoice = scanner.nextInt();
+						if(menuChoice == 1){
+							// view plants
+						}
+						else if(menuChoice == 2){
+							// view reservoirs
+						}
+						else if(menuChoice == 3){
+							storage.deleteRoom(selectedRoom.id);
+							user.remove_room(selectedRoom.name);
+							quitView = true;
+						}
+						else if(menuChoice == 4){
+							quitView = true;
+							break;
+						}
+						else{
+							System.out.println("Not a valid choice");
+						}
+                    }
+                }
             }
             else if(intInput == 5){
                 //Quit
