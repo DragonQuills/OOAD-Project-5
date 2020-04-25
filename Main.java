@@ -61,21 +61,42 @@ public class Main {
                 System.out.println("Here are your available Rooms:");
                 //TODO:List out the available Rooms
                 ArrayList<Room> rooms_list = user.get_rooms_list();
-                String selected_room;
+                Room selected_room;
                 for (type room : rooms_list) {
                   System.out.println(room.status_report());
                 }
                 System.out.println("Which room would you like to add your plant to?")
                 while(true){
                   String input_room = scanner.next();
-                  if (rooms_list.contains(input_room)){
-                    selected_room = input_room;
-                    break;
+                  for (int i = 0; i < rooms_list.size(); i++){
+                    if (rooms_list.get(i).name == input_room){
+                      selected_room = rooms_list.get(i);
+                      break;
+                    }
                   }
-                  else {
-                    System.out.println("Room does not exist, please try again:");
-                  }
+                  System.out.println("Room"+input_room+" does not exist, please try again.");
                 }
+                System.out.println("Here are your available reservoirs in " + selected_room.name);
+                ArrayList<WaterReservoir> reservoir_list = selected_room.get_reservoir_list();
+                for (type reservoir : reservoir_list){
+                  System.out.println(reservoir.status_report());
+                }
+                System.out.println("Which reservoir would you like to use for your new plant?");
+                Reservoir selected_reservoir;
+                while(true) {
+                  String input_reservoir = scanner.next();
+                  for (int i = 0; i < reservoir_list.size(); i++){
+                    if (reservoir_list.get(i).name == input_reservoir){
+                      selected_reservoir = reservoir_list.get(i);
+                      break;
+                    }
+                  }
+                  System.out.println("Reservoir" + input_reservoir + " does not exist. Please try again.");
+                }
+
+
+                System.out.println("Which reservoir would you like to connect your plant to?");
+
                 System.out.println("Enter plant name:");//This has to be first as input for PlantFactory
                 String plant_name = scanner.next();
                 System.out.println("Enter plant type");
@@ -83,7 +104,8 @@ public class Main {
                 System.out.println("Checking our database of recommendations...");
                 PlantPot new_plant = factory.get_plant(plant_name, plant_type);
                 selected_room.add_plant(new_plant);
-                
+                new_plant.set_water_reservoir(selected_reservoir);
+
                 //If data is found in query_csv(), print that data
                 String user_likes_data = "";
                 if (new_plant.get_min_temp() > 0) {
