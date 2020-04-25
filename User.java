@@ -7,6 +7,7 @@ class User{
   public int id;
 
 // methods
+//TODO: Something with this!!!
   public String status_report(){
     return "";
   }
