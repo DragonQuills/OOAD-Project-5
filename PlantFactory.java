@@ -26,15 +26,16 @@ class PlantFactory{
     try (BufferedReader br = new BufferedReader(new FileReader(csvFile))){
       while ((line = br.readLine()) != null) {
         String[] data = line.split(delimiter);
-        String[] return_data;
+        String[] return_data = new String[5];
         if (data[0] == type){
           return_data = Arrays.copyOfRange(data,1,5);
         }
+        return return_data;
       }
     } catch (IOException e) {
       e.printStackTrace();
     }
-    return return_data;
+
 
   }
 

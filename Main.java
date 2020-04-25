@@ -43,6 +43,9 @@ public class Main {
             int intInput = scanner.nextInt();
             if(intInput == 1){
                 //TODO:Add room
+                System.out.println("Enter the name of your new room: ");
+                String room_name = scanner.next();
+                String new_room = user.add_room(room_name);
             }
             else if(intInput == 2){
                 System.out.println("Enter reservoir name: ");
