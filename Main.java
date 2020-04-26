@@ -114,7 +114,8 @@ public class Main {
                   System.out.println("Input must be a number. Please try again:");
                 }
               }
-              storage.createRoom(room_name, temp_min, temp_max, userId);
+              Room newRoom = storage.createRoom(room_name, temp_min, temp_max, userId);
+              user.add_room(newRoom);
             }
             //Add Reservoir
             else if(intInput == 2){
