@@ -538,6 +538,29 @@ public class StorageHandler {
         }
     }
 
+    public int getTempReading(int roomId){
+        try{
+            FileInputStream f = new FileInputStream(roomsFile);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            while((line = br.readLine()) != null){
+                String[] splitline = line.split(",");
+                if(Integer.parseInt(splitline[0]) == roomId){
+                    br.close();
+                    return Integer.parseInt(splitline[4]);
+                }
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        return 404;
+    }
+
     private ArrayList<String> originalFile(File file){
         ArrayList<String> original = new ArrayList<String>();
         try{
