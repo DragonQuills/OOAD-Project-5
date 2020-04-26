@@ -125,6 +125,7 @@ class PlantPot{
     min_soil_humidity = minHumidity;
     max_temp = maxTemp;
     min_temp = minTemp;
+
     store = StorageHandler.getInstance();
     water_sensor.set_current_humidity(currentHumidity);
   }
