@@ -125,7 +125,7 @@ class Room{
     Command heat_up = new HeatUpCommand(ac, heater);
     Command cool_down = new CoolDownCommand(ac, heater);
     Command same_temp = new SameTempCommand(ac, heater);
-    temp_sensor = new TempuratureSensor(heat_up, cool_down, same_temp, 60, 75);
+    temp_sensor = new TempuratureSensor(heat_up, cool_down, same_temp, lowest_temp, highest_temp);
     store = StorageHandler.getInstance();
   }
 }
