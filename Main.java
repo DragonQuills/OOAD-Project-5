@@ -104,8 +104,22 @@ public class Main {
                 System.out.println("Max capacity: ");
                 int capacity = scanner.nextInt();
                 System.out.println("Warning level: ");
-                int warning = scanner.nextInt();
-                storage.createReservoir(userId, reservoirName, capacity, warning);
+				int warning = scanner.nextInt();
+				String roomNames = user.roomNames();
+				int selectedRoom = -1;
+				while(true){
+					System.out.println("Select a room");
+					System.out.println(roomNames);
+					int roomChoice = scanner.nextInt();
+					if(roomChoice > 0 && roomChoice <= user.numRooms()){
+						selectedRoom = roomChoice - 1;
+						break;
+					}
+					else{
+						System.out.println("Not a valid room");
+					}
+				}
+                storage.createReservoir(user.get_room(selectedRoom).id, reservoirName, capacity, warning);
             }
             else if(intInput == 3){
                 //Add plant
