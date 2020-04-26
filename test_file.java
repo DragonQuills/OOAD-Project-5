@@ -11,7 +11,7 @@ class test_file{
     PlantPot rosemary = new PlantPot("Rosemary1", "rosemary");
     rosemary.set_water_reservoir(res);
     rosemary.set_min_soil_humidity(10);
-    rosemary.set_desired_humidity(50);
+    rosemary.set_desired_soil_humidity(50);
     // rosemary.check_water();
 
     Light rosemary_light = new Light();
@@ -69,7 +69,7 @@ class test_file{
     PlantPot rosemary = new PlantPot("Rosemary1", "rosemary");
     rosemary.set_water_reservoir(res);
     rosemary.set_min_soil_humidity(10);
-    rosemary.set_desired_humidity(50);
+    rosemary.set_desired_soil_humidity(50);
     // rosemary.check_water();
 
     Light rosemary_light = new Light();

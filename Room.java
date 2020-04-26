@@ -24,6 +24,19 @@ class Room{
   public ArrayList<PlantPot> get_plants(){
     return plants;
   }
+
+  public PlantPot get_plant(int n){
+    return plants.get(n);
+  }
+
+  public ArrayList<WaterReservoir> get_reservoir_list(){
+    return reservoirs;
+  }
+
+  public WaterReservoir get_reservoir(int n){
+    return reservoirs.get(n);
+  }
+
   public void add_plant(PlantPot p){
     plants.add(p);
   }
@@ -83,6 +96,13 @@ class Room{
     return report;
   }
 
+//temp getter functions for PlantFactory.conditions_ok_for_plant()
+  public float get_lowest_temp(){
+    return lowest_temp;
+  }
+  public float get_highest_temp(){
+    return highest_temp;
+  }
 // constructor
   public Room(int new_id, String new_name, int new_lowest_temp, int new_highest_temp){
     id = new_id;

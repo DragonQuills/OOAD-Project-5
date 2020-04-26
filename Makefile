@@ -10,7 +10,7 @@ all: Command.java WaterReservoir.java WaterSensor.java PlantPot.java Timer.java 
 	javac Room.java
 	javac TempuratureSensor.java
 
-	javac test_file.java
+	#javac test_file.java
 
 clean:
 	rm *.class
