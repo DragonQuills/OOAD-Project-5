@@ -13,7 +13,11 @@ public class Main {
             System.out.println("Select an option:");
             System.out.println("1. Login");
             System.out.println("2. Register");
-            int intInput = scanner.nextInt();
+            try {
+              int intInput = scanner.nextInt();
+            } catch (InputMismatchException e){
+              System.out.println("Input not valid");
+            }
             if(intInput == 1){
                 while(userId == -1){
                     userId = storage.loginUser(scanner);
