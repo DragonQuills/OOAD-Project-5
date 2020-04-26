@@ -163,7 +163,7 @@ public class StorageHandler {
 
     public void createPlant(PlantPot plant){
         int maxId = getMaxId(plantsFile);
-        int reservoirId = idFromReservoir(plant.get_res());
+        int reservoirId = plant.get_res().id;
         String name = plant.name;
         String type = plant.plant_type;
         Float desiredHumidity = plant.get_desired_soil_humidity();
@@ -183,65 +183,19 @@ public class StorageHandler {
             e.printStackTrace();
         }
 
-        //TODO: New constructor for plant?  I am not sure how this function will best interact with the factory.
-        // Maybe a function that is called at runtime that bypasses the factory w/ information stored in the database
-
         plant.id = maxId+1;
     }
 
-    public int idFromReservoir(WaterReservoir res){
-        try{
-            FileInputStream f = new FileInputStream(reservoirsFile);
-            BufferedReader br = new BufferedReader(new InputStreamReader(f));
-            String line;
-            boolean firstLine = true;
-            while((line = br.readLine()) != null){
-                String[] splitLine = line.split(",");
-                if(firstLine){
-                    firstLine = false;
-                    continue;
-                }
-                if(splitLine[2] == res.name && Float.parseFloat(splitLine[3]) == res.get_max_cpacity() && Float.parseFloat(splitLine[4]) == res.get_warning_level()){
-                    br.close();
-                    return Integer.parseInt(splitLine[0]);
-                }
-            }
-            br.close();        
-        }
-        catch(FileNotFoundException e){
-            e.printStackTrace();
-        }     
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        return -1;
-    }
-
-    public void deleteById(File file, int id){
+    private void deleteById(File file, int id){
         //Use function overloading in place of default parameters
         deleteById(file, id, 0);
     }
 
-    public void deleteById(File file, int id, int index){
-        ArrayList<String> original = new ArrayList<String>();
-        try{
-            FileInputStream f = new FileInputStream(file);
-            BufferedReader br = new BufferedReader(new InputStreamReader(f));
-            String line;
-            while((line = br.readLine()) != null){
-                original.add(line);
-            }
-            br.close();        
-        }
-        catch(FileNotFoundException e){
-            e.printStackTrace();
-        }     
-        catch(IOException e){
-            e.printStackTrace();
-        }
+    private void deleteById(File file, int id, int index){
+        ArrayList<String> original = originalFile(file);
 
         try{
-            FileWriter fw = new FileWriter(file, false); //False overwrites
+            FileWriter fw = new FileWriter(file, false); //False flag overwrites the file
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
             for(int i = 0; i < original.size(); i++){
@@ -256,6 +210,77 @@ public class StorageHandler {
             e.printStackTrace();
         }
         
+    }
+
+    public void deletePlant(int id){
+        deleteById(plantsFile, id);
+    }
+
+    public void deleteReservoir(int id){
+        ArrayList<Integer> plantsToDelete = new ArrayList<Integer>();
+        try{
+            FileInputStream f = new FileInputStream(plantsFile);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            boolean firstLine = true;
+            while((line = br.readLine()) != null){
+                String[] splitLine = line.split(",");
+                if(firstLine){
+                    firstLine = false;
+                    continue;
+                }
+                if(Integer.parseInt(splitLine[1]) == id){
+                    plantsToDelete.add(Integer.parseInt(splitLine[0]));
+                }
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+        for(int i = 0; i < plantsToDelete.size(); i++){
+            deletePlant(plantsToDelete.get(i));
+        }
+
+        deleteById(reservoirsFile, id);
+    }
+
+    public void deleteRoom(int id){
+        ArrayList<Integer> resToDelete = new ArrayList<Integer>();
+        try{
+            FileInputStream f = new FileInputStream(reservoirsFile);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            boolean firstLine = true;
+            while((line = br.readLine()) != null){
+                String[] splitLine = line.split(",");
+                if(firstLine){
+                    firstLine = false;
+                    continue;
+                }
+                if(Integer.parseInt(splitLine[1]) == id){
+                    resToDelete.add(Integer.parseInt(splitLine[0]));
+                }
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+        for(int i = 0; i < resToDelete.size(); i++){
+            deleteReservoir(resToDelete.get(i));
+        }
+
+        deleteById(roomsFile, id);
+        deleteById(ownersFile, id, 1);
     }
 
     private int getMaxId(File file){
@@ -425,7 +450,7 @@ public class StorageHandler {
         return reservoirs;
     }
 
-    public ArrayList<PlantPot> plantFromReservoir(WaterReservoir res){
+    public ArrayList<PlantPot> plantsFromReservoir(WaterReservoir res){
         ArrayList<PlantPot> plants = new ArrayList<PlantPot>();
         int resId = res.id;
 
@@ -461,5 +486,75 @@ public class StorageHandler {
         }
 
         return plants;
+    }
+
+    public void tempReading(int id, int temp){
+        ArrayList<String> original = originalFile(roomsFile);
+
+        try{
+            FileWriter fw = new FileWriter(roomsFile, false);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            for(int i = 0; i < original.size(); i++){
+                if(original.get(i).split(",")[0].equals(String.valueOf(id))){
+                    String[] splitLine = original.get(i).split(",");
+                    String line = splitLine[0]+","+splitLine[1]+","+splitLine[2]+","+splitLine[3]+","+String.valueOf(temp);
+                    pw.println(line);
+                }
+                else{
+                    pw.println(original.get(i));
+                }
+                
+            }
+            pw.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void humidityReading(int id, Float humidity){
+        ArrayList<String> original = originalFile(plantsFile);
+
+        try{
+            FileWriter fw = new FileWriter(plantsFile, false);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            for(int i = 0; i < original.size(); i++){
+                if(original.get(i).split(",")[0].equals(String.valueOf(id))){
+                    String[] splitLine = original.get(i).split(",");
+                    String line = splitLine[0]+","+splitLine[1]+","+splitLine[2]+","+splitLine[3]+","+splitLine[4]+","+splitLine[5]+","+splitLine[6]+","+splitLine[7]+","+String.valueOf(humidity);
+                    pw.println(line);
+                }
+                else{
+                    pw.println(original.get(i));
+                }
+                
+            }
+            pw.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    private ArrayList<String> originalFile(File file){
+        ArrayList<String> original = new ArrayList<String>();
+        try{
+            FileInputStream f = new FileInputStream(file);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            while((line = br.readLine()) != null){
+                original.add(line);
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        return original;
     }
 }

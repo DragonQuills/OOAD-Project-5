@@ -38,7 +38,7 @@ public class Main {
             ArrayList<WaterReservoir> reservoirs = storage.reservoirsFromRoom(userRooms.get(room).id);
             for(int res = 0; res < reservoirs.size(); res++){
                 userRooms.get(room).add_res(reservoirs.get(res));
-                ArrayList<PlantPot> plants = storage.plantFromReservoir(reservoirs.get(res));
+                ArrayList<PlantPot> plants = storage.plantsFromReservoir(reservoirs.get(res));
                 for(int plant = 0; plant < plants.size(); plant++){
                     userRooms.get(room).add_plant(plants.get(plant));
                 }
@@ -68,7 +68,7 @@ public class Main {
                 min_temp = scanner.next();
                 try {
                   temp_min = Integer.parseInt(min_temp);
-                  if (temp_min < 1 || temp_max > 120){
+                  if (temp_min < 1 || temp_min > 120){
                     System.out.println("Temperature must be between 0 and 120. Please try again.");
                   }
                   else{
@@ -83,7 +83,7 @@ public class Main {
                 System.out.println("Maximum Temperature of new room: ");
                 max_temp = scanner.next();
                 try {
-                  temp_max = Integer.parseInt(min_temp);
+                  temp_max = Integer.parseInt(max_temp);
                   if (temp_max < 1 || temp_max > 120){
                     System.out.println("Temperature must be between 0 and 120. Please try again.");
                   }
@@ -95,7 +95,7 @@ public class Main {
                   System.out.println("Input must be a number. Please try again:");
                 }
               }
-              storage.createRoom(room_name, temp_min, temp_max);
+              storage.createRoom(room_name, temp_min, temp_max, userId);
             }
             //Add Reservoir
             else if(intInput == 2){
@@ -104,8 +104,22 @@ public class Main {
                 System.out.println("Max capacity: ");
                 int capacity = scanner.nextInt();
                 System.out.println("Warning level: ");
-                int warning = scanner.nextInt();
-                storage.createReservoir(userId, reservoirName, capacity, warning);
+				int warning = scanner.nextInt();
+				String roomNames = user.roomNames();
+				int selectedRoom = -1;
+				while(true){
+					System.out.println("Select a room");
+					System.out.println(roomNames);
+					int roomChoice = scanner.nextInt();
+					if(roomChoice > 0 && roomChoice <= user.numRooms()){
+						selectedRoom = roomChoice - 1;
+						break;
+					}
+					else{
+						System.out.println("Not a valid room");
+					}
+				}
+                storage.createReservoir(user.get_room(selectedRoom).id, reservoirName, capacity, warning);
             }
             else if(intInput == 3){
                 //Add plant
@@ -113,40 +127,50 @@ public class Main {
 
                 //Display existing room options and request room selection for new plant
                 ArrayList<Room> rooms_list = user.get_rooms_list();
-                Room selected_room;
+                
                 for (Room room : rooms_list) {
                   System.out.println(room.status_report());
                 }
-                System.out.println("Which room would you like to add your plant to?");
-                while(true){
+				System.out.println("Which room would you like to add your plant to?");
+				boolean validRoom = false;
+				int roomIndex = -1;
+                while(!validRoom){
                   String input_room = scanner.next();
                   for (int i = 0; i < rooms_list.size(); i++){
                     if (rooms_list.get(i).name == input_room){
-                      selected_room = rooms_list.get(i);
+					  roomIndex = i;
+					  validRoom = true;
                       break;
                     }
                   }
                   System.out.println("Room"+input_room+" does not exist, please try again.");
-                }
+				}
+				
+				Room selected_room = rooms_list.get(roomIndex);
 
                 //Display Reservoirs available in selected room and request reservoir selection for new plant
                 System.out.println("Here are your available reservoirs in " + selected_room.name);
                 ArrayList<WaterReservoir> reservoir_list = selected_room.get_reservoir_list();
-                for (Reservoir reservoir : reservoir_list){
+                for (WaterReservoir reservoir : reservoir_list){
                   System.out.println(reservoir.status_report());
                 }
                 System.out.println("Which reservoir would you like to use for your new plant?");
-                Reservoir selected_reservoir;
-                while(true) {
+				
+				boolean validRes = false;
+				int resIndex = -1;
+                while(!validRes) {
                   String input_reservoir = scanner.next();
                   for (int i = 0; i < reservoir_list.size(); i++){
                     if (reservoir_list.get(i).name == input_reservoir){
-                      selected_reservoir = reservoir_list.get(i);
+					  validRes = true;
+					  resIndex = i;
                       break;
                     }
                   }
                   System.out.println("Reservoir" + input_reservoir + " does not exist. Please try again.");
-                }
+				}
+				
+				WaterReservoir selected_reservoir = reservoir_list.get(resIndex);
 
                 System.out.println("Enter plant name:");//This has to be first as input for PlantFactory
                 String plant_name = scanner.next();
@@ -274,7 +298,7 @@ public class Main {
                           System.out.println("Input must be a number. Please try again:");
                         }
                       }
-
+					  storage.createPlant(new_plant);
                     }
                   //Catch invalid input, request new input
                   //Should re-iterate at top of the "parent" while loop with new user_likes_data value
@@ -286,9 +310,84 @@ public class Main {
 
             }
             else if(intInput == 4){
-                ArrayList<Room> rooms_list = user.get_rooms_list();
-                for (Room room : rooms_list){
-                  System.out.println(room.status_report());
+                boolean quitView = false;
+                while(!quitView){
+                    boolean validRoom = false;
+                    int roomChoice = -1;
+                    while(!validRoom){
+                        System.out.println("Select a room: ");
+                        System.out.println(user.roomNames());
+                        roomChoice = scanner.nextInt();
+                        if(roomChoice > 0 && roomChoice <= user.numRooms()){
+                            validRoom = true;
+                        }
+                        else{
+                            System.out.println("Not a valid room");
+                        }
+                    }
+                    Room selectedRoom = user.get_room(roomChoice-1);
+					//At this point a room has been selected
+					boolean quitSubmenu = false;
+                    while(!quitSubmenu){
+                        System.out.println("Select an option:");
+                        System.out.println("1 View plants");
+                        System.out.println("2 View reservoirs");
+						System.out.println("3 Delete room");
+						System.out.println("4 Return to main menu");
+						int menuChoice = scanner.nextInt();
+						if(menuChoice == 1){
+							boolean quitPlants = false;
+							ArrayList<PlantPot> plants = selectedRoom.get_plants();
+							while(!quitPlants){
+								for(int i = 0; i < plants.size(); i++){
+									System.out.println((i+1)+" Delete "+plants.get(i).name);
+								}
+								System.out.println((plants.size()+1)+" Return to main menu");
+								int plantChoice = scanner.nextInt();
+								if(plantChoice > 0 && plantChoice <= plants.size()){
+									storage.deletePlant(selectedRoom.get_plant(plantChoice-1).id);
+								}
+								else if(plantChoice == (plants.size()+1)){
+									quitPlants = true;
+								}
+								else{
+									System.out.println("Not a valid choice");
+								}
+							}
+						}
+						else if(menuChoice == 2){
+							boolean quitRes = false;
+							ArrayList<WaterReservoir> resList = selectedRoom.get_reservoir_list();
+							while(!quitRes){
+								for(int i = 0; i < resList.size(); i++){
+									System.out.println((i+1)+" Delete "+resList.get(i).name);
+								}
+								System.out.println((resList.size()+1)+" Return to main menu");
+								int resChoice = scanner.nextInt();
+								if(resChoice > 0 && resChoice <= resList.size()){
+									storage.deleteReservoir(selectedRoom.get_reservoir(resChoice-1).id);
+								}
+								else if(resChoice == (resList.size()+1)){
+									quitRes = true;
+								}
+								else{
+									System.out.println("Not a valid choice");
+								}
+							}
+						}
+						else if(menuChoice == 3){
+							storage.deleteRoom(selectedRoom.id);
+							user.remove_room(selectedRoom.name);
+							quitView = true;
+						}
+						else if(menuChoice == 4){
+							quitView = true;
+							break;
+						}
+						else{
+							System.out.println("Not a valid choice");
+						}
+                    }
                 }
             }
             else if(intInput == 5){

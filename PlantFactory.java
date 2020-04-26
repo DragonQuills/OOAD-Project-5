@@ -29,14 +29,16 @@ class PlantFactory{
         String[] return_data = new String[5];
         if (data[0] == type){
           return_data = Arrays.copyOfRange(data,1,5);
+          return return_data;
         }
-        return return_data;
+        
       }
     } catch (IOException e) {
       e.printStackTrace();
     }
 
-
+    String[] empty = new String[0];
+    return empty;
   }
 
   public boolean conditions_ok_for_plant(PlantPot p, Room r){

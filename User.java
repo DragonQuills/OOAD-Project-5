@@ -35,6 +35,21 @@ class User{
     return false;
   }
 
+  public String roomNames(){
+    String roomString = "";
+    for(int room = 0; room < rooms.size(); room++){
+      roomString+=(room+1)+" "+rooms.get(room).name+"\n";
+    }
+    return roomString;
+  }
+
+  public int numRooms(){
+    return rooms.size();
+  }
+
+  public Room get_room(int n){
+    return rooms.get(n);
+  }
   public ArrayList<Room> get_rooms_list(){
     return rooms;
   }
