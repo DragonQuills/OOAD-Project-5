@@ -13,7 +13,6 @@ class test_file{
     rosemary.set_water_reservoir(res);
     rosemary.set_min_soil_humidity(10);
     rosemary.set_desired_soil_humidity(50);
-    // rosemary.check_water();
 
     Light rosemary_light = new Light();
     Command light_on = new LightOnCommand(rosemary_light);
