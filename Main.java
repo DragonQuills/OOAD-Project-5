@@ -162,15 +162,18 @@ public class Main {
                   //Display existing room options and request room selection for new plant
 
 
-                  for (Room room : rooms_list) {
-                    System.out.println(room.status_report());
+                  for (int i = 0; i < rooms_list.size(); i++) {
+                    int count = i+1;
+                    System.out.println(rooms_list.get(i).name);
+                    System.out.println(rooms_list.get(i).status_report());
                   }
   				        System.out.println("Which room would you like to add your plant to?");
   				        boolean validRoom = false;
   				        int roomIndex = -1;
                   while(!validRoom){
-                    Scanner sc = new Scanner(System.in);
-                    String input_room = scanner.nextLine();
+                    //Scanner sc = new Scanner(System.in);
+                    sc.reset();
+                    String input_room = sc.nextLine();
                     for (int i = 0; i < rooms_list.size(); i++){
                       if (rooms_list.get(i).name == input_room){
   					                 roomIndex = i;
