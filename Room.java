@@ -9,7 +9,6 @@ class Room{
   private ArrayList<WaterReservoir> reservoirs;
   private int lowest_temp;
   private int highest_temp;
-  // private PlantFactory plant_factory;
   private ArrayList<User> observers;
   private AC ac;
   private Heater heater;
@@ -18,10 +17,6 @@ class Room{
 
 
 //methods
-  // I think this is better off in the UI file?
-  // private void manage_room(){}
-
-
   public ArrayList<PlantPot> get_plants(){
     return plants;
   }
