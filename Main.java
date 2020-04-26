@@ -15,8 +15,9 @@ public class Main {
             System.out.println("2. Register");
             try {
               int intInput = scanner.nextInt();
-            } catch (InputMismatchException e){
+            } catch (Exception e){
               //will jump to else statement on line 35
+              int intInput = 0;
             }
             if(intInput == 1){
                 while(userId == -1){
@@ -32,7 +33,7 @@ public class Main {
                 validInput = true;
             }
             else{
-                System.out.println("Input not valid");
+                System.out.println("Input not valid. Please enter 1 or 2.");
             }
         }
 
