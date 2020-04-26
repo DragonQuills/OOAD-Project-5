@@ -192,22 +192,7 @@ public class StorageHandler {
     }
 
     private void deleteById(File file, int id, int index){
-        ArrayList<String> original = new ArrayList<String>();
-        try{
-            FileInputStream f = new FileInputStream(file);
-            BufferedReader br = new BufferedReader(new InputStreamReader(f));
-            String line;
-            while((line = br.readLine()) != null){
-                original.add(line);
-            }
-            br.close();        
-        }
-        catch(FileNotFoundException e){
-            e.printStackTrace();
-        }     
-        catch(IOException e){
-            e.printStackTrace();
-        }
+        ArrayList<String> original = originalFile(file);
 
         try{
             FileWriter fw = new FileWriter(file, false); //False flag overwrites the file
@@ -501,5 +486,75 @@ public class StorageHandler {
         }
 
         return plants;
+    }
+
+    public void tempReading(int id, int temp){
+        ArrayList<String> original = originalFile(roomsFile);
+
+        try{
+            FileWriter fw = new FileWriter(roomsFile, false);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            for(int i = 0; i < original.size(); i++){
+                if(original.get(i).split(",")[0].equals(String.valueOf(id))){
+                    String[] splitLine = original.get(i).split(",");
+                    String line = splitLine[0]+","+splitLine[1]+","+splitLine[2]+","+splitLine[3]+","+String.valueOf(temp);
+                    pw.println(line);
+                }
+                else{
+                    pw.println(original.get(i));
+                }
+                
+            }
+            pw.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void humidityReading(int id, Float humidity){
+        ArrayList<String> original = originalFile(plantsFile);
+
+        try{
+            FileWriter fw = new FileWriter(plantsFile, false);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            for(int i = 0; i < original.size(); i++){
+                if(original.get(i).split(",")[0].equals(String.valueOf(id))){
+                    String[] splitLine = original.get(i).split(",");
+                    String line = splitLine[0]+","+splitLine[1]+","+splitLine[2]+","+splitLine[3]+","+splitLine[4]+","+splitLine[5]+","+splitLine[6]+","+splitLine[7]+","+String.valueOf(humidity);
+                    pw.println(line);
+                }
+                else{
+                    pw.println(original.get(i));
+                }
+                
+            }
+            pw.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    private ArrayList<String> originalFile(File file){
+        ArrayList<String> original = new ArrayList<String>();
+        try{
+            FileInputStream f = new FileInputStream(file);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            while((line = br.readLine()) != null){
+                original.add(line);
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        return original;
     }
 }
