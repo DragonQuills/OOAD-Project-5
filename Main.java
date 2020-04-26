@@ -83,7 +83,7 @@ public class Main {
                 System.out.println("Maximum Temperature of new room: ");
                 max_temp = scanner.next();
                 try {
-                  temp_max = Integer.parseInt(min_temp);
+                  temp_max = Integer.parseInt(max_temp);
                   if (temp_max < 1 || temp_max > 120){
                     System.out.println("Temperature must be between 0 and 120. Please try again.");
                   }
