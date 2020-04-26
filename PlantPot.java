@@ -113,7 +113,7 @@ class PlantPot{
   }
 
   //constructor used when creating a plant from the database
-  public PlantPot(int newId, WaterReservoir newRes, String newName, String type, Float desiredHumidity, Float minHumidity, Float maxTemp, float minTemp){
+  public PlantPot(int newId, WaterReservoir newRes, String newName, String type, Float desiredHumidity, Float minHumidity, Float maxTemp, Float minTemp, Float currentHumidity){
     id = newId;
     res = newRes;
     name = newName;
@@ -122,5 +122,6 @@ class PlantPot{
     min_soil_humidity = minHumidity;
     max_temp = maxTemp;
     min_temp = minTemp;
+    water_sensor.set_current_humidity(currentHumidity);
   }
 }
