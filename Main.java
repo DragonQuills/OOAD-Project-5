@@ -16,7 +16,7 @@ public class Main {
             try {
               int intInput = scanner.nextInt();
             } catch (InputMismatchException e){
-              System.out.println("Input not valid");
+              //will jump to else statement on line 35
             }
             if(intInput == 1){
                 while(userId == -1){
