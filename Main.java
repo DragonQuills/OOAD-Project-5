@@ -16,14 +16,14 @@ public class Main {
             int intInput = scanner.nextInt();
             if(intInput == 1){
                 while(userId == -1){
-                    userId = storage.loginUser();
+                    userId = storage.loginUser(scanner);
                 }
                 validInput = true;
             }
             else if(intInput == 2){
                 //Redirect to register
                 while(userId == -1){
-                    userId = storage.registerUser();
+                    userId = storage.registerUser(scanner);
                 }
                 validInput = true;
             }
