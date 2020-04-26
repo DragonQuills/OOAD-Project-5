@@ -163,7 +163,7 @@ public class StorageHandler {
 
     public void createPlant(PlantPot plant){
         int maxId = getMaxId(plantsFile);
-        int reservoirId = idFromReservoir(plant.get_res());
+        int reservoirId = plant.get_res().id;
         String name = plant.name;
         String type = plant.plant_type;
         Float desiredHumidity = plant.get_desired_soil_humidity();
@@ -184,34 +184,6 @@ public class StorageHandler {
         }
 
         plant.id = maxId+1;
-    }
-
-    private int idFromReservoir(WaterReservoir res){
-        try{
-            FileInputStream f = new FileInputStream(reservoirsFile);
-            BufferedReader br = new BufferedReader(new InputStreamReader(f));
-            String line;
-            boolean firstLine = true;
-            while((line = br.readLine()) != null){
-                String[] splitLine = line.split(",");
-                if(firstLine){
-                    firstLine = false;
-                    continue;
-                }
-                if(splitLine[2] == res.name && Float.parseFloat(splitLine[3]) == res.get_max_cpacity() && Float.parseFloat(splitLine[4]) == res.get_warning_level()){
-                    br.close();
-                    return Integer.parseInt(splitLine[0]);
-                }
-            }
-            br.close();        
-        }
-        catch(FileNotFoundException e){
-            e.printStackTrace();
-        }     
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        return -1;
     }
 
     private void deleteById(File file, int id){
