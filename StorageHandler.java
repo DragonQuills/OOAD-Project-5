@@ -183,9 +183,6 @@ public class StorageHandler {
             e.printStackTrace();
         }
 
-        //TODO: New constructor for plant?  I am not sure how this function will best interact with the factory.
-        // Maybe a function that is called at runtime that bypasses the factory w/ information stored in the database
-
         plant.id = maxId+1;
     }
 
