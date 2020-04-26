@@ -9,7 +9,11 @@ class User{
 // methods
 //TODO: Something with this!!!
   public String status_report(){
-    return "";
+    String report = "";
+    for (Room r : rooms){
+      report += r.status_report + "\n";
+    }
+    return report;
   }
 
   public void add_room(Room r){
