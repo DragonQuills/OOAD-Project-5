@@ -171,17 +171,18 @@ public class Main {
   				        boolean validRoom = false;
   				        int roomIndex = -1;
                   while(!validRoom){
-                    //Scanner sc = new Scanner(System.in);
-                    sc.reset();
+                    Scanner sc = new Scanner(System.in);
                     String input_room = sc.nextLine();
                     for (int i = 0; i < rooms_list.size(); i++){
-                      if (rooms_list.get(i).name == input_room){
+                      if (rooms_list.get(i).name.equals(input_room)){
   					                 roomIndex = i;
   					                 validRoom = true;
                              break;
                       }
                     }
-                    System.out.println("Room "+input_room+" does not exist, please try again.");
+                    if (validRoom == true) {
+                      break;
+                    }
   				        }
 
   				        Room selected_room = rooms_list.get(roomIndex);
@@ -199,13 +200,13 @@ public class Main {
                   while(!validRes) {
                     String input_reservoir = scanner.next();
                     for (int i = 0; i < reservoir_list.size(); i++){
-                      if (reservoir_list.get(i).name == input_reservoir){
+                      if (reservoir_list.get(i).name.equals(input_reservoir)){
   					                 validRes = true;
   					                 resIndex = i;
                              break;
                       }
                     }
-                    System.out.println("Reservoir" + input_reservoir + " does not exist. Please try again.");
+                    System.out.println("Reservoir " + input_reservoir + " does not exist. Please try again.");
   				        }
 
   				        WaterReservoir selected_reservoir = reservoir_list.get(resIndex);
