@@ -188,7 +188,7 @@ public class Main {
   				        Room selected_room = rooms_list.get(roomIndex);
 
                   //Display Reservoirs available in selected room and request reservoir selection for new plant
-                  System.out.println("Here are your available reservoirs in " + selected_room.name);
+                  System.out.println("Here are your available reservoirs in " + selected_room.name + ":");
                   ArrayList<WaterReservoir> reservoir_list = selected_room.get_reservoir_list();
                   for (WaterReservoir reservoir : reservoir_list){
                     System.out.println(reservoir.status_report());
@@ -234,7 +234,7 @@ public class Main {
                   }
                   //else, tell the use they must enter data
                   else {
-                    System.out.println("No data about plant type "+ plant_type+ ". Please enter custom data: ");
+                    System.out.println("No data about plant type "+ plant_type);
                     user_likes_data = "n";
                   }
 
