@@ -51,10 +51,18 @@ public class Main {
         while(true){
           System.out.println("How many hours have passed?");
           hours = scanner.nextInt();
-          if(hours >= 0){
+          if(hours < 0){
+            System.out.println("Not a valid input");
             break;
           }
-          System.out.println("Not a valid input");
+          else{
+            for(int i = 0; i < hours; i++){
+              int time = i%24;
+              System.out.println("It is currently " + time + " o'clock.");
+              user.hour_passed();
+            }
+            break;
+          }
         }
 
         while(true){
@@ -138,7 +146,7 @@ public class Main {
 
                 //Display existing room options and request room selection for new plant
                 ArrayList<Room> rooms_list = user.get_rooms_list();
-                
+
                 for (Room room : rooms_list) {
                   System.out.println(room.status_report());
                 }
@@ -156,7 +164,7 @@ public class Main {
                   }
                   System.out.println("Room"+input_room+" does not exist, please try again.");
 				}
-				
+
 				Room selected_room = rooms_list.get(roomIndex);
 
                 //Display Reservoirs available in selected room and request reservoir selection for new plant
@@ -166,7 +174,7 @@ public class Main {
                   System.out.println(reservoir.status_report());
                 }
                 System.out.println("Which reservoir would you like to use for your new plant?");
-				
+
 				boolean validRes = false;
 				int resIndex = -1;
                 while(!validRes) {
@@ -180,7 +188,7 @@ public class Main {
                   }
                   System.out.println("Reservoir" + input_reservoir + " does not exist. Please try again.");
 				}
-				
+
 				WaterReservoir selected_reservoir = reservoir_list.get(resIndex);
 
                 System.out.println("Enter plant name:");//This has to be first as input for PlantFactory
