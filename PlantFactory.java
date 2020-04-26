@@ -3,9 +3,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 
-
+//Factory Pattern used to create new plants according to ideal specifications
 class PlantFactory{
 // methods
+//get_plant() creates a new PlantPot object using data found by query_csv()
   public PlantPot get_plant(String name, String type){
     PlantPot plantPot = new PlantPot(name, type);
     String[] data = query_csv(type);
@@ -17,6 +18,8 @@ class PlantFactory{
     return plantPot;
   }
 
+//query_csv() pulls data from our database of ideal growing conditions for various plant types
+//Future iterations of this project could replace this with a query_api() function in order to provide more plant type options.
   private String[] query_csv(String type){
 
     String csvFile = "fake_plant_data.csv";
@@ -41,6 +44,7 @@ class PlantFactory{
     return empty;
   }
 
+//conditions_ok_for_plant() determines if the selected room is safe for a certain plant
   public boolean conditions_ok_for_plant(PlantPot p, Room r){
     if (r.get_lowest_temp() > p.get_min_temp() && r.get_highest_temp() < p.get_max_temp()){
       return true;
