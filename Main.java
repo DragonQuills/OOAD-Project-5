@@ -16,14 +16,14 @@ public class Main {
             int intInput = scanner.nextInt();
             if(intInput == 1){
                 while(userId == -1){
-                    userId = storage.loginUser();
+                    userId = storage.loginUser(scanner);
                 }
                 validInput = true;
             }
             else if(intInput == 2){
                 //Redirect to register
                 while(userId == -1){
-                    userId = storage.registerUser();
+                    userId = storage.registerUser(scanner);
                 }
                 validInput = true;
             }
@@ -44,6 +44,25 @@ public class Main {
                 }
             }
             user.add_room(userRooms.get(room));
+        }
+
+        int hours = -1;
+
+        while(true){
+          System.out.println("How many hours have passed?");
+          hours = scanner.nextInt();
+          if(hours < 0){
+            System.out.println("Not a valid input");
+            break;
+          }
+          else{
+            for(int i = 0; i < hours; i++){
+              int time = i%24;
+              System.out.println("It is currently " + time + " o'clock.");
+              user.hour_passed();
+            }
+            break;
+          }
         }
 
         while(true){
@@ -95,7 +114,8 @@ public class Main {
                   System.out.println("Input must be a number. Please try again:");
                 }
               }
-              storage.createRoom(room_name, temp_min, temp_max, userId);
+              Room newRoom = storage.createRoom(room_name, temp_min, temp_max, userId);
+              user.add_room(newRoom);
             }
             //Add Reservoir
             else if(intInput == 2){
@@ -127,7 +147,7 @@ public class Main {
 
                 //Display existing room options and request room selection for new plant
                 ArrayList<Room> rooms_list = user.get_rooms_list();
-                
+
                 for (Room room : rooms_list) {
                   System.out.println(room.status_report());
                 }
@@ -145,7 +165,7 @@ public class Main {
                   }
                   System.out.println("Room"+input_room+" does not exist, please try again.");
 				}
-				
+
 				Room selected_room = rooms_list.get(roomIndex);
 
                 //Display Reservoirs available in selected room and request reservoir selection for new plant
@@ -155,7 +175,7 @@ public class Main {
                   System.out.println(reservoir.status_report());
                 }
                 System.out.println("Which reservoir would you like to use for your new plant?");
-				
+
 				boolean validRes = false;
 				int resIndex = -1;
                 while(!validRes) {
@@ -169,7 +189,7 @@ public class Main {
                   }
                   System.out.println("Reservoir" + input_reservoir + " does not exist. Please try again.");
 				}
-				
+
 				WaterReservoir selected_reservoir = reservoir_list.get(resIndex);
 
                 System.out.println("Enter plant name:");//This has to be first as input for PlantFactory

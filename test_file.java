@@ -2,7 +2,8 @@ class test_file{
   public static void main(String args[]){
     // test_single_plant();
     // test_temp_sensor();
-    test_room();
+    // test_room();
+    test_time_passing();
   }
 
   public static void test_single_plant(){
@@ -12,7 +13,6 @@ class test_file{
     rosemary.set_water_reservoir(res);
     rosemary.set_min_soil_humidity(10);
     rosemary.set_desired_soil_humidity(50);
-    // rosemary.check_water();
 
     Light rosemary_light = new Light();
     Command light_on = new LightOnCommand(rosemary_light);
@@ -26,7 +26,7 @@ class test_file{
     for(int i = 0; i < 48; i++){
       int time = i%24;
       System.out.println("It is currently " + time + " o'clock.");
-      rosemary.time_passes(1);
+      rosemary.hour_passed();
       rosemary.check_water();
       System.out.println("");
     }
@@ -84,5 +84,33 @@ class test_file{
     r1.add_plant(rosemary);
 
     System.out.println(r1.status_report());
+  }
+
+  public static void test_time_passing(){
+    Room r1 = new Room(1, "Kitchen", 55, 85);
+
+    WaterReservoir res = new WaterReservoir("Reservoir 1", 1000, 100);
+
+
+    PlantPot rosemary = new PlantPot("Rosemary1", "rosemary");
+    rosemary.set_water_reservoir(res);
+    rosemary.set_min_soil_humidity(10);
+    rosemary.set_desired_soil_humidity(50);
+    // rosemary.check_water();
+
+    Light rosemary_light = new Light();
+    Command light_on = new LightOnCommand(rosemary_light);
+    Command light_off = new LightOffCommand(rosemary_light);
+
+    Timer rosemary_timer = new Timer(light_on, light_off, 8);
+
+    rosemary.set_timer(rosemary_timer);
+
+    r1.add_res(res);
+    r1.add_plant(rosemary);
+
+    for(int i = 0; i < 24; i++){
+      r1.hour_passed();
+    }
   }
 }

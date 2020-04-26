@@ -7,11 +7,10 @@ class User{
   public int id;
 
 // methods
-//TODO: Something with this!!!
   public String status_report(){
     String report = "";
     for (Room r : rooms){
-      report += r.status_report + "\n";
+      report += r.status_report() + "\n";
     }
     return report;
   }
@@ -56,6 +55,13 @@ class User{
   }
   public ArrayList<Room> get_rooms_list(){
     return rooms;
+  }
+
+  public void hour_passed(){
+    for(Room r : rooms){
+      System.out.println("Passing time for Room " + r.name);
+      r.hour_passed();
+    }
   }
 
   public User(int new_id){

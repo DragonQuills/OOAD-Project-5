@@ -29,13 +29,13 @@ public class StorageHandler {
         return instance;
     }
 
-    public int registerUser(){
-        Scanner scanner = new Scanner(System.in);
+    public int registerUser(Scanner scanner){
+        // Scanner scanner = new Scanner(System.in);
         System.out.println("Enter a username: ");
         String username = scanner.next();
         System.out.println("Enter a password: ");
         String password = scanner.next();
-        scanner.close();
+        // scanner.close();
         //Ref: https://tutoref.com/how-to-read-and-write-files-in-java-8/
         int maxId;
         try{
@@ -85,13 +85,13 @@ public class StorageHandler {
         return maxId+1;
     }
 
-    public int loginUser(){
-        Scanner scanner = new Scanner(System.in);
+    public int loginUser(Scanner scanner){
+        // Scanner scanner = new Scanner(System.in);
         System.out.println("Enter a username: ");
         String username = scanner.next();
         System.out.println("Enter a password: ");
         String password = scanner.next();
-        scanner.close();
+        // scanner.close();
         try{
             FileInputStream f = new FileInputStream(usersFile);
             BufferedReader br = new BufferedReader(new InputStreamReader(f));
@@ -371,7 +371,8 @@ public class StorageHandler {
                     String name = splitLine[1];
                     int lowest = Integer.parseInt(splitLine[2]);
                     int highest = Integer.parseInt(splitLine[3]);
-                    return new Room(id, name, lowest, highest);
+                    int current = Integer.parseInt(splitLine[4]);
+                    return new Room(id, name, lowest, highest, current);
                 }
             }
             br.close();        
@@ -473,7 +474,8 @@ public class StorageHandler {
                     Float minHum = Float.parseFloat(splitLine[5]);
                     Float maxTem = Float.parseFloat(splitLine[6]);
                     Float minTem = Float.parseFloat(splitLine[7]);
-                    plants.add(new PlantPot(id, res, name, type, desHum, minHum, maxTem, minTem));
+                    Float curHum = Float.parseFloat(splitLine[8]);
+                    plants.add(new PlantPot(id, res, name, type, desHum, minHum, maxTem, minTem, curHum));
                 }
             }
             br.close();        
