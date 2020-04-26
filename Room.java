@@ -14,6 +14,7 @@ class Room{
   private AC ac;
   private Heater heater;
   private TempuratureSensor temp_sensor;
+  private StorageHandler store;
 
 
 //methods
@@ -96,6 +97,16 @@ class Room{
     return report;
   }
 
+  public void hour_passed(){
+    temp_sensor.hour_passed();
+    System.out.println("The tempurature is " + temp_sensor.get_current_temp() + " degrees F.");
+    temp_sensor.check_temp();
+    store.tempReading(id, temp_sensor.get_current_temp());
+    for(PlantPot p: plants){
+      p.hour_passed();
+    }
+  }
+
 //temp getter functions for PlantFactory.conditions_ok_for_plant()
   public float get_lowest_temp(){
     return lowest_temp;
@@ -120,5 +131,6 @@ class Room{
     Command cool_down = new CoolDownCommand(ac, heater);
     Command same_temp = new SameTempCommand(ac, heater);
     temp_sensor = new TempuratureSensor(heat_up, cool_down, same_temp, 60, 75);
+    store = StorageHandler.getInstance();
   }
 }

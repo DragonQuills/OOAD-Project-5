@@ -80,12 +80,12 @@ class PlantPot{
   }
 
   // Used to make water "evaporate" and turn the light on or off.
-  public void time_passes(int hours){
-    for(int i = 0; i < hours; i++){
-      System.out.println("Passing time for " + name);
-      timer.hour_passed();
-      water_sensor.hour_passed();
-    }
+  public void hour_passed(){
+    System.out.println("Passing time for " + name);
+    timer.hour_passed();
+    water_sensor.hour_passed();
+    check_water();
+    System.out.println("");
   }
 
   // Gives a staus report to the Room to print for the User

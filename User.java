@@ -11,7 +11,7 @@ class User{
   public String status_report(){
     String report = "";
     for (Room r : rooms){
-      report += r.status_report + "\n";
+      report += r.status_report() + "\n";
     }
     return report;
   }
