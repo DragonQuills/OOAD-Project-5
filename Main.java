@@ -46,6 +46,17 @@ public class Main {
             user.add_room(userRooms.get(room));
         }
 
+        int hours = -1;
+
+        while(true){
+          System.out.println("How many hours have passed?");
+          hours = scanner.nextInt();
+          if(hours >= 0){
+            break;
+          }
+          System.out.println("Not a valid input");
+        }
+
         while(true){
             //Print main menu
             System.out.println("Select an option:");
