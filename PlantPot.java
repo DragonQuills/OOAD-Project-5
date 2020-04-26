@@ -12,6 +12,7 @@ class PlantPot{
   private float min_soil_humidity; //this is the level at or below which the plant will be watered
   private float max_temp;
   private float min_temp;
+  private StorageHandler store;
 
 //methods
   public void set_min_soil_humidity(float new_min){
@@ -80,12 +81,13 @@ class PlantPot{
   }
 
   // Used to make water "evaporate" and turn the light on or off.
-  public void time_passes(int hours){
-    for(int i = 0; i < hours; i++){
-      System.out.println("Passing time for " + name);
-      timer.hour_passed();
-      water_sensor.hour_passed();
-    }
+  public void hour_passed(){
+    System.out.println("Passing time for " + name);
+    timer.hour_passed();
+    water_sensor.hour_passed();
+    store.humidityReading(id, water_sensor.get_current_humidity());
+    check_water();
+    System.out.println("");
   }
 
   // Gives a staus report to the Room to print for the User
@@ -110,6 +112,7 @@ class PlantPot{
   public PlantPot(String new_name, String new_plant_type){
       name = new_name;
       plant_type = new_plant_type;
+      store = StorageHandler.getInstance();
   }
 
   //constructor used when creating a plant from the database
@@ -122,6 +125,8 @@ class PlantPot{
     min_soil_humidity = minHumidity;
     max_temp = maxTemp;
     min_temp = minTemp;
+
+    store = StorageHandler.getInstance();
     water_sensor.set_current_humidity(currentHumidity);
   }
 }

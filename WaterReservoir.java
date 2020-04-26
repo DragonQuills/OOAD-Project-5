@@ -33,7 +33,7 @@ class WaterReservoir{
     return report;
   }
 
-  public Float get_max_cpacity(){
+  public Float get_max_capacity(){
     return max_capacity;
   }
 
