@@ -116,9 +116,9 @@ class PlantPot{
   }
 
   //constructor used when creating a plant from the database
-  public PlantPot(int newId, WaterReservoir newRes, String newName, String type, Float desiredHumidity, Float minHumidity, Float maxTemp, Float minTemp, Float currentHumidity){
+  public PlantPot(int newId, WaterReservoir newRes, String newName, String type, Float desiredHumidity, Float minHumidity, Float maxTemp, Float minTemp, Float currentHumidity, int light){
     id = newId;
-    res = newRes;
+    set_water_reservoir(newRes);
     name = newName;
     plant_type = type;
     desired_soil_humidity = desiredHumidity;
@@ -128,5 +128,11 @@ class PlantPot{
 
     store = StorageHandler.getInstance();
     water_sensor.set_current_humidity(currentHumidity);
+
+    Light new_light = new Light();
+    Command light_on = new LightOnCommand(new_light);
+    Command light_off = new LightOffCommand(new_light);
+    Timer new_timer = new Timer(light_on, light_off, light);
+    this.set_timer(new_timer);
   }
 }

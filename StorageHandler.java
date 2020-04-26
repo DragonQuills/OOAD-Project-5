@@ -12,6 +12,7 @@ public class StorageHandler {
     private File roomsFile;
     private File plantsFile;
     private File ownersFile;
+    private File lightsFile;
 
     private StorageHandler(){
         usersFile = new File("./storage/users.csv");
@@ -19,6 +20,7 @@ public class StorageHandler {
         roomsFile = new File("./storage/rooms.csv");
         plantsFile = new File("./storage/plants.csv");
         ownersFile = new File("./storage/owners.csv");
+        lightsFile = new File("./storage/lights.csv");
     }
 
     public static StorageHandler getInstance(){
@@ -170,12 +172,25 @@ public class StorageHandler {
         Float minHumidity = plant.get_min_soil_humidity();
         Float maxTemp = plant.get_max_temp();
         Float minTemp = plant.get_min_temp();
+        Float lightTime = plant.get_light_hours();
         //room is not needed as reservoir manages that relation
         try{
             FileWriter fw = new FileWriter(plantsFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
             String line = (maxId+1)+","+reservoirId+","+name+","+type+","+desiredHumidity+","+minHumidity+","+maxTemp+","+minTemp+",0"; //0 indicates a plant with no recorded moisture
+            pw.println(line);
+            pw.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+        try{
+            FileWriter fw = new FileWriter(lightsFile, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            String line = (maxId+1)+","+lightTime; //0 indicates a plant with no recorded moisture
             pw.println(line);
             pw.close();
         }
@@ -475,7 +490,8 @@ public class StorageHandler {
                     Float maxTem = Float.parseFloat(splitLine[6]);
                     Float minTem = Float.parseFloat(splitLine[7]);
                     Float curHum = Float.parseFloat(splitLine[8]);
-                    plants.add(new PlantPot(id, res, name, type, desHum, minHum, maxTem, minTem, curHum));
+                    int lightHours = hoursFromPlantId(id);
+                    plants.add(new PlantPot(id, res, name, type, desHum, minHum, maxTem, minTem, curHum, lightHours));
                 }
             }
             br.close();        
@@ -488,6 +504,34 @@ public class StorageHandler {
         }
 
         return plants;
+    }
+
+    private int hoursFromPlantId(int plantId){
+        try{
+            FileInputStream f = new FileInputStream(plantsFile);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            boolean firstLine = true;
+            while((line = br.readLine()) != null){
+                String[] splitLine = line.split(",");
+                if(firstLine){
+                    firstLine = false;
+                    continue;
+                }
+                if(Integer.parseInt(splitLine[0]) == plantId){
+                    br.close();
+                    return Integer.parseInt(splitLine[1]);
+                }
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        return 404;
     }
 
     public void tempReading(int id, int temp){
