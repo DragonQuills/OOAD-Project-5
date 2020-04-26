@@ -38,7 +38,7 @@ public class Main {
             ArrayList<WaterReservoir> reservoirs = storage.reservoirsFromRoom(userRooms.get(room).id);
             for(int res = 0; res < reservoirs.size(); res++){
                 userRooms.get(room).add_res(reservoirs.get(res));
-                ArrayList<PlantPot> plants = storage.plantFromReservoir(reservoirs.get(res));
+                ArrayList<PlantPot> plants = storage.plantsFromReservoir(reservoirs.get(res));
                 for(int plant = 0; plant < plants.size(); plant++){
                     userRooms.get(room).add_plant(plants.get(plant));
                 }
@@ -284,7 +284,7 @@ public class Main {
                           System.out.println("Input must be a number. Please try again:");
                         }
                       }
-
+					  storage.createPlant(new_plant);
                     }
                   //Catch invalid input, request new input
                   //Should re-iterate at top of the "parent" while loop with new user_likes_data value

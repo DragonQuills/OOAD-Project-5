@@ -189,7 +189,7 @@ public class StorageHandler {
         plant.id = maxId+1;
     }
 
-    public int idFromReservoir(WaterReservoir res){
+    private int idFromReservoir(WaterReservoir res){
         try{
             FileInputStream f = new FileInputStream(reservoirsFile);
             BufferedReader br = new BufferedReader(new InputStreamReader(f));
@@ -217,12 +217,12 @@ public class StorageHandler {
         return -1;
     }
 
-    public void deleteById(File file, int id){
+    private void deleteById(File file, int id){
         //Use function overloading in place of default parameters
         deleteById(file, id, 0);
     }
 
-    public void deleteById(File file, int id, int index){
+    private void deleteById(File file, int id, int index){
         ArrayList<String> original = new ArrayList<String>();
         try{
             FileInputStream f = new FileInputStream(file);
@@ -241,7 +241,7 @@ public class StorageHandler {
         }
 
         try{
-            FileWriter fw = new FileWriter(file, false); //False overwrites
+            FileWriter fw = new FileWriter(file, false); //False flag overwrites the file
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
             for(int i = 0; i < original.size(); i++){
@@ -496,7 +496,7 @@ public class StorageHandler {
         return reservoirs;
     }
 
-    public ArrayList<PlantPot> plantFromReservoir(WaterReservoir res){
+    public ArrayList<PlantPot> plantsFromReservoir(WaterReservoir res){
         ArrayList<PlantPot> plants = new ArrayList<PlantPot>();
         int resId = res.id;
 
