@@ -371,7 +371,8 @@ public class StorageHandler {
                     String name = splitLine[1];
                     int lowest = Integer.parseInt(splitLine[2]);
                     int highest = Integer.parseInt(splitLine[3]);
-                    return new Room(id, name, lowest, highest);
+                    int current = Integer.parseInt(splitLine[4]);
+                    return new Room(id, name, lowest, highest, current);
                 }
             }
             br.close();        
@@ -473,7 +474,8 @@ public class StorageHandler {
                     Float minHum = Float.parseFloat(splitLine[5]);
                     Float maxTem = Float.parseFloat(splitLine[6]);
                     Float minTem = Float.parseFloat(splitLine[7]);
-                    plants.add(new PlantPot(id, res, name, type, desHum, minHum, maxTem, minTem));
+                    Float curHum = Float.parseFloat(splitLine[8]);
+                    plants.add(new PlantPot(id, res, name, type, desHum, minHum, maxTem, minTem, curHum));
                 }
             }
             br.close();        
