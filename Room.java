@@ -121,4 +121,23 @@ class Room{
     Command same_temp = new SameTempCommand(ac, heater);
     temp_sensor = new TempuratureSensor(heat_up, cool_down, same_temp, 60, 75);
   }
+
+  public Room(int new_id, String new_name, int new_lowest_temp, int new_highest_temp, int current_temp){
+    id = new_id;
+    name = new_name;
+    lowest_temp = new_lowest_temp;
+    highest_temp = new_highest_temp;
+
+    plants = new ArrayList<PlantPot>();
+    reservoirs = new ArrayList<WaterReservoir>();
+
+    ac = new AC();
+    heater = new Heater();
+
+    Command heat_up = new HeatUpCommand(ac, heater);
+    Command cool_down = new CoolDownCommand(ac, heater);
+    Command same_temp = new SameTempCommand(ac, heater);
+    temp_sensor = new TempuratureSensor(heat_up, cool_down, same_temp, 60, 75);
+    temp_sensor.set_current_temp(current_temp);
+  }
 }

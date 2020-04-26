@@ -371,7 +371,8 @@ public class StorageHandler {
                     String name = splitLine[1];
                     int lowest = Integer.parseInt(splitLine[2]);
                     int highest = Integer.parseInt(splitLine[3]);
-                    return new Room(id, name, lowest, highest);
+                    int current = Integer.parseInt(splitLine[4]);
+                    return new Room(id, name, lowest, highest, current);
                 }
             }
             br.close();        
@@ -473,7 +474,8 @@ public class StorageHandler {
                     Float minHum = Float.parseFloat(splitLine[5]);
                     Float maxTem = Float.parseFloat(splitLine[6]);
                     Float minTem = Float.parseFloat(splitLine[7]);
-                    plants.add(new PlantPot(id, res, name, type, desHum, minHum, maxTem, minTem));
+                    Float curHum = Float.parseFloat(splitLine[8]);
+                    plants.add(new PlantPot(id, res, name, type, desHum, minHum, maxTem, minTem, curHum));
                 }
             }
             br.close();        
@@ -536,52 +538,6 @@ public class StorageHandler {
         catch(IOException e){
             e.printStackTrace();
         }
-    }
-
-    public int getTempReading(int roomId){
-        try{
-            FileInputStream f = new FileInputStream(roomsFile);
-            BufferedReader br = new BufferedReader(new InputStreamReader(f));
-            String line;
-            while((line = br.readLine()) != null){
-                String[] splitline = line.split(",");
-                if(Integer.parseInt(splitline[0]) == roomId){
-                    br.close();
-                    return Integer.parseInt(splitline[4]);
-                }
-            }
-            br.close();        
-        }
-        catch(FileNotFoundException e){
-            e.printStackTrace();
-        }     
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        return 404;
-    }
-
-    public Float getHumidityReading(int plantId){
-        try{
-            FileInputStream f = new FileInputStream(plantsFile);
-            BufferedReader br = new BufferedReader(new InputStreamReader(f));
-            String line;
-            while((line = br.readLine()) != null){
-                String[] splitline = line.split(",");
-                if(Integer.parseInt(splitline[0]) == plantId){
-                    br.close();
-                    return Float.parseFloat(splitline[8]);
-                }
-            }
-            br.close();        
-        }
-        catch(FileNotFoundException e){
-            e.printStackTrace();
-        }     
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        return Float.intBitsToFloat(404);
     }
 
     private ArrayList<String> originalFile(File file){
