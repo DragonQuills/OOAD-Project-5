@@ -561,6 +561,29 @@ public class StorageHandler {
         return 404;
     }
 
+    public Float getHumidityReading(int plantId){
+        try{
+            FileInputStream f = new FileInputStream(plantsFile);
+            BufferedReader br = new BufferedReader(new InputStreamReader(f));
+            String line;
+            while((line = br.readLine()) != null){
+                String[] splitline = line.split(",");
+                if(Integer.parseInt(splitline[0]) == plantId){
+                    br.close();
+                    return Float.parseFloat(splitline[8]);
+                }
+            }
+            br.close();        
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }     
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        return Float.intBitsToFloat(404);
+    }
+
     private ArrayList<String> originalFile(File file){
         ArrayList<String> original = new ArrayList<String>();
         try{
