@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 ,max_soil_humidity,min_soil_humidity,min_temp,max_temp
 Rose,60,55,50,80
 Basil,65,50,50,80
 Succulent,50,10,65,110
+=======
+,desired_soil_humidity,min_soil_humidity,light_hours,min_temp,max_temp
+Rose,60,55,12,50,80
+Basil,65,50,12,50,80
+Succulent,50,10,15,65,110
+>>>>>>> master

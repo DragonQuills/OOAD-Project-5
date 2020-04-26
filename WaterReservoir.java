@@ -1,6 +1,7 @@
 class WaterReservoir{
 //attributes
   public String name;
+  public int id;
 
   private float max_capacity;
   private float current_water;
@@ -24,12 +25,20 @@ class WaterReservoir{
     return current_water<=warning_level;
   }
 
-  public String report_current_level(){
+  public String status_report(){
     String report = "Reservoir " + name + "'s current level is " + current_water + " oz. ";
     if (current_water <= warning_level){
       report += "This is below the warning level, please refill immediately.";
     }
     return report;
+  }
+
+  public Float get_max_cpacity(){
+    return max_capacity;
+  }
+
+  public Float get_warning_level(){
+    return warning_level;
   }
 
 //constructor
@@ -38,5 +47,13 @@ class WaterReservoir{
     max_capacity = max;
     current_water = max;
     warning_level = warning;
+  }
+
+  public WaterReservoir(String new_name, float max, float warning, int inputId){
+    name = new_name;
+    max_capacity = max;
+    current_water = max;
+    warning_level = warning;
+    id = inputId;
   }
 }

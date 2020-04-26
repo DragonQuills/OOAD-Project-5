@@ -1,0 +1,179 @@
+The light is off.
+It is currently 0 o'clock.
+Passing time for Rosemary1
+Water is too low at 0.0, watering plant.
+The hose is on.
+The hose is off.
+Water is too low at 10.0, watering plant.
+The hose is on.
+The hose is off.
+Water is too low at 20.0, watering plant.
+The hose is on.
+The hose is off.
+Water is too low at 30.0, watering plant.
+The hose is on.
+The hose is off.
+Water is too low at 40.0, watering plant.
+The hose is on.
+The hose is off.
+Water is now at 50.0, finished watering.
+
+It is currently 1 o'clock.
+Passing time for Rosemary1
+
+It is currently 2 o'clock.
+Passing time for Rosemary1
+
+It is currently 3 o'clock.
+Passing time for Rosemary1
+
+It is currently 4 o'clock.
+Passing time for Rosemary1
+
+It is currently 5 o'clock.
+Passing time for Rosemary1
+
+It is currently 6 o'clock.
+Passing time for Rosemary1
+
+It is currently 7 o'clock.
+Passing time for Rosemary1
+
+It is currently 8 o'clock.
+Passing time for Rosemary1
+
+It is currently 9 o'clock.
+Passing time for Rosemary1
+
+It is currently 10 o'clock.
+Passing time for Rosemary1
+
+It is currently 11 o'clock.
+Passing time for Rosemary1
+
+It is currently 12 o'clock.
+Passing time for Rosemary1
+
+It is currently 13 o'clock.
+Passing time for Rosemary1
+
+It is currently 14 o'clock.
+Passing time for Rosemary1
+
+It is currently 15 o'clock.
+Passing time for Rosemary1
+The light is on.
+
+It is currently 16 o'clock.
+Passing time for Rosemary1
+
+It is currently 17 o'clock.
+Passing time for Rosemary1
+
+It is currently 18 o'clock.
+Passing time for Rosemary1
+
+It is currently 19 o'clock.
+Passing time for Rosemary1
+
+It is currently 20 o'clock.
+Passing time for Rosemary1
+
+It is currently 21 o'clock.
+Passing time for Rosemary1
+
+It is currently 22 o'clock.
+Passing time for Rosemary1
+
+It is currently 23 o'clock.
+Passing time for Rosemary1
+
+It is currently 0 o'clock.
+Passing time for Rosemary1
+
+It is currently 1 o'clock.
+Passing time for Rosemary1
+
+It is currently 2 o'clock.
+Passing time for Rosemary1
+
+It is currently 3 o'clock.
+Passing time for Rosemary1
+
+It is currently 4 o'clock.
+Passing time for Rosemary1
+
+It is currently 5 o'clock.
+Passing time for Rosemary1
+
+It is currently 6 o'clock.
+Passing time for Rosemary1
+
+It is currently 7 o'clock.
+Passing time for Rosemary1
+The light is off.
+
+It is currently 8 o'clock.
+Passing time for Rosemary1
+
+It is currently 9 o'clock.
+Passing time for Rosemary1
+
+It is currently 10 o'clock.
+Passing time for Rosemary1
+
+It is currently 11 o'clock.
+Passing time for Rosemary1
+
+It is currently 12 o'clock.
+Passing time for Rosemary1
+
+It is currently 13 o'clock.
+Passing time for Rosemary1
+
+It is currently 14 o'clock.
+Passing time for Rosemary1
+
+It is currently 15 o'clock.
+Passing time for Rosemary1
+The light is on.
+
+It is currently 16 o'clock.
+Passing time for Rosemary1
+
+It is currently 17 o'clock.
+Passing time for Rosemary1
+Water is too low at 9.0, watering plant.
+The hose is on.
+The hose is off.
+Water is too low at 19.0, watering plant.
+The hose is on.
+The hose is off.
+Water is too low at 29.0, watering plant.
+The hose is on.
+The hose is off.
+Water is too low at 39.0, watering plant.
+The hose is on.
+The hose is off.
+Water is too low at 49.0, watering plant.
+The hose is on.
+The hose is off.
+Water is now at 59.0, finished watering.
+
+It is currently 18 o'clock.
+Passing time for Rosemary1
+
+It is currently 19 o'clock.
+Passing time for Rosemary1
+
+It is currently 20 o'clock.
+Passing time for Rosemary1
+
+It is currently 21 o'clock.
+Passing time for Rosemary1
+
+It is currently 22 o'clock.
+Passing time for Rosemary1
+
+It is currently 23 o'clock.
+Passing time for Rosemary1
