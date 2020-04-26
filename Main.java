@@ -17,7 +17,7 @@ public class Main {
             try {
               intInput = scanner.nextInt();
             } catch (Exception e){
-              //will jump to else statement on line 352z
+              //will jump to else statement on line 352
             }
             if(intInput == 1){
                 while(userId == -1){
@@ -163,7 +163,7 @@ public class Main {
 
 
                   for (int i = 0; i < rooms_list.size(); i++) {
-                    int count = i+1;
+                    
                     System.out.println(rooms_list.get(i).name);
                     System.out.println(rooms_list.get(i).status_report());
                   }
@@ -292,7 +292,11 @@ public class Main {
                               System.out.println("Lights must be on for 1-24 hours per day. Please try again.");
                             }
                             else{
-                              new_plant.set_light_hours(light);
+                              Light new_light = new Light();
+                              Command light_on = new LightOnCommand(new_light);
+                              Command light_off = new LightOffCommand(new_light);
+                              Timer new_timer = new Timer(light_on, light_off,light);
+                              new_plant.set_timer(new_timer);
                               break;
                             }
                           }
@@ -337,7 +341,8 @@ public class Main {
                             System.out.println("Input must be a number. Please try again:");
                           }
                         }
-  					  storage.createPlant(new_plant);
+  					            storage.createPlant(new_plant);
+                        break;
                       }
                     //Catch invalid input, request new input
                     //Should re-iterate at top of the "parent" while loop with new user_likes_data value
