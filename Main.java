@@ -16,14 +16,14 @@ public class Main {
             int intInput = scanner.nextInt();
             if(intInput == 1){
                 while(userId == -1){
-                    userId = storage.loginUser();
+                    userId = storage.loginUser(scanner);
                 }
                 validInput = true;
             }
             else if(intInput == 2){
                 //Redirect to register
                 while(userId == -1){
-                    userId = storage.registerUser();
+                    userId = storage.registerUser(scanner);
                 }
                 validInput = true;
             }
@@ -114,7 +114,8 @@ public class Main {
                   System.out.println("Input must be a number. Please try again:");
                 }
               }
-              storage.createRoom(room_name, temp_min, temp_max, userId);
+              Room newRoom = storage.createRoom(room_name, temp_min, temp_max, userId);
+              user.add_room(newRoom);
             }
             //Add Reservoir
             else if(intInput == 2){
