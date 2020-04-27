@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Arrays;
 import java.util.ArrayList;
 
@@ -14,9 +12,14 @@ class PlantFactory{
     if (data.size() > 0){
       plantPot.set_min_soil_humidity(Float.parseFloat(data.get(0)));
       plantPot.set_desired_soil_humidity(Float.parseFloat(data.get(1)));
-      plantPot.set_light_hours(Integer.parseInt(data.get(2)));
       plantPot.set_min_temp(Float.parseFloat(data.get(3)));
       plantPot.set_max_temp(Float.parseFloat(data.get(4)));
+
+      Light new_light = new Light();
+      Command light_on = new LightOnCommand(new_light);
+      Command light_off = new LightOffCommand(new_light);
+      Timer new_timer = new Timer(light_on, light_off, Integer.parseInt(data.get(2)));
+      plantPot.set_timer(new_timer);
     }
     return plantPot;
   }
@@ -25,7 +28,7 @@ class PlantFactory{
 //Future iterations of this project could replace this with a query_api() function in order to provide more plant type options.
   private ArrayList<String> query_csv(String type){
 
-    String csvFile = "fake_plant_data.csv";
+    File csvFile = new File("./fake_plant_data.csv");
     String line = "";
     String delimiter = ",";
 
@@ -33,7 +36,9 @@ class PlantFactory{
       while ((line = br.readLine()) != null) {
         String[] arr = line.split(delimiter);
         String[] return_data = new String[5];
-        if (arr[0] == type){
+        System.out.println(arr[0]);
+        if (arr[0].equals(type)){
+          System.out.println("a");
           return_data = Arrays.copyOfRange(arr,1,5);
           ArrayList<String> data = new ArrayList<String>(Arrays.asList(return_data));
           return data;
