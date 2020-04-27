@@ -122,7 +122,9 @@ public class Main {
                 }
               }
               Room newRoom = storage.createRoom(room_name, temp_min, temp_max, userId);
+
               user.add_room(newRoom);
+
             }
             //Add Reservoir
             else if(intInput == 2){
@@ -169,10 +171,10 @@ public class Main {
                     System.out.println(rooms_list.get(i).name);
                     System.out.println(rooms_list.get(i).status_report());
                   }
-  				        System.out.println("Which room would you like to add your plant to?");
   				        boolean validRoom = false;
   				        int roomIndex = -1;
                   while(!validRoom){
+                    System.out.println("Which room would you like to add your plant to?");
                     Scanner sc = new Scanner(System.in);
                     String input_room = sc.nextLine();
                     for (int i = 0; i < rooms_list.size(); i++){
@@ -182,8 +184,8 @@ public class Main {
                              break;
                       }
                     }
-                    if (validRoom == true) {
-                      break;
+                    if (!validRoom) {
+                      System.out.println("Invalid input. Please select a room from the list above.");
                     }
   				        }
 
@@ -208,7 +210,9 @@ public class Main {
                              break;
                       }
                     }
-                    System.out.println("Reservoir " + input_reservoir + " does not exist. Please try again.");
+                    if(!validRes){
+                      System.out.println("Reservoir " + input_reservoir + " does not exist. Please try again.");
+                    }
   				        }
 
   				        WaterReservoir selected_reservoir = reservoir_list.get(resIndex);
