@@ -57,10 +57,10 @@ class User{
     return rooms;
   }
 
-  public void hour_passed(){
+  public void hour_passed(int temp_change){
     for(Room r : rooms){
       System.out.println("Passing time for Room " + r.name);
-      r.hour_passed();
+      r.hour_passed(temp_change);
     }
   }
 

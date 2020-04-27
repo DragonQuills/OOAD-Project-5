@@ -61,10 +61,30 @@ public class Main {
             break;
           }
           else{
+            int temp_change = 0;
+            while(true){
+              System.out.println("What's the outdoor tempurature?:");
+              String outdoor_temp = scanner.next();
+              try {
+                int temp = Integer.parseInt(outdoor_temp);
+                if (temp < 0 || temp > 120){
+                  System.out.println("Uh, are you sure? That doesn't seem right...");
+                  System.out.println("Please enter a temperature between 0 and 120 degrees Fahrenheit.");
+                }
+                else{
+                  temp_change = (temp - 60) / 20;
+                  break;
+                }
+              }
+              catch(NumberFormatException e) {
+                System.out.println("Input must be a number. Please try again:");
+              }
+            }
+
             for(int i = 0; i < hours; i++){
               int time = i%24 +1;
               System.out.println("It is currently " + time + " o'clock.");
-              user.hour_passed();
+              user.hour_passed(temp_change);
             }
             break;
           }

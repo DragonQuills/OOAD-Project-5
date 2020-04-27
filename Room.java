@@ -100,7 +100,17 @@ class Room{
     return report;
   }
 
-  public void hour_passed(){
+  public void hour_passed(int temp_change){
+    temp_sensor.set_temp_modification(temp_change);
+    if(temp_change > 0){
+      System.out.println("It's hot outside...");
+    }
+    if(temp_change < 0){
+      System.out.println("It's cold outside...");
+    }
+    if(temp_sensor.get_temp_modification_from_me()){
+      System.out.println("But this room is regulating it's own tempurature.");
+    }
     temp_sensor.hour_passed();
     System.out.println("The tempurature is " + temp_sensor.get_current_temp() + " degrees F.");
     temp_sensor.check_temp();
