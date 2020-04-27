@@ -147,6 +147,8 @@ public class Main {
 					             }
 				         }
                  storage.createReservoir(user.get_room(selectedRoom).id, reservoirName, capacity, warning);
+                 WaterReservoir temp_res = new WaterReservoir(reservoirName, capacity, warning);
+                 user.get_room(selectedRoom).add_res(temp_res);
             }
             else if(intInput == 3){
                 //Add plant
@@ -163,7 +165,7 @@ public class Main {
 
 
                   for (int i = 0; i < rooms_list.size(); i++) {
-                    
+
                     System.out.println(rooms_list.get(i).name);
                     System.out.println(rooms_list.get(i).status_report());
                   }
