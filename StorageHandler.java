@@ -12,7 +12,6 @@ public class StorageHandler {
     private File roomsFile;
     private File plantsFile;
     private File ownersFile;
-    private File lightsFile;
 
     private StorageHandler(){
         usersFile = new File("./storage/users.csv");
@@ -20,7 +19,6 @@ public class StorageHandler {
         roomsFile = new File("./storage/rooms.csv");
         plantsFile = new File("./storage/plants.csv");
         ownersFile = new File("./storage/owners.csv");
-        lightsFile = new File("./storage/lights.csv");
     }
 
     public static StorageHandler getInstance(){
