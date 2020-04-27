@@ -55,7 +55,8 @@ public class Main {
 
         while(true){
           System.out.println("How many hours have passed?");
-          hours = scanner.nextInt();
+		  hours = scanner.nextInt();
+		  scanner.nextLine();
           if(hours < 0){
             System.out.println("Not a valid input");
             break;
@@ -64,7 +65,7 @@ public class Main {
             int temp_change = 0;
             while(true){
               System.out.println("What's the outdoor tempurature?:");
-              String outdoor_temp = scanner.next();
+              String outdoor_temp = scanner.nextLine();
               try {
                 int temp = Integer.parseInt(outdoor_temp);
                 if (temp < 0 || temp > 120){
@@ -170,8 +171,7 @@ public class Main {
 						                   System.out.println("Not a valid room");
 					             }
 				         }
-                 storage.createReservoir(user.get_room(selectedRoom).id, reservoirName, capacity, warning);
-                 WaterReservoir temp_res = new WaterReservoir(reservoirName, capacity, warning);
+                 WaterReservoir temp_res = storage.createReservoir(user.get_room(selectedRoom).id, reservoirName, capacity, warning);
                  user.get_room(selectedRoom).add_res(temp_res);
             }
             else if(intInput == 3){
@@ -446,6 +446,17 @@ public class Main {
 								scanner.nextLine();
 								if(resChoice > 0 && resChoice <= resList.size()){
 									storage.deleteReservoir(selectedRoom.get_reservoir(resChoice-1).id);
+									WaterReservoir toDelete = selectedRoom.get_reservoir(resChoice-1);
+									ArrayList<Integer> plantsToDelete = new ArrayList<Integer>();
+									ArrayList<PlantPot> listOfPlants = selectedRoom.get_plants();
+									for(int p = 0; p < listOfPlants.size(); p++){
+										if(listOfPlants.get(p).resMatches(toDelete)){
+											plantsToDelete.add(p);
+										}
+									}
+									for(int d = plantsToDelete.size()-1; d >= 0; d--){
+										selectedRoom.remove_plant(plantsToDelete.get(d));
+									}
 									selectedRoom.remove_res(resChoice-1);
 								}
 								else if(resChoice == (resList.size()+1)){
