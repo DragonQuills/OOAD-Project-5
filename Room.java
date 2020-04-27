@@ -47,6 +47,10 @@ class Room{
     return false;
   }
 
+  public void remove_plant(int id){
+    plants.remove(id);
+  }
+
   public boolean rename_plant(String old_name, String new_name){
     for( int i = 0; i < plants.size(); i++){
       if (plants.get(i).name == old_name){
@@ -68,6 +72,10 @@ class Room{
       }
     }
     return false;
+  }
+
+  public void remove_res(int id){
+    reservoirs.remove(id);
   }
 
   public boolean rename_res(String old_name, String new_name){

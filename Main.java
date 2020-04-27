@@ -418,6 +418,7 @@ public class Main {
 								int resChoice = scanner.nextInt();
 								if(resChoice > 0 && resChoice <= resList.size()){
 									storage.deleteReservoir(selectedRoom.get_reservoir(resChoice-1).id);
+									selectedRoom.remove_res(resChoice-1);
 								}
 								else if(resChoice == (resList.size()+1)){
 									quitRes = true;
