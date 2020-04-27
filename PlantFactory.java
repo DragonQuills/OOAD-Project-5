@@ -36,9 +36,7 @@ class PlantFactory{
       while ((line = br.readLine()) != null) {
         String[] arr = line.split(delimiter);
         String[] return_data = new String[5];
-        System.out.println(arr[0]);
         if (arr[0].equals(type)){
-          System.out.println("a");
           return_data = Arrays.copyOfRange(arr,1,5);
           ArrayList<String> data = new ArrayList<String>(Arrays.asList(return_data));
           return data;
