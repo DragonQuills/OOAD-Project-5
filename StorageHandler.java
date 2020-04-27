@@ -132,7 +132,7 @@ public class StorageHandler {
             FileWriter fw = new FileWriter(reservoirsFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            String line = (maxId+1)+","+String.valueOf(roomId)+","+name+","+String.valueOf(capacity)+","+String.valueOf(warning);
+            String line = (maxId+1)+","+String.valueOf(roomId)+","+name+","+String.valueOf(capacity)+","+String.valueOf(warning)+","+String.valueOf(capacity); //Assume a reservoir is added while full
             pw.println(line);
             pw.close();
         }
@@ -451,7 +451,8 @@ public class StorageHandler {
                     String name = splitLine[2];
                     float capacity = Float.parseFloat(splitLine[3]);
                     float warning = Float.parseFloat(splitLine[4]);
-                    reservoirs.add(new WaterReservoir(name, capacity, warning, id));
+                    float current = Float.parseFloat(splitLine[5]);
+                    reservoirs.add(new WaterReservoir(name, capacity, warning, id, current));
                 }
             }
             br.close();
