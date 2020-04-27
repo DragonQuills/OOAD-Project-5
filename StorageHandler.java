@@ -229,6 +229,7 @@ public class StorageHandler {
 
     public void deletePlant(int id){
         deleteById(plantsFile, id);
+        deleteById(lightsFile, id);
     }
 
     public void deleteReservoir(int id){
