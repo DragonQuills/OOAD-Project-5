@@ -37,7 +37,7 @@ class PlantFactory{
         String[] arr = line.split(delimiter);
         String[] return_data = new String[5];
         if (arr[0].equals(type)){
-          return_data = Arrays.copyOfRange(arr,1,5);
+          return_data = Arrays.copyOfRange(arr,1,6);
           ArrayList<String> data = new ArrayList<String>(Arrays.asList(return_data));
           return data;
         }
