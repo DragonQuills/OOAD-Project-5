@@ -10,6 +10,7 @@ class WaterReservoir{
   // boolean so the plant can tell if watering was successful
   public boolean water_used(float amount_used){
     current_water -= amount_used;
+    StorageHandler.getInstance().storeWaterLevel(id, current_water);
     if(current_water <= 0){
       current_water = 0;
       return false;
@@ -20,6 +21,7 @@ class WaterReservoir{
   }
   public void water_refilled(){
     current_water = max_capacity;
+    StorageHandler.getInstance().storeWaterLevel(id, current_water);
   }
   public boolean refill_needed(){
     return current_water<=warning_level;
