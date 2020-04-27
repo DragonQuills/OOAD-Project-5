@@ -51,6 +51,15 @@ class WaterReservoir{
     warning_level = warning;
   }
 
+  //constructor w/ id
+  public WaterReservoir(String new_name, float max, float warning, int newId){
+    name = new_name;
+    max_capacity = max;
+    current_water = max;
+    warning_level = warning;
+    id = newId;
+  }
+
   //Constructor for use when building from database
   public WaterReservoir(String new_name, float max, float warning, int inputId, float current){
     name = new_name;

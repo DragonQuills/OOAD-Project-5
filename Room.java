@@ -47,8 +47,8 @@ class Room{
     return false;
   }
 
-  public void remove_plant(int id){
-    plants.remove(id);
+  public void remove_plant(int index){
+    plants.remove(index);
   }
 
   public boolean rename_plant(String old_name, String new_name){
@@ -74,8 +74,8 @@ class Room{
     return false;
   }
 
-  public void remove_res(int id){
-    reservoirs.remove(id);
+  public void remove_res(int index){
+    reservoirs.remove(index);
   }
 
   public boolean rename_res(String old_name, String new_name){

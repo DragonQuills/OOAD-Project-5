@@ -140,7 +140,8 @@ public class Main {
 				        while(true){
 					             System.out.println("Select a room");
 					             System.out.println(roomNames);
-					             int roomChoice = scanner.nextInt();
+								 int roomChoice = scanner.nextInt();
+								 scanner.nextLine();
 					             if(roomChoice > 0 && roomChoice <= user.numRooms()){
 						                   selectedRoom = roomChoice - 1;
 						                   break;
@@ -370,7 +371,8 @@ public class Main {
                     while(!validRoom){
                         System.out.println("Select a room: ");
                         System.out.println(user.roomNames());
-                        roomChoice = scanner.nextInt();
+						roomChoice = scanner.nextInt();
+						scanner.nextLine();
                         if(roomChoice > 0 && roomChoice <= user.numRooms()){
                             validRoom = true;
                         }
@@ -389,6 +391,7 @@ public class Main {
 						System.out.println("3 Delete room");
 						System.out.println("4 Return to main menu");
 						int menuChoice = scanner.nextInt();
+						scanner.nextLine();
 						if(menuChoice == 1){
 							boolean quitPlants = false;
 							ArrayList<PlantPot> plants = selectedRoom.get_plants();
@@ -398,8 +401,10 @@ public class Main {
 								}
 								System.out.println((plants.size()+1)+" Return to main menu");
 								int plantChoice = scanner.nextInt();
+								scanner.nextLine();
 								if(plantChoice > 0 && plantChoice <= plants.size()){
 									storage.deletePlant(selectedRoom.get_plant(plantChoice-1).id);
+									selectedRoom.remove_plant(plantChoice-1);
 								}
 								else if(plantChoice == (plants.size()+1)){
 									quitPlants = true;
@@ -418,6 +423,7 @@ public class Main {
 								}
 								System.out.println((resList.size()+1)+" Return to main menu");
 								int resChoice = scanner.nextInt();
+								scanner.nextLine();
 								if(resChoice > 0 && resChoice <= resList.size()){
 									storage.deleteReservoir(selectedRoom.get_reservoir(resChoice-1).id);
 									selectedRoom.remove_res(resChoice-1);
