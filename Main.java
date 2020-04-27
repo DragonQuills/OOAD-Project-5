@@ -378,6 +378,7 @@ public class Main {
                     }
                     Room selectedRoom = user.get_room(roomChoice-1);
 					//At this point a room has been selected
+          System.out.println(selectedRoom.status_report());
 					boolean quitSubmenu = false;
                     while(!quitSubmenu){
                         System.out.println("Select an option:");
