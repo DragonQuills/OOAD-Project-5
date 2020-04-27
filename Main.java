@@ -62,7 +62,7 @@ public class Main {
           }
           else{
             for(int i = 0; i < hours; i++){
-              int time = i%24;
+              int time = i%24 +1;
               System.out.println("It is currently " + time + " o'clock.");
               user.hour_passed();
             }
