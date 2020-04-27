@@ -100,6 +100,10 @@ class Room{
     for(PlantPot p: plants){
       p.hour_passed();
     }
+    for( WaterReservoir wr : reservoirs){
+      System.out.println(wr.status_report());
+    }
+    System.out.println("");
   }
 
 //temp getter functions for PlantFactory.conditions_ok_for_plant()
