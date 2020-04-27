@@ -78,7 +78,8 @@ public class Main {
             System.out.println("3. Add Plant");
             System.out.println("4. View Rooms");
             System.out.println("5. Quit");
-            int intInput = scanner.nextInt();
+			int intInput = scanner.nextInt();
+			scanner.nextLine();
             //Add Room
             if(intInput == 1){
               System.out.println("Enter the name of your new room: ");
@@ -202,7 +203,7 @@ public class Main {
   				        boolean validRes = false;
   				        int resIndex = -1;
                   while(!validRes) {
-                    String input_reservoir = scanner.next();
+                    String input_reservoir = scanner.nextLine();
                     for (int i = 0; i < reservoir_list.size(); i++){
                       if (reservoir_list.get(i).name.equals(input_reservoir)){
   					                 validRes = true;
@@ -218,9 +219,9 @@ public class Main {
   				        WaterReservoir selected_reservoir = reservoir_list.get(resIndex);
 
                   System.out.println("Enter plant name:");//This has to be first as input for PlantFactory
-                  String plant_name = scanner.next();
+                  String plant_name = scanner.nextLine();
                   System.out.println("Enter plant type");
-                  String plant_type = scanner.next();
+                  String plant_type = scanner.nextLine();
                   System.out.println("Checking our database of recommendations...");
                   PlantPot new_plant = factory.get_plant(plant_name, plant_type);
                   selected_room.add_plant(new_plant);
@@ -236,7 +237,7 @@ public class Main {
                     System.out.println("Minimum Room Temperature: "+ new_plant.get_min_temp());
                     System.out.println("Maximum Room Temperature: "+ new_plant.get_max_temp());
                     System.out.println("Accept? (y/n)");
-                    user_likes_data = scanner.next();
+					user_likes_data = scanner.nextLine();
                   }
                   //else, tell the use they must enter data
                   else {
@@ -247,11 +248,12 @@ public class Main {
 
                   while(true){
                     //If user likes data, continue with new_plant as-is
-                    if (user_likes_data == "y"){
+                    if (user_likes_data.equals("y")){
+						storage.createPlant(new_plant);
                       break;
                     }
                     //Case: User wants to enter their own data
-                    if (user_likes_data == "n"){
+                    if (user_likes_data.equals("n")){
                         System.out.println("Please enter your custom maintenance settings:");
                         //User Input Soil Humidity Input Validation
                         while(true){
@@ -354,7 +356,7 @@ public class Main {
                     //Should re-iterate at top of the "parent" while loop with new user_likes_data value
                     else {
                           System.out.println("Invalid Input. Please type y or n and press Enter.");
-                          user_likes_data = scanner.next();
+						  user_likes_data = scanner.nextLine();
                         }
                     }
                   }
