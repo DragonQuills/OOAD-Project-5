@@ -61,16 +61,16 @@ public class StorageHandler {
                     maxId = Integer.parseInt(splitLine[0]);
                 }
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
             return -1;
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
             return -1;
-        }   
+        }
         //If the code has reached this point that username is not registered
         try{
             FileWriter fw = new FileWriter(usersFile, true);
@@ -106,16 +106,16 @@ public class StorageHandler {
                     continue;
                 }
                 if(splitLine[1].equals(username) && splitLine[2].equals(password)){
-                    br.close(); 
+                    br.close();
                     return Integer.parseInt(splitLine[0]);
                 }
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
             return -1;
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
             return -1;
@@ -150,7 +150,7 @@ public class StorageHandler {
             FileWriter fw = new FileWriter(roomsFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            String line = (maxId+1)+","+name+","+lowestTemp+","+highestTemp+",0"; //0 indicates a room that hasn't had a temperature measurement yet
+            String line = (maxId+1)+","+name+","+lowestTemp+","+highestTemp+","+(highestTemp-10); //0 indicates a room that hasn't had a temperature measurement yet
             pw.println(line);
             pw.close();
         }
@@ -224,7 +224,7 @@ public class StorageHandler {
         catch(IOException e){
             e.printStackTrace();
         }
-        
+
     }
 
     public void deletePlant(int id){
@@ -248,11 +248,11 @@ public class StorageHandler {
                     plantsToDelete.add(Integer.parseInt(splitLine[0]));
                 }
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
         }
@@ -281,11 +281,11 @@ public class StorageHandler {
                     resToDelete.add(Integer.parseInt(splitLine[0]));
                 }
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
         }
@@ -315,11 +315,11 @@ public class StorageHandler {
                     maxId = Integer.parseInt(splitLine[0]);
                 }
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
         }
@@ -344,11 +344,11 @@ public class StorageHandler {
                     return false;
                 }
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
         }
@@ -390,11 +390,11 @@ public class StorageHandler {
                     return new Room(id, name, lowest, highest, current);
                 }
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
         }
@@ -420,11 +420,11 @@ public class StorageHandler {
                     rooms.add(roomFromId(Integer.parseInt(splitLine[1])));
                 }
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
         }
@@ -454,11 +454,11 @@ public class StorageHandler {
                     reservoirs.add(new WaterReservoir(name, capacity, warning, id));
                 }
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
         }
@@ -494,11 +494,11 @@ public class StorageHandler {
                     plants.add(new PlantPot(id, res, name, type, desHum, minHum, maxTem, minTem, curHum, lightHours));
                 }
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
         }
@@ -523,11 +523,11 @@ public class StorageHandler {
                     return Integer.parseInt(splitLine[1]);
                 }
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
         }
@@ -550,7 +550,7 @@ public class StorageHandler {
                 else{
                     pw.println(original.get(i));
                 }
-                
+
             }
             pw.close();
         }
@@ -575,7 +575,7 @@ public class StorageHandler {
                 else{
                     pw.println(original.get(i));
                 }
-                
+
             }
             pw.close();
         }
@@ -593,11 +593,11 @@ public class StorageHandler {
             while((line = br.readLine()) != null){
                 original.add(line);
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
         }
