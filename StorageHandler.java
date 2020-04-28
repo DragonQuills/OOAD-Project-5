@@ -12,7 +12,6 @@ public class StorageHandler {
     private File roomsFile;
     private File plantsFile;
     private File ownersFile;
-    private File lightsFile;
 
     private StorageHandler(){
         usersFile = new File("./storage/users.csv");
@@ -20,7 +19,6 @@ public class StorageHandler {
         roomsFile = new File("./storage/rooms.csv");
         plantsFile = new File("./storage/plants.csv");
         ownersFile = new File("./storage/owners.csv");
-        lightsFile = new File("./storage/lights.csv");
     }
 
     public static StorageHandler getInstance(){
@@ -61,16 +59,16 @@ public class StorageHandler {
                     maxId = Integer.parseInt(splitLine[0]);
                 }
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
             return -1;
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
             return -1;
-        }   
+        }
         //If the code has reached this point that username is not registered
         try{
             FileWriter fw = new FileWriter(usersFile, true);
@@ -106,16 +104,16 @@ public class StorageHandler {
                     continue;
                 }
                 if(splitLine[1].equals(username) && splitLine[2].equals(password)){
-                    br.close(); 
+                    br.close();
                     return Integer.parseInt(splitLine[0]);
                 }
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
             return -1;
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
             return -1;
@@ -132,7 +130,7 @@ public class StorageHandler {
             FileWriter fw = new FileWriter(reservoirsFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            String line = (maxId+1)+","+String.valueOf(roomId)+","+name+","+String.valueOf(capacity)+","+String.valueOf(warning);
+            String line = (maxId+1)+","+String.valueOf(roomId)+","+name+","+String.valueOf(capacity)+","+String.valueOf(warning)+","+String.valueOf(capacity); //Assume a reservoir is added while full
             pw.println(line);
             pw.close();
         }
@@ -140,7 +138,7 @@ public class StorageHandler {
             e.printStackTrace();
         }
 
-        return new WaterReservoir(name, capacity, warning);
+        return new WaterReservoir(name, capacity, warning, maxId+1);
     }
 
     public Room createRoom(String name, int lowestTemp, int highestTemp, int userId){
@@ -150,7 +148,7 @@ public class StorageHandler {
             FileWriter fw = new FileWriter(roomsFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            String line = (maxId+1)+","+name+","+lowestTemp+","+highestTemp+",0"; //0 indicates a room that hasn't had a temperature measurement yet
+            String line = (maxId+1)+","+name+","+lowestTemp+","+highestTemp+","+(highestTemp-10); //0 indicates a room that hasn't had a temperature measurement yet
             pw.println(line);
             pw.close();
         }
@@ -178,19 +176,7 @@ public class StorageHandler {
             FileWriter fw = new FileWriter(plantsFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            String line = (maxId+1)+","+reservoirId+","+name+","+type+","+desiredHumidity+","+minHumidity+","+maxTemp+","+minTemp+",0"; //0 indicates a plant with no recorded moisture
-            pw.println(line);
-            pw.close();
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-
-        try{
-            FileWriter fw = new FileWriter(lightsFile, true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
-            String line = (maxId+1)+","+lightTime; //0 indicates a plant with no recorded moisture
+            String line = (maxId+1)+","+reservoirId+","+name+","+type+","+desiredHumidity+","+minHumidity+","+maxTemp+","+minTemp+",0,"+String.valueOf(lightTime); //0 indicates a plant with no recorded moisture
             pw.println(line);
             pw.close();
         }
@@ -224,7 +210,7 @@ public class StorageHandler {
         catch(IOException e){
             e.printStackTrace();
         }
-        
+
     }
 
     public void deletePlant(int id){
@@ -248,11 +234,11 @@ public class StorageHandler {
                     plantsToDelete.add(Integer.parseInt(splitLine[0]));
                 }
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
         }
@@ -281,11 +267,11 @@ public class StorageHandler {
                     resToDelete.add(Integer.parseInt(splitLine[0]));
                 }
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
         }
@@ -315,11 +301,11 @@ public class StorageHandler {
                     maxId = Integer.parseInt(splitLine[0]);
                 }
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
         }
@@ -344,11 +330,11 @@ public class StorageHandler {
                     return false;
                 }
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
         }
@@ -390,11 +376,11 @@ public class StorageHandler {
                     return new Room(id, name, lowest, highest, current);
                 }
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
         }
@@ -420,11 +406,11 @@ public class StorageHandler {
                     rooms.add(roomFromId(Integer.parseInt(splitLine[1])));
                 }
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
         }
@@ -451,14 +437,15 @@ public class StorageHandler {
                     String name = splitLine[2];
                     float capacity = Float.parseFloat(splitLine[3]);
                     float warning = Float.parseFloat(splitLine[4]);
-                    reservoirs.add(new WaterReservoir(name, capacity, warning, id));
+                    float current = Float.parseFloat(splitLine[5]);
+                    reservoirs.add(new WaterReservoir(name, capacity, warning, id, current));
                 }
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
         }
@@ -490,48 +477,20 @@ public class StorageHandler {
                     Float maxTem = Float.parseFloat(splitLine[6]);
                     Float minTem = Float.parseFloat(splitLine[7]);
                     Float curHum = Float.parseFloat(splitLine[8]);
-                    int lightHours = hoursFromPlantId(id);
+                    int lightHours = Math.round(Float.parseFloat(splitLine[9]));
                     plants.add(new PlantPot(id, res, name, type, desHum, minHum, maxTem, minTem, curHum, lightHours));
                 }
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
         }
 
         return plants;
-    }
-
-    private int hoursFromPlantId(int plantId){
-        try{
-            FileInputStream f = new FileInputStream(plantsFile);
-            BufferedReader br = new BufferedReader(new InputStreamReader(f));
-            String line;
-            boolean firstLine = true;
-            while((line = br.readLine()) != null){
-                String[] splitLine = line.split(",");
-                if(firstLine){
-                    firstLine = false;
-                    continue;
-                }
-                if(Integer.parseInt(splitLine[0]) == plantId){
-                    br.close();
-                    return Integer.parseInt(splitLine[1]);
-                }
-            }
-            br.close();        
-        }
-        catch(FileNotFoundException e){
-            e.printStackTrace();
-        }     
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        return 404;
     }
 
     public void tempReading(int id, int temp){
@@ -550,7 +509,7 @@ public class StorageHandler {
                 else{
                     pw.println(original.get(i));
                 }
-                
+
             }
             pw.close();
         }
@@ -569,13 +528,38 @@ public class StorageHandler {
             for(int i = 0; i < original.size(); i++){
                 if(original.get(i).split(",")[0].equals(String.valueOf(id))){
                     String[] splitLine = original.get(i).split(",");
-                    String line = splitLine[0]+","+splitLine[1]+","+splitLine[2]+","+splitLine[3]+","+splitLine[4]+","+splitLine[5]+","+splitLine[6]+","+splitLine[7]+","+String.valueOf(humidity);
+                    String line = splitLine[0]+","+splitLine[1]+","+splitLine[2]+","+splitLine[3]+","+splitLine[4]+","+splitLine[5]+","+splitLine[6]+","+splitLine[7]+","+String.valueOf(humidity)+","+splitLine[9];
                     pw.println(line);
                 }
                 else{
                     pw.println(original.get(i));
                 }
-                
+
+            }
+            pw.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void storeWaterLevel(int id, float level){
+        ArrayList<String> original = originalFile(reservoirsFile);
+
+        try{
+            FileWriter fw = new FileWriter(reservoirsFile, false);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            for(int i = 0; i < original.size(); i++){
+                if(original.get(i).split(",")[0].equals(String.valueOf(id))){
+                    String[] splitLine = original.get(i).split(",");
+                    String line = splitLine[0]+","+splitLine[1]+","+splitLine[2]+","+splitLine[3]+","+splitLine[4]+","+String.valueOf(level);
+                    pw.println(line);
+                }
+                else{
+                    pw.println(original.get(i));
+                }
+
             }
             pw.close();
         }
@@ -593,11 +577,11 @@ public class StorageHandler {
             while((line = br.readLine()) != null){
                 original.add(line);
             }
-            br.close();        
+            br.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
-        }     
+        }
         catch(IOException e){
             e.printStackTrace();
         }

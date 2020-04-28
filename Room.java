@@ -47,6 +47,10 @@ class Room{
     return false;
   }
 
+  public void remove_plant(int index){
+    plants.remove(index);
+  }
+
   public boolean rename_plant(String old_name, String new_name){
     for( int i = 0; i < plants.size(); i++){
       if (plants.get(i).name == old_name){
@@ -68,6 +72,10 @@ class Room{
       }
     }
     return false;
+  }
+
+  public void remove_res(int index){
+    reservoirs.remove(index);
   }
 
   public boolean rename_res(String old_name, String new_name){
@@ -92,7 +100,17 @@ class Room{
     return report;
   }
 
-  public void hour_passed(){
+  public void hour_passed(int temp_change){
+    temp_sensor.set_temp_modification(temp_change);
+    if(temp_change > 0){
+      System.out.println("It's hot outside...");
+    }
+    if(temp_change < 0){
+      System.out.println("It's cold outside...");
+    }
+    if(temp_sensor.get_temp_modification_from_me()){
+      System.out.println("But this room is regulating it's own tempurature.");
+    }
     temp_sensor.hour_passed();
     System.out.println("The tempurature is " + temp_sensor.get_current_temp() + " degrees F.");
     temp_sensor.check_temp();
@@ -100,6 +118,10 @@ class Room{
     for(PlantPot p: plants){
       p.hour_passed();
     }
+    for( WaterReservoir wr : reservoirs){
+      System.out.println(wr.status_report());
+    }
+    System.out.println("");
   }
 
 //temp getter functions for PlantFactory.conditions_ok_for_plant()
@@ -146,5 +168,7 @@ class Room{
     Command same_temp = new SameTempCommand(ac, heater);
     temp_sensor = new TempuratureSensor(heat_up, cool_down, same_temp, lowest_temp, highest_temp);
     temp_sensor.set_current_temp(current_temp);
+
+    store = StorageHandler.getInstance();
   }
 }

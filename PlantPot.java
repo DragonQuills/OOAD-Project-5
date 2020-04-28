@@ -58,6 +58,10 @@ class PlantPot{
     timer = t;
   }
 
+  public boolean resMatches(WaterReservoir input_res){
+    return input_res == res;
+  }
+
   //this checks the water sensor and then tells it to water the plant if the water level is too low
   public void check_water(){
     float current_water_level = water_sensor.take_reading();

@@ -29,6 +29,9 @@ class TempuratureSensor{
       temp_modification_from_me = false;
     }
   }
+  public boolean get_temp_modification_from_me(){
+    return temp_modification_from_me;
+  }
 
   public void check_temp(){
     if(current_temp == median_temp){

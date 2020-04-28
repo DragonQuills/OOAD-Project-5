@@ -110,7 +110,7 @@ class test_file{
     r1.add_plant(rosemary);
 
     for(int i = 0; i < 24; i++){
-      r1.hour_passed();
+      r1.hour_passed(-3);
     }
   }
 }

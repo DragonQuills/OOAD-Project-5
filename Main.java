@@ -55,16 +55,37 @@ public class Main {
 
         while(true){
           System.out.println("How many hours have passed?");
-          hours = scanner.nextInt();
+		  hours = scanner.nextInt();
+		  scanner.nextLine();
           if(hours < 0){
             System.out.println("Not a valid input");
             break;
           }
           else{
+            int temp_change = 0;
+            while(true){
+              System.out.println("What's the outdoor tempurature?:");
+              String outdoor_temp = scanner.nextLine();
+              try {
+                int temp = Integer.parseInt(outdoor_temp);
+                if (temp < 0 || temp > 120){
+                  System.out.println("Uh, are you sure? That doesn't seem right...");
+                  System.out.println("Please enter a temperature between 0 and 120 degrees Fahrenheit.");
+                }
+                else{
+                  temp_change = (temp - 60) / 20;
+                  break;
+                }
+              }
+              catch(NumberFormatException e) {
+                System.out.println("Input must be a number. Please try again:");
+              }
+            }
+
             for(int i = 0; i < hours; i++){
-              int time = i%24;
+              int time = i%24 +1;
               System.out.println("It is currently " + time + " o'clock.");
-              user.hour_passed();
+              user.hour_passed(temp_change);
             }
             break;
           }
@@ -78,7 +99,8 @@ public class Main {
             System.out.println("3. Add Plant");
             System.out.println("4. View Rooms");
             System.out.println("5. Quit");
-            int intInput = scanner.nextInt();
+			int intInput = scanner.nextInt();
+			scanner.nextLine();
             //Add Room
             if(intInput == 1){
               System.out.println("Enter the name of your new room: ");
@@ -122,7 +144,9 @@ public class Main {
                 }
               }
               Room newRoom = storage.createRoom(room_name, temp_min, temp_max, userId);
+
               user.add_room(newRoom);
+
             }
             //Add Reservoir
             else if(intInput == 2){
@@ -137,7 +161,8 @@ public class Main {
 				        while(true){
 					             System.out.println("Select a room");
 					             System.out.println(roomNames);
-					             int roomChoice = scanner.nextInt();
+								 int roomChoice = scanner.nextInt();
+								 scanner.nextLine();
 					             if(roomChoice > 0 && roomChoice <= user.numRooms()){
 						                   selectedRoom = roomChoice - 1;
 						                   break;
@@ -146,7 +171,8 @@ public class Main {
 						                   System.out.println("Not a valid room");
 					             }
 				         }
-                 storage.createReservoir(user.get_room(selectedRoom).id, reservoirName, capacity, warning);
+                 WaterReservoir temp_res = storage.createReservoir(user.get_room(selectedRoom).id, reservoirName, capacity, warning);
+                 user.get_room(selectedRoom).add_res(temp_res);
             }
             else if(intInput == 3){
                 //Add plant
@@ -163,14 +189,14 @@ public class Main {
 
 
                   for (int i = 0; i < rooms_list.size(); i++) {
-                    
+
                     System.out.println(rooms_list.get(i).name);
                     System.out.println(rooms_list.get(i).status_report());
                   }
-  				        System.out.println("Which room would you like to add your plant to?");
   				        boolean validRoom = false;
   				        int roomIndex = -1;
                   while(!validRoom){
+                    System.out.println("Which room would you like to add your plant to?");
                     Scanner sc = new Scanner(System.in);
                     String input_room = sc.nextLine();
                     for (int i = 0; i < rooms_list.size(); i++){
@@ -180,8 +206,8 @@ public class Main {
                              break;
                       }
                     }
-                    if (validRoom == true) {
-                      break;
+                    if (!validRoom) {
+                      System.out.println("Invalid input. Please select a room from the list above.");
                     }
   				        }
 
@@ -198,7 +224,7 @@ public class Main {
   				        boolean validRes = false;
   				        int resIndex = -1;
                   while(!validRes) {
-                    String input_reservoir = scanner.next();
+                    String input_reservoir = scanner.nextLine();
                     for (int i = 0; i < reservoir_list.size(); i++){
                       if (reservoir_list.get(i).name.equals(input_reservoir)){
   					                 validRes = true;
@@ -206,15 +232,17 @@ public class Main {
                              break;
                       }
                     }
-                    System.out.println("Reservoir " + input_reservoir + " does not exist. Please try again.");
+                    if(!validRes){
+                      System.out.println("Reservoir " + input_reservoir + " does not exist. Please try again.");
+                    }
   				        }
 
   				        WaterReservoir selected_reservoir = reservoir_list.get(resIndex);
 
                   System.out.println("Enter plant name:");//This has to be first as input for PlantFactory
-                  String plant_name = scanner.next();
+                  String plant_name = scanner.nextLine();
                   System.out.println("Enter plant type");
-                  String plant_type = scanner.next();
+                  String plant_type = scanner.nextLine();
                   System.out.println("Checking our database of recommendations...");
                   PlantPot new_plant = factory.get_plant(plant_name, plant_type);
                   selected_room.add_plant(new_plant);
@@ -230,7 +258,7 @@ public class Main {
                     System.out.println("Minimum Room Temperature: "+ new_plant.get_min_temp());
                     System.out.println("Maximum Room Temperature: "+ new_plant.get_max_temp());
                     System.out.println("Accept? (y/n)");
-                    user_likes_data = scanner.next();
+					user_likes_data = scanner.nextLine();
                   }
                   //else, tell the use they must enter data
                   else {
@@ -241,11 +269,12 @@ public class Main {
 
                   while(true){
                     //If user likes data, continue with new_plant as-is
-                    if (user_likes_data == "y"){
+                    if (user_likes_data.equals("y")){
+						storage.createPlant(new_plant);
                       break;
                     }
                     //Case: User wants to enter their own data
-                    if (user_likes_data == "n"){
+                    if (user_likes_data.equals("n")){
                         System.out.println("Please enter your custom maintenance settings:");
                         //User Input Soil Humidity Input Validation
                         while(true){
@@ -348,7 +377,7 @@ public class Main {
                     //Should re-iterate at top of the "parent" while loop with new user_likes_data value
                     else {
                           System.out.println("Invalid Input. Please type y or n and press Enter.");
-                          user_likes_data = scanner.next();
+						  user_likes_data = scanner.nextLine();
                         }
                     }
                   }
@@ -362,7 +391,8 @@ public class Main {
                     while(!validRoom){
                         System.out.println("Select a room: ");
                         System.out.println(user.roomNames());
-                        roomChoice = scanner.nextInt();
+						roomChoice = scanner.nextInt();
+						scanner.nextLine();
                         if(roomChoice > 0 && roomChoice <= user.numRooms()){
                             validRoom = true;
                         }
@@ -372,6 +402,7 @@ public class Main {
                     }
                     Room selectedRoom = user.get_room(roomChoice-1);
 					//At this point a room has been selected
+          System.out.println(selectedRoom.status_report());
 					boolean quitSubmenu = false;
                     while(!quitSubmenu){
                         System.out.println("Select an option:");
@@ -380,6 +411,7 @@ public class Main {
 						System.out.println("3 Delete room");
 						System.out.println("4 Return to main menu");
 						int menuChoice = scanner.nextInt();
+						scanner.nextLine();
 						if(menuChoice == 1){
 							boolean quitPlants = false;
 							ArrayList<PlantPot> plants = selectedRoom.get_plants();
@@ -389,8 +421,10 @@ public class Main {
 								}
 								System.out.println((plants.size()+1)+" Return to main menu");
 								int plantChoice = scanner.nextInt();
+								scanner.nextLine();
 								if(plantChoice > 0 && plantChoice <= plants.size()){
 									storage.deletePlant(selectedRoom.get_plant(plantChoice-1).id);
+									selectedRoom.remove_plant(plantChoice-1);
 								}
 								else if(plantChoice == (plants.size()+1)){
 									quitPlants = true;
@@ -409,8 +443,21 @@ public class Main {
 								}
 								System.out.println((resList.size()+1)+" Return to main menu");
 								int resChoice = scanner.nextInt();
+								scanner.nextLine();
 								if(resChoice > 0 && resChoice <= resList.size()){
 									storage.deleteReservoir(selectedRoom.get_reservoir(resChoice-1).id);
+									WaterReservoir toDelete = selectedRoom.get_reservoir(resChoice-1);
+									ArrayList<Integer> plantsToDelete = new ArrayList<Integer>();
+									ArrayList<PlantPot> listOfPlants = selectedRoom.get_plants();
+									for(int p = 0; p < listOfPlants.size(); p++){
+										if(listOfPlants.get(p).resMatches(toDelete)){
+											plantsToDelete.add(p);
+										}
+									}
+									for(int d = plantsToDelete.size()-1; d >= 0; d--){
+										selectedRoom.remove_plant(plantsToDelete.get(d));
+									}
+									selectedRoom.remove_res(resChoice-1);
 								}
 								else if(resChoice == (resList.size()+1)){
 									quitRes = true;
