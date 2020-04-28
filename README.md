@@ -8,4 +8,4 @@ Code was all written in Java.  Environments used were Visual Studio and Atom.  T
 
 ```make run```
 
-Values in the database are stored in the storage folder in CSV files, and can be edited manually.
+Values in the database are stored in the storage folder in CSV files, and can be edited manually.  However, if formatted improperly this will cause undefined behavior.
