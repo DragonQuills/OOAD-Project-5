@@ -74,7 +74,6 @@ public class UI {
 	private void hoursPassed(){
 		System.out.println("How many hours have passed?");
 		int hours = intInput();
-		scanner.nextLine();
 		if(hours < 0){
 			System.out.println("Not a valid input");
 			return;
@@ -117,7 +116,6 @@ public class UI {
 			System.out.println("4. View Rooms");
 			System.out.println("5. Quit");
 			int intInput = intInput();
-			scanner.nextLine();
 			if(intInput == 1){
 				addRoom();
 			}
