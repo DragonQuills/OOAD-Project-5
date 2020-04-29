@@ -420,12 +420,10 @@ public class UI {
 
 	private void viewRooms(){
 		boolean quitView = false;
-		while(!quitView){
-			Room selectedRoom = selectRoom("Select a room:");
-			//At this point a room has been selected
-			System.out.println(selectedRoom.status_report());
-			roomMenu(selectedRoom);
-		}
+		Room selectedRoom = selectRoom("Select a room:");
+		//At this point a room has been selected
+		System.out.println(selectedRoom.status_report());
+		roomMenu(selectedRoom);
 	}
 
 	private void roomMenu(Room selectedRoom){
