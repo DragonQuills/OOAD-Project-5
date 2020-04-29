@@ -15,6 +15,7 @@ public class UI {
 
 	public void start(){
 		int userId = -1;
+		boolean newUser = false;
 		while(userId == -1){
 			System.out.println("Select an option:");
 			System.out.println("1. Login");
@@ -28,10 +29,12 @@ public class UI {
 			}
 			if(intInput == 1){
 				userId = login();
+				newUser = false;
 			}
 			else if(intInput == 2){
 				//Redirect to register
 				userId = register();
+				newUser = true;
 			}
 			else{
 				System.out.println("Input not valid. Please enter 1 or 2.");
@@ -50,6 +53,10 @@ public class UI {
 				}
 			}
 			user.add_room(userRooms.get(room));
+		}
+
+		if(newUser){
+			hoursPassed();
 		}
 	}
 
@@ -70,7 +77,7 @@ public class UI {
 		return storage.registerUser(username, password);
 	}
 
-	public void hoursPassed(){
+	private void hoursPassed(){
 		System.out.println("How many hours have passed?");
 		int hours = scanner.nextInt();
 		scanner.nextLine();
