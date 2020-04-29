@@ -1,3 +1,8 @@
+/*
+Singleton pattern
+Handles all of the database saving and loading
+*/
+
 import java.util.Scanner;
 import java.io.*; //reference: https://www.tutorialspoint.com/java/java_files_io.htm
 import java.util.ArrayList;
@@ -29,15 +34,16 @@ public class StorageHandler {
         return instance;
     }
 
+    // Create a new user and add them to the database.
     public int registerUser(Scanner scanner){
-        // Scanner scanner = new Scanner(System.in);
         System.out.println("Enter a username: ");
         String username = scanner.next();
         System.out.println("Enter a password: ");
         String password = scanner.next();
-        // scanner.close();
         //Ref: https://tutoref.com/how-to-read-and-write-files-in-java-8/
         int maxId;
+
+        //Check if that username is already taken
         try{
             FileInputStream f = new FileInputStream(usersFile);
             BufferedReader br = new BufferedReader(new InputStreamReader(f));
