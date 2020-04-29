@@ -314,6 +314,9 @@ public class UI {
 			//If user likes data, continue with new_plant as-is
 			if (user_likes_data.equals("y")){
 				storage.createPlant(new_plant);
+				if(!factory.conditions_ok_for_plant(new_plant, selected_room)){
+					System.out.println("WARNING: This room's temperature is not optimal for this plant.");
+				}
 				break;
 			}
 			//Case: User wants to enter their own data
@@ -385,6 +388,9 @@ public class UI {
 					}
 				}
 				storage.createPlant(new_plant);
+				if(!factory.conditions_ok_for_plant(new_plant, selected_room)){
+					System.out.println("WARNING: This room's temperature is not optimal for this plant.");
+				}
 				break;
 			}
 			//Catch invalid input, request new input
