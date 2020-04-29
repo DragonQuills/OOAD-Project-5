@@ -55,7 +55,7 @@ public class UI {
 			user.add_room(userRooms.get(room));
 		}
 
-		if(newUser){
+		if(!newUser){
 			hoursPassed();
 		}
 	}
