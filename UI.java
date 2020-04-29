@@ -20,13 +20,7 @@ public class UI {
 			System.out.println("Select an option:");
 			System.out.println("1. Login");
 			System.out.println("2. Register");
-			int intInput = -1;
-			try {
-				intInput = scanner.nextInt();
-			}
-			catch (Exception e){
-
-			}
+			int intInput = intInput();
 			if(intInput == 1){
 				userId = login();
 				newUser = false;
@@ -79,7 +73,7 @@ public class UI {
 
 	private void hoursPassed(){
 		System.out.println("How many hours have passed?");
-		int hours = scanner.nextInt();
+		int hours = intInput();
 		scanner.nextLine();
 		if(hours < 0){
 			System.out.println("Not a valid input");
@@ -122,7 +116,7 @@ public class UI {
 			System.out.println("3. Add Plant");
 			System.out.println("4. View Rooms");
 			System.out.println("5. Quit");
-			int intInput = scanner.nextInt();
+			int intInput = intInput();
 			scanner.nextLine();
 			if(intInput == 1){
 				addRoom();
@@ -199,10 +193,9 @@ public class UI {
 		System.out.println("Enter reservoir name: ");
 		String reservoirName = scanner.next();
 		System.out.println("Max capacity: ");
-		int capacity = scanner.nextInt();
+		int capacity = intInput();
 		System.out.println("Warning level: ");
-		int warning = scanner.nextInt();
-		scanner.nextLine();
+		int warning = intInput();
 		Room selectedRoom = selectRoom("Which room is the reservoir in?");
 		WaterReservoir temp_res = storage.createReservoir(selectedRoom.id, reservoirName, capacity, warning);
 		selectedRoom.add_res(temp_res);
@@ -220,8 +213,7 @@ public class UI {
 		while(true){
 			System.out.println(prompt);
 			System.out.println(roomNames);
-			int roomChoice = scanner.nextInt();
-			scanner.nextLine();
+			int roomChoice = intInput();
 			if(roomChoice > 0 && roomChoice <= user.numRooms()){
 				selectedRoom = roomChoice - 1;
 				break;
@@ -243,8 +235,7 @@ public class UI {
 		while(true){
 			System.out.println(prompt);
 			System.out.println(resNames);
-			int resChoice = scanner.nextInt();
-			scanner.nextLine();
+			int resChoice = intInput();
 			if(resChoice > 0 && resChoice <= room.numRes()){
 				selectedRes = resChoice - 1;
 				break;
@@ -266,8 +257,7 @@ public class UI {
 		while(true){
 			System.out.println(prompt);
 			System.out.println(plantNames);
-			int plantChoice = scanner.nextInt();
-			scanner.nextLine();
+			int plantChoice = intInput();
 			if(plantChoice > 0 && plantChoice <= room.numPlants()){
 				selectedPlant = plantChoice - 1;
 				break;
@@ -334,20 +324,14 @@ public class UI {
 				//User Input Soil Humidity Input Validation
 				while(true){
 					System.out.println("Minimum soil humidity percentage (0-100):");
-					String min_soil_humidity = scanner.next();
-					try {
-						Float min_soil = Float.parseFloat(min_soil_humidity);
-						if (min_soil < 1 || min_soil > 99){
-							System.out.println("Humidity percentage must be between 0 and 100. Please try again.");
-						}
-						else{
-							new_plant.set_min_soil_humidity(min_soil);
-							break;
-						}System.out.println("Invalid Input. Please type y or n and press Enter.");
-						user_likes_data = scanner.nextLine();
+					// String min_soil_humidity = scanner.next();
+					Float min_soil = floatInput();
+					if (min_soil < 1 || min_soil > 99){
+						System.out.println("Humidity percentage must be between 0 and 100. Please try again.");
 					}
-					catch(NumberFormatException e) {
-						System.out.println("Input must be a number. Please try again:");
+					else{
+						new_plant.set_min_soil_humidity(min_soil);
+						break;
 					}
 				}
 				while(true){
@@ -457,8 +441,7 @@ public class UI {
 			System.out.println("3. Rename room");
 			System.out.println("4. Delete room");
 			System.out.println("5. Return to main menu");
-			int menuChoice = scanner.nextInt();
-			scanner.nextLine();
+			int menuChoice = intInput();
 			if(menuChoice == 1){
 				PlantPot selectedPlant = selectPlant("Select a plant", selectedRoom);
 				if(selectedPlant != null){
@@ -501,8 +484,7 @@ public class UI {
 			System.out.println("2. Rename plant");
 			System.out.println("3. Quit menu");
 
-			int choice = scanner.nextInt();
-			scanner.nextLine();
+			int choice = intInput();
 			if(choice == 1){
 				storage.deletePlant(plant.id);
 				room.remove_plant_by_id(plant.id);
@@ -532,8 +514,7 @@ public class UI {
 			System.out.println("3. Refill reservoir");
 			System.out.println("4. Quit menu");
 
-			int choice = scanner.nextInt();
-			scanner.nextLine();
+			int choice = intInput();
 			if(choice == 1){
 				System.out.println("Deleted reservoir "+reservoir.name+" and attached plants");
 				storage.deleteReservoir(reservoir.id);
@@ -566,6 +547,32 @@ public class UI {
 			}
 			else{
 				System.out.println("Not a valid input");
+			}
+		}
+	}
+
+	private int intInput(){
+		while(true){
+			String input = scanner.nextLine();
+			try{
+				int toReturn = Integer.parseInt(input);
+				return toReturn;
+			}
+			catch(NumberFormatException e){
+				System.out.println("Not a valid integer format input");
+			}
+		}
+	}
+
+	private float floatInput(){
+		while(true){
+			String input = scanner.nextLine();
+			try{
+				float toReturn = Float.parseFloat(input);
+				return toReturn;
+			}
+			catch(NumberFormatException e){
+				System.out.println("Not a valid integer format input");
 			}
 		}
 	}
