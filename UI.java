@@ -302,7 +302,7 @@ public class UI {
 			user_likes_data = "n";
 		}
 
-		while(true){ 
+		while(true){
 			//If user likes data, continue with new_plant as-is
 			if (user_likes_data.equals("y")){
 				storage.createPlant(new_plant);
@@ -419,6 +419,10 @@ public class UI {
 	}
 
 	private void viewRooms(){
+		if(user.numRooms() == 0){
+			System.out.println("You don't have any rooms currently.");
+			return;
+		}
 		Room selectedRoom = selectRoom("Select a room:");
 		//At this point a room has been selected
 		System.out.println(selectedRoom.status_report());
@@ -494,7 +498,7 @@ public class UI {
 				System.out.println("Not a valid input");
 			}
 		}
-		
+
 	}
 
 	private void reservoirMenu(WaterReservoir reservoir, Room room){
