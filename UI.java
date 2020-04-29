@@ -325,7 +325,6 @@ public class UI {
 				//User Input Soil Humidity Input Validation
 				while(true){
 					System.out.println("Minimum soil humidity percentage (0-100):");
-					// String min_soil_humidity = scanner.next();
 					Float min_soil = floatInput();
 					if (min_soil < 1 || min_soil > 99){
 						System.out.println("Humidity percentage must be between 0 and 100. Please try again.");
