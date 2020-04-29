@@ -51,6 +51,14 @@ class Room{
     plants.remove(index);
   }
 
+  public void remove_plant_by_id(int id){
+    for( int i = 0; i < plants.size(); i++){
+      if (plants.get(i).id == id){
+        plants.remove(i);
+      }
+    }
+  }
+
   public boolean rename_plant(String old_name, String new_name){
     for( int i = 0; i < plants.size(); i++){
       if (plants.get(i).name == old_name){
@@ -98,6 +106,18 @@ class Room{
 
   public int numRes(){
     return reservoirs.size();
+  }
+
+  public String plantNames(){
+    String plantsString = "";
+    for(int plant = 0; plant < plants.size(); plant++){
+      plantsString+=(plant+1)+". "+plants.get(plant).name+"\n";
+    }
+    return plantsString;
+  }
+
+  public int numPlants(){
+    return plants.size();
   }
 
   public String status_report(){
