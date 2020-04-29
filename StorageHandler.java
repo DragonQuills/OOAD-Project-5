@@ -199,6 +199,7 @@ public class StorageHandler {
         plant.id = maxId+1;
     }
 
+    // Deletes something of the given id from the given file
     private void deleteById(File file, int id){
         //Use function overloading in place of default parameters
         deleteById(file, id, 0);
@@ -208,7 +209,8 @@ public class StorageHandler {
         ArrayList<String> original = originalFile(file);
 
         try{
-            FileWriter fw = new FileWriter(file, false); //False flag overwrites the file
+            //False flag overwrites the file in order to delete the object
+            FileWriter fw = new FileWriter(file, false);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
             for(int i = 0; i < original.size(); i++){
@@ -229,6 +231,7 @@ public class StorageHandler {
         deleteById(plantsFile, id);
     }
 
+    // Deletes reservoir and all plants attached to it
     public void deleteReservoir(int id){
         ArrayList<Integer> plantsToDelete = new ArrayList<Integer>();
         try{
@@ -262,6 +265,7 @@ public class StorageHandler {
         deleteById(reservoirsFile, id);
     }
 
+    // Deletes a room, then deletes all the reservoirs in that room
     public void deleteRoom(int id){
         ArrayList<Integer> resToDelete = new ArrayList<Integer>();
         try{
@@ -296,6 +300,7 @@ public class StorageHandler {
         deleteById(ownersFile, id, 1);
     }
 
+    // goes through a file and finds the maximum id value to be used to assign new ids
     private int getMaxId(File file){
         int maxId = 0;
         try{
@@ -324,6 +329,7 @@ public class StorageHandler {
         return maxId;
     }
 
+    // Adds a new owner too a room. Allows multiple users to own one room
     public boolean addOwnership(int user, int room){
         try{
             FileInputStream f = new FileInputStream(ownersFile);
@@ -366,6 +372,7 @@ public class StorageHandler {
         return true;
     }
 
+    // Reads in a room from the database and returns the created room object
     private Room roomFromId(int roomId){
         try{
             FileInputStream f = new FileInputStream(roomsFile);
