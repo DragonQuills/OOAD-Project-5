@@ -1,4 +1,3 @@
-import java.util.Scanner;
 import java.io.*; //reference: https://www.tutorialspoint.com/java/java_files_io.htm
 import java.util.ArrayList;
 
@@ -29,13 +28,7 @@ public class StorageHandler {
         return instance;
     }
 
-    public int registerUser(Scanner scanner){
-        // Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter a username: ");
-        String username = scanner.next();
-        System.out.println("Enter a password: ");
-        String password = scanner.next();
-        // scanner.close();
+    public int registerUser(String username, String password){
         //Ref: https://tutoref.com/how-to-read-and-write-files-in-java-8/
         int maxId;
         try{
@@ -85,13 +78,7 @@ public class StorageHandler {
         return maxId+1;
     }
 
-    public int loginUser(Scanner scanner){
-        // Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter a username: ");
-        String username = scanner.next();
-        System.out.println("Enter a password: ");
-        String password = scanner.next();
-        // scanner.close();
+    public int loginUser(String username, String password){
         try{
             FileInputStream f = new FileInputStream(usersFile);
             BufferedReader br = new BufferedReader(new InputStreamReader(f));
