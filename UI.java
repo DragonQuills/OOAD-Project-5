@@ -429,26 +429,6 @@ public class UI {
 				PlantPot selectedPlant = selectPlant("Select a plant", selectedRoom);
 				System.out.print(selectedPlant.status_report());
 				plantMenu(selectedPlant, selectedRoom);
-				boolean quitPlants = false;
-				ArrayList<PlantPot> plants = selectedRoom.get_plants();
-				while(!quitPlants){
-					for(int i = 0; i < plants.size(); i++){
-						System.out.println((i+1)+" Delete "+plants.get(i).name);
-					}
-					System.out.println((plants.size()+1)+" Return to main menu");
-					int plantChoice = scanner.nextInt();
-					scanner.nextLine();
-					if(plantChoice > 0 && plantChoice <= plants.size()){
-						storage.deletePlant(selectedRoom.get_plant(plantChoice-1).id);
-						selectedRoom.remove_plant(plantChoice-1);
-					}
-					else if(plantChoice == (plants.size()+1)){
-						quitPlants = true;
-					}
-					else{
-						System.out.println("Not a valid choice");
-					}
-				}
 			}
 			else if(menuChoice == 2){
 				boolean quitRes = false;
@@ -512,6 +492,18 @@ public class UI {
 				storage.deletePlant(plant.id);
 				room.remove_plant_by_id(plant.id);
 				return;
+			}
+			else if(choice == 2){
+				System.out.print("What would you like to call the plant?");
+				String name = scanner.nextLine();
+				plant.name = name;
+				storage.changePlantName(plant.id, name);
+			}
+			else if(choice == 3){
+				return;
+			}
+			else{
+				System.out.println("Not a valid input");
 			}
 		}
 		
