@@ -147,7 +147,7 @@ public class UI {
 
 	private void addRoom(){
 		System.out.println("Enter the name of your new room: ");
-		String room_name = scanner.next();
+		String room_name = scanner.nextLine();
 		String min_temp;
 		String max_temp;
 		int temp_min;
