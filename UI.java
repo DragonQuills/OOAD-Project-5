@@ -554,6 +554,8 @@ public class UI {
 			}
 			else if(choice == 3){
 				reservoir.water_refilled();
+				System.out.println("Reservoir refilled!");
+				System.out.println(reservoir.status_report());
 			}
 			else if(choice == 4){
 				return;
