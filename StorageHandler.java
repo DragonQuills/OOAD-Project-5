@@ -530,6 +530,31 @@ public class StorageHandler {
         }
     }
 
+    public void changePlantName(int id, String name){
+        ArrayList<String> original = originalFile(plantsFile);
+
+        try{
+            FileWriter fw = new FileWriter(plantsFile, false);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            for(int i = 0; i < original.size(); i++){
+                if(original.get(i).split(",")[0].equals(String.valueOf(id))){
+                    String[] splitLine = original.get(i).split(",");
+                    String line = splitLine[0]+","+splitLine[1]+","+name+","+splitLine[3]+","+splitLine[4]+","+splitLine[5]+","+splitLine[6]+","+splitLine[7]+","+splitLine[8]+","+splitLine[9];
+                    pw.println(line);
+                }
+                else{
+                    pw.println(original.get(i));
+                }
+
+            }
+            pw.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
     public void storeWaterLevel(int id, float level){
         ArrayList<String> original = originalFile(reservoirsFile);
 
