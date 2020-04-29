@@ -1,6 +1,5 @@
 import java.util.ArrayList; //Referenced https://www.w3schools.com/java/java_arraylist.asp
 
-
 class User{
 // attributes
   private ArrayList<Room> rooms;
@@ -38,6 +37,7 @@ class User{
     return false;
   }
 
+  // Gives back a large string for room names to the UI
   public String roomNames(){
     String roomString = "";
     for(int room = 0; room < rooms.size(); room++){
@@ -53,6 +53,7 @@ class User{
   public Room get_room(int n){
     return rooms.get(n);
   }
+
   public ArrayList<Room> get_rooms_list(){
     return rooms;
   }
