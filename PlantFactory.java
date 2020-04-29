@@ -53,7 +53,7 @@ class PlantFactory{
 
 //conditions_ok_for_plant() determines if the selected room is safe for a certain plant
   public boolean conditions_ok_for_plant(PlantPot p, Room r){
-    if (r.get_lowest_temp() > p.get_min_temp() && r.get_highest_temp() < p.get_max_temp()){
+    if (r.get_lowest_temp() >= p.get_min_temp() && r.get_highest_temp() <= p.get_max_temp()){
       return true;
     }
     else {
