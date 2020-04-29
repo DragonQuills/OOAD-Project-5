@@ -593,6 +593,7 @@ public class StorageHandler {
         }
     }
 
+    // Returns the full text of a file broken up line by line into an ArrayList
     private ArrayList<String> originalFile(File file){
         ArrayList<String> original = new ArrayList<String>();
         try{
