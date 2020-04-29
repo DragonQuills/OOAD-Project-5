@@ -3,11 +3,12 @@
 //This pattern was chosen because it provides encapsulation such that this system
 //could be implemented on real hardware without any restructuring of the classes.
 
+
 public interface Command {
   public void execute();
 }
 
-//Physical Objects used by Commands
+// Simulation of physical Objects used by Commands
 class Light{
   public void on(){
     System.out.println("The light is on.");

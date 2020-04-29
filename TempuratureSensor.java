@@ -1,3 +1,7 @@
+/*
+Invoker for Command pattern
+*/
+
 class TempuratureSensor{
 // attributes
   private Command heat_room;
@@ -8,8 +12,14 @@ class TempuratureSensor{
   private int min_temp;
   private int max_temp;
   private int median_temp;
+
+  // how much the tempurature changes each hour
   private int temp_modification;
+
+  // bool for if the tempurature modification is from an
+  // outside tempurature or from the AC or heater in the room
   private boolean temp_modification_from_me;
+
 // methods
   public int get_current_temp(){
     return current_temp;
@@ -33,6 +43,7 @@ class TempuratureSensor{
     return temp_modification_from_me;
   }
 
+  // Checks the tempurature and uses commands to turn the AC and heater on or off
   public void check_temp(){
     if(current_temp == median_temp){
       // Used to simulate external tempurature changes effecting the rooms
@@ -43,12 +54,14 @@ class TempuratureSensor{
         temp_modification_from_me = true;
       }
     }
+
     else if (current_temp < min_temp){
       System.out.println("Tempurature is too cold, turning AC off and heater on.");
       heat_room.execute();
       temp_modification = 1;
       temp_modification_from_me = true;
     }
+
     else if( current_temp > max_temp){
       System.out.println("Tempurature is too hot, turning AC on and heater off.");
       cool_room.execute();
