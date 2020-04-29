@@ -407,6 +407,7 @@ public class StorageHandler {
         return null;
     }
 
+    // Returns an array of rooms that belong to the given user
     public ArrayList<Room> roomsFromUser(int userId){
         ArrayList<Room> rooms = new ArrayList<Room>();
 
@@ -437,6 +438,7 @@ public class StorageHandler {
         return rooms;
     }
 
+    // returns reservoirs that are in the given room
     public ArrayList<WaterReservoir> reservoirsFromRoom(int roomId){
         ArrayList<WaterReservoir> reservoirs = new ArrayList<WaterReservoir>();
 
@@ -472,6 +474,7 @@ public class StorageHandler {
         return reservoirs;
     }
 
+    // Returns plants that are attached to the given reservoir
     public ArrayList<PlantPot> plantsFromReservoir(WaterReservoir res){
         ArrayList<PlantPot> plants = new ArrayList<PlantPot>();
         int resId = res.id;
@@ -512,6 +515,7 @@ public class StorageHandler {
         return plants;
     }
 
+    // Updates the current tempurature for a given room
     public void tempReading(int id, int temp){
         ArrayList<String> original = originalFile(roomsFile);
 
@@ -537,6 +541,7 @@ public class StorageHandler {
         }
     }
 
+    // Updates the current humidity level for a given plant
     public void humidityReading(int id, Float humidity){
         ArrayList<String> original = originalFile(plantsFile);
 
@@ -562,6 +567,7 @@ public class StorageHandler {
         }
     }
 
+    // Updates the current water level for a given reservoir
     public void storeWaterLevel(int id, float level){
         ArrayList<String> original = originalFile(reservoirsFile);
 
