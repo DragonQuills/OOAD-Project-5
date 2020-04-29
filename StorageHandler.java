@@ -131,6 +131,7 @@ public class StorageHandler {
         return -1;
     }
 
+    // Creates and returns a new reservoir and stores it in the database
     public WaterReservoir createReservoir(int roomId, String name, int capacity, int warning){
         int maxId = getMaxId(reservoirsFile);
 
@@ -149,6 +150,7 @@ public class StorageHandler {
         return new WaterReservoir(name, capacity, warning, maxId+1);
     }
 
+    // Creates and returns a new room and stores it in the database
     public Room createRoom(String name, int lowestTemp, int highestTemp, int userId){
         int maxId = getMaxId(roomsFile);
 
@@ -169,6 +171,7 @@ public class StorageHandler {
         return new Room(maxId+1, name, lowestTemp, highestTemp);
     }
 
+    // Creates and returns a new room and stores it in the database
     public void createPlant(PlantPot plant){
         int maxId = getMaxId(plantsFile);
         int reservoirId = plant.get_res().id;
@@ -179,7 +182,8 @@ public class StorageHandler {
         Float maxTemp = plant.get_max_temp();
         Float minTemp = plant.get_min_temp();
         Float lightTime = plant.get_light_hours();
-        //room is not needed as reservoir manages that relation
+        // room is not becasue the plant doesn't care what room it's in,
+        // just what reservoir it's attached to
         try{
             FileWriter fw = new FileWriter(plantsFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
