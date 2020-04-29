@@ -75,7 +75,7 @@ public class StorageHandler {
             e.printStackTrace();
             return -1;
         }
-        //If the code has reached this point that username is not registered
+        // If the code has reached this point that username is not registered
         try{
             FileWriter fw = new FileWriter(usersFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -91,13 +91,15 @@ public class StorageHandler {
         return maxId+1;
     }
 
+    // Log in a user by pulling their information form the database
     public int loginUser(Scanner scanner){
-        // Scanner scanner = new Scanner(System.in);
         System.out.println("Enter a username: ");
         String username = scanner.next();
         System.out.println("Enter a password: ");
         String password = scanner.next();
-        // scanner.close();
+
+        // Try to find the user's name and password
+        // and returns the userid if they do.
         try{
             FileInputStream f = new FileInputStream(usersFile);
             BufferedReader br = new BufferedReader(new InputStreamReader(f));
