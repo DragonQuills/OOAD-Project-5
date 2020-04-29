@@ -10,8 +10,8 @@ class PlantFactory{
     PlantPot plantPot = new PlantPot(name, type);
     ArrayList<String> data = query_csv(type);
     if (data.size() > 0){
-      plantPot.set_min_soil_humidity(Float.parseFloat(data.get(0)));
-      plantPot.set_desired_soil_humidity(Float.parseFloat(data.get(1)));
+      plantPot.set_min_soil_humidity(Float.parseFloat(data.get(1)));
+      plantPot.set_desired_soil_humidity(Float.parseFloat(data.get(0)));
       plantPot.set_min_temp(Float.parseFloat(data.get(3)));
       plantPot.set_max_temp(Float.parseFloat(data.get(4)));
 
