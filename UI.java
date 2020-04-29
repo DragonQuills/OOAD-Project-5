@@ -446,9 +446,16 @@ public class UI {
 				plantMenu(selectedPlant, selectedRoom);
 			}
 			else if(menuChoice == 2){
-				WaterReservoir selectedRes = selectReservoir("Select a reservoir", selectedRoom);
-				System.out.println(selectedRes.status_report());
-				reservoirMenu(selectedRes, selectedRoom);
+				if (selectedRoom.get_reservoir_list().isEmpty()){
+					System.out.println("This room does not contain any reservoirs. Return to Main Menu to add one now.");
+					quitSubmenu = true;
+					roomMenu(selectedRoom);
+				}
+				else {
+					WaterReservoir selectedRes = selectReservoir("Select a reservoir", selectedRoom);
+					System.out.println(selectedRes.status_report());
+					reservoirMenu(selectedRes, selectedRoom);
+				}
 			}
 			else if(menuChoice == 3){
 				System.out.println("What would you like to call the room?");
