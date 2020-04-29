@@ -272,7 +272,11 @@ public class UI {
 		}
 
 		Room selected_room = selectRoom("What room is the plant in?");
-
+		if (selected_room.get_reservoir_list().isEmpty()){
+			System.out.println("You cannot add a plant until you have added a reservoir.");
+			System.out.println("Exiting...");
+			return;
+		}
 		WaterReservoir selected_reservoir = selectReservoir("What reservoir is the plant attached to?", selected_room);
 
 		System.out.println("Enter plant name:");//This has to be first as input for PlantFactory
@@ -302,7 +306,7 @@ public class UI {
 			user_likes_data = "n";
 		}
 
-		while(true){ 
+		while(true){
 			//If user likes data, continue with new_plant as-is
 			if (user_likes_data.equals("y")){
 				storage.createPlant(new_plant);
@@ -494,7 +498,7 @@ public class UI {
 				System.out.println("Not a valid input");
 			}
 		}
-		
+
 	}
 
 	private void reservoirMenu(WaterReservoir reservoir, Room room){
