@@ -88,6 +88,18 @@ class Room{
     return false;
   }
 
+  public String reservoirNames(){
+    String resString = "";
+    for(int res = 0; res < reservoirs.size(); res++){
+      resString+=(res+1)+". "+reservoirs.get(res).name+"\n";
+    }
+    return resString;
+  }
+
+  public int numRes(){
+    return reservoirs.size();
+  }
+
   public String status_report(){
     String report = "";
     report += "The room " + name + " is at " + temp_sensor.get_current_temp() + " degrees F.\n";
