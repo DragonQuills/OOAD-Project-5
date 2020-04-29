@@ -543,8 +543,4 @@ public class UI {
 			}
 		}
 	}
-
-	public void finalize(){
-		scanner.close();
-	}
 }

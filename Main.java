@@ -4,7 +4,5 @@ public class Main {
 
 		ui.start();
 		ui.mainMenu();
-		ui.finalize();
-
 	}
 }
