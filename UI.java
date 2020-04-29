@@ -65,8 +65,8 @@ public class UI {
 
 	private int register(){
 		System.out.println("Enter a username: ");
-        String username = scanner.next();
-        System.out.println("Enter a password: ");
+		String username = scanner.next();
+		System.out.println("Enter a password: ");
 		String password = scanner.next();
 		return storage.registerUser(username, password);
 	}
