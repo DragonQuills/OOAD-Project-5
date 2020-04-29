@@ -81,7 +81,7 @@ public class UI {
 
 		int temp_change = 0;
 		while(true){
-			System.out.println("What's the outdoor tempurature?:");
+			System.out.println("What's the outdoor temperature?:");
 			String outdoor_temp = scanner.nextLine();
 			try {
 				int temp = Integer.parseInt(outdoor_temp);
