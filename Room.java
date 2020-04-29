@@ -82,6 +82,14 @@ class Room{
     return false;
   }
 
+  public void remove_reservoir_by_id(int id){
+    for( int i = 0; i < reservoirs.size(); i++){
+      if (reservoirs.get(i).id == id){
+        reservoirs.remove(i);
+      }
+    }
+  }
+
   public void remove_res(int index){
     reservoirs.remove(index);
   }

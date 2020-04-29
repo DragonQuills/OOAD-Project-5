@@ -431,37 +431,9 @@ public class UI {
 				plantMenu(selectedPlant, selectedRoom);
 			}
 			else if(menuChoice == 2){
-				boolean quitRes = false;
-				ArrayList<WaterReservoir> resList = selectedRoom.get_reservoir_list();
-				while(!quitRes){
-					for(int i = 0; i < resList.size(); i++){
-						System.out.println((i+1)+" Delete "+resList.get(i).name);
-					}
-					System.out.println((resList.size()+1)+" Return to main menu");
-					int resChoice = scanner.nextInt();
-					scanner.nextLine();
-					if(resChoice > 0 && resChoice <= resList.size()){
-						storage.deleteReservoir(selectedRoom.get_reservoir(resChoice-1).id);
-						WaterReservoir toDelete = selectedRoom.get_reservoir(resChoice-1);
-						ArrayList<Integer> plantsToDelete = new ArrayList<Integer>();
-						ArrayList<PlantPot> listOfPlants = selectedRoom.get_plants();
-						for(int p = 0; p < listOfPlants.size(); p++){
-							if(listOfPlants.get(p).resMatches(toDelete)){
-								plantsToDelete.add(p);
-							}
-						}
-						for(int d = plantsToDelete.size()-1; d >= 0; d--){
-							selectedRoom.remove_plant(plantsToDelete.get(d));
-						}
-						selectedRoom.remove_res(resChoice-1);
-					}
-					else if(resChoice == (resList.size()+1)){
-						quitRes = true;
-					}
-					else{
-						System.out.println("Not a valid choice");
-					}
-				}
+				WaterReservoir selectedRes = selectReservoir("Select a reservoir", selectedRoom);
+				System.out.print(selectedRes.status_report());
+				reservoirMenu(selectedRes, selectedRoom);
 			}
 			else if(menuChoice == 3){
 				System.out.println("Deleted room " +selectedRoom.name);
@@ -500,6 +472,51 @@ public class UI {
 				storage.changePlantName(plant.id, name);
 			}
 			else if(choice == 3){
+				return;
+			}
+			else{
+				System.out.println("Not a valid input");
+			}
+		}
+		
+	}
+
+	private void reservoirMenu(WaterReservoir reservoir, Room room){
+		while(true){
+			System.out.print("Select an option: ");
+			System.out.print("1. Delete reservoir");
+			System.out.print("2. Rename reservoir");
+			System.out.print("3. Refill reservoir");
+			System.out.print("4. Quit menu");
+
+			int choice = scanner.nextInt();
+			scanner.nextLine();
+			if(choice == 1){
+				System.out.println("Deleted reservoir "+reservoir.name+" and attached plants");
+				storage.deleteReservoir(reservoir.id);
+				ArrayList<Integer> plantsToDelete = new ArrayList<Integer>();
+				ArrayList<PlantPot> listOfPlants = room.get_plants();
+				for(int p = 0; p < listOfPlants.size(); p++){
+					if(listOfPlants.get(p).resMatches(reservoir)){
+						plantsToDelete.add(p);
+					}
+				}
+				for(int d = plantsToDelete.size()-1; d >= 0; d--){
+					room.remove_plant(plantsToDelete.get(d));
+				}
+				room.remove_reservoir_by_id(reservoir.id);
+				return;
+			}
+			else if(choice == 2){
+				System.out.print("What would you like to call the reservoir?");
+				String name = scanner.nextLine();
+				reservoir.name = name;
+				storage.changeReservoirName(reservoir.id, name);
+			}
+			else if(choice == 3){
+				reservoir.water_refilled();
+			}
+			else if(choice == 4){
 				return;
 			}
 			else{
