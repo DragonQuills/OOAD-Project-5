@@ -1,3 +1,7 @@
+/*
+Invoker for the command pattern
+*/
+
 class Timer{
 // attributes
   private Command light_on;
