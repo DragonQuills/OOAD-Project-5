@@ -189,7 +189,7 @@ public class UI {
 			return;
 		}
 		System.out.println("Enter reservoir name: ");
-		String reservoirName = scanner.next();
+		String reservoirName = scanner.nextLine();
 		System.out.println("Max capacity: ");
 		int capacity = intInput();
 		System.out.println("Warning level: ");
@@ -346,60 +346,42 @@ public class UI {
 				//User Input Light Time Input Validation
 				while(true){
 					System.out.println("Number of hours of light per day:");
-					String light_hours = scanner.next();
-					try {
-						int light = intInput();
-						if (light < 1 || light > 24){
-							System.out.println("Lights must be on for 1-24 hours per day. Please try again.");
-						}
-						else{
-							Light new_light = new Light();
-							Command light_on = new LightOnCommand(new_light);
-							Command light_off = new LightOffCommand(new_light);
-							Timer new_timer = new Timer(light_on, light_off,light);
-							new_plant.set_timer(new_timer);
-							break;
-						}
+					int light = intInput();
+					if (light < 1 || light > 24){
+						System.out.println("Lights must be on for 1-24 hours per day. Please try again.");
 					}
-					catch(NumberFormatException e) {
-						System.out.println("Input must be a number. Please try again:");
+					else{
+						Light new_light = new Light();
+						Command light_on = new LightOnCommand(new_light);
+						Command light_off = new LightOffCommand(new_light);
+						Timer new_timer = new Timer(light_on, light_off,light);
+						new_plant.set_timer(new_timer);
+						break;
 					}
 				}
 				//User Input Temperature Input Validation
 				while(true){
 					System.out.println("Minimum Room Temperature (Fahrenheit):");
-					String min_temp = scanner.next();
-					try {
-						Float temp = Float.parseFloat(min_temp);
-						if (temp < 0 || temp > 120){
-							System.out.println("We are currently unable to provide the environment you have requested.");
-							System.out.println("Please enter a temperature between 0 and 120 degrees Fahrenheit.");
-						}
-						else{
-							new_plant.set_min_temp(temp);
-							break;
-						}
+					Float temp = floatInput();
+					if (temp < 0 || temp > 120){
+						System.out.println("We are currently unable to provide the environment you have requested.");
+						System.out.println("Please enter a temperature between 0 and 120 degrees Fahrenheit.");
 					}
-					catch(NumberFormatException e) {
-						System.out.println("Input must be a number. Please try again:");
+					else{
+						new_plant.set_min_temp(temp);
+						break;
 					}
 				}
 				while(true){
 					System.out.println("Maximum Room Temperature (Fahrenheit):");
-					String max_temp = scanner.next();
-					try {
-						Float temp = Float.parseFloat(max_temp);
-						if (temp < 0 || temp > 120){
-							System.out.println("We are currently unable to provide the environment you have requested.");
-							System.out.println("Please enter a temperature between 0 and 120 degrees Fahrenheit.");
-						}
-						else{
-							new_plant.set_max_temp(temp);
-							break;
-						}
+					Float temp = floatInput();
+					if (temp < 0 || temp > 120){
+						System.out.println("We are currently unable to provide the environment you have requested.");
+						System.out.println("Please enter a temperature between 0 and 120 degrees Fahrenheit.");
 					}
-					catch(NumberFormatException e) {
-						System.out.println("Input must be a number. Please try again:");
+					else{
+						new_plant.set_max_temp(temp);
+						break;
 					}
 				}
 				storage.createPlant(new_plant);
