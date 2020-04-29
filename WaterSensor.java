@@ -1,3 +1,7 @@
+/*
+Invoker for controller
+*/
+
 class WaterSensor{
 // attributes
   private float current_humidity;
@@ -11,11 +15,11 @@ class WaterSensor{
   }
 
   public void water_plant(){
-    current_humidity += 10;
-
     // In a real greenhouse system, this would water for a certain amount of time
     // which would determine how much water the plant gets.
     // For this example, we're just having a constant amount of water.
+    current_humidity += 10;
+
     hose_on.execute();
     hose_off.execute();
   }
@@ -28,14 +32,16 @@ class WaterSensor{
   public void set_current_humidity(float new_current_humidity){
     current_humidity = new_current_humidity;
   }
+
   // normally this would be actual time passing and the water level lowering
-  // but sicne we have no actual hardware we're simulating it this way.
+  // but since we have no actual hardware we're simulating it this way.
   public void hour_passed(){
     current_humidity -= 1;
     if(current_humidity < 0){
       current_humidity = 0;
     }
   }
+  
 // constructor
   public WaterSensor(Command new_hose_on, Command new_hose_off){
     hose_on = new_hose_on;

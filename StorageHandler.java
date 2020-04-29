@@ -1,3 +1,8 @@
+/*
+Singleton pattern
+Handles all of the database saving and loading
+*/
+
 import java.util.Scanner;
 import java.io.*; //reference: https://www.tutorialspoint.com/java/java_files_io.htm
 import java.util.ArrayList;
@@ -29,15 +34,16 @@ public class StorageHandler {
         return instance;
     }
 
+    // Create a new user and add them to the database.
     public int registerUser(Scanner scanner){
-        // Scanner scanner = new Scanner(System.in);
         System.out.println("Enter a username: ");
         String username = scanner.next();
         System.out.println("Enter a password: ");
         String password = scanner.next();
-        // scanner.close();
         //Ref: https://tutoref.com/how-to-read-and-write-files-in-java-8/
         int maxId;
+
+        //Check if that username is already taken
         try{
             FileInputStream f = new FileInputStream(usersFile);
             BufferedReader br = new BufferedReader(new InputStreamReader(f));
@@ -69,7 +75,7 @@ public class StorageHandler {
             e.printStackTrace();
             return -1;
         }
-        //If the code has reached this point that username is not registered
+        // If the code has reached this point that username is not registered
         try{
             FileWriter fw = new FileWriter(usersFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -85,13 +91,15 @@ public class StorageHandler {
         return maxId+1;
     }
 
+    // Log in a user by pulling their information form the database
     public int loginUser(Scanner scanner){
-        // Scanner scanner = new Scanner(System.in);
         System.out.println("Enter a username: ");
         String username = scanner.next();
         System.out.println("Enter a password: ");
         String password = scanner.next();
-        // scanner.close();
+
+        // Try to find the user's name and password
+        // and returns the userid if they do.
         try{
             FileInputStream f = new FileInputStream(usersFile);
             BufferedReader br = new BufferedReader(new InputStreamReader(f));
@@ -123,6 +131,7 @@ public class StorageHandler {
         return -1;
     }
 
+    // Creates and returns a new reservoir and stores it in the database
     public WaterReservoir createReservoir(int roomId, String name, int capacity, int warning){
         int maxId = getMaxId(reservoirsFile);
 
@@ -141,6 +150,7 @@ public class StorageHandler {
         return new WaterReservoir(name, capacity, warning, maxId+1);
     }
 
+    // Creates and returns a new room and stores it in the database
     public Room createRoom(String name, int lowestTemp, int highestTemp, int userId){
         int maxId = getMaxId(roomsFile);
 
@@ -161,6 +171,7 @@ public class StorageHandler {
         return new Room(maxId+1, name, lowestTemp, highestTemp);
     }
 
+    // Creates and returns a new room and stores it in the database
     public void createPlant(PlantPot plant){
         int maxId = getMaxId(plantsFile);
         int reservoirId = plant.get_res().id;
@@ -171,7 +182,8 @@ public class StorageHandler {
         Float maxTemp = plant.get_max_temp();
         Float minTemp = plant.get_min_temp();
         Float lightTime = plant.get_light_hours();
-        //room is not needed as reservoir manages that relation
+        // room is not becasue the plant doesn't care what room it's in,
+        // just what reservoir it's attached to
         try{
             FileWriter fw = new FileWriter(plantsFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -187,6 +199,7 @@ public class StorageHandler {
         plant.id = maxId+1;
     }
 
+    // Deletes something of the given id from the given file
     private void deleteById(File file, int id){
         //Use function overloading in place of default parameters
         deleteById(file, id, 0);
@@ -196,7 +209,8 @@ public class StorageHandler {
         ArrayList<String> original = originalFile(file);
 
         try{
-            FileWriter fw = new FileWriter(file, false); //False flag overwrites the file
+            //False flag overwrites the file in order to delete the object
+            FileWriter fw = new FileWriter(file, false);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
             for(int i = 0; i < original.size(); i++){
@@ -217,6 +231,7 @@ public class StorageHandler {
         deleteById(plantsFile, id);
     }
 
+    // Deletes reservoir and all plants attached to it
     public void deleteReservoir(int id){
         ArrayList<Integer> plantsToDelete = new ArrayList<Integer>();
         try{
@@ -250,6 +265,7 @@ public class StorageHandler {
         deleteById(reservoirsFile, id);
     }
 
+    // Deletes a room, then deletes all the reservoirs in that room
     public void deleteRoom(int id){
         ArrayList<Integer> resToDelete = new ArrayList<Integer>();
         try{
@@ -284,6 +300,7 @@ public class StorageHandler {
         deleteById(ownersFile, id, 1);
     }
 
+    // goes through a file and finds the maximum id value to be used to assign new ids
     private int getMaxId(File file){
         int maxId = 0;
         try{
@@ -312,6 +329,7 @@ public class StorageHandler {
         return maxId;
     }
 
+    // Adds a new owner too a room. Allows multiple users to own one room
     public boolean addOwnership(int user, int room){
         try{
             FileInputStream f = new FileInputStream(ownersFile);
@@ -354,6 +372,7 @@ public class StorageHandler {
         return true;
     }
 
+    // Reads in a room from the database and returns the created room object
     private Room roomFromId(int roomId){
         try{
             FileInputStream f = new FileInputStream(roomsFile);
@@ -388,6 +407,7 @@ public class StorageHandler {
         return null;
     }
 
+    // Returns an array of rooms that belong to the given user
     public ArrayList<Room> roomsFromUser(int userId){
         ArrayList<Room> rooms = new ArrayList<Room>();
 
@@ -418,6 +438,7 @@ public class StorageHandler {
         return rooms;
     }
 
+    // returns reservoirs that are in the given room
     public ArrayList<WaterReservoir> reservoirsFromRoom(int roomId){
         ArrayList<WaterReservoir> reservoirs = new ArrayList<WaterReservoir>();
 
@@ -453,6 +474,7 @@ public class StorageHandler {
         return reservoirs;
     }
 
+    // Returns plants that are attached to the given reservoir
     public ArrayList<PlantPot> plantsFromReservoir(WaterReservoir res){
         ArrayList<PlantPot> plants = new ArrayList<PlantPot>();
         int resId = res.id;
@@ -493,6 +515,7 @@ public class StorageHandler {
         return plants;
     }
 
+    // Updates the current tempurature for a given room
     public void tempReading(int id, int temp){
         ArrayList<String> original = originalFile(roomsFile);
 
@@ -518,6 +541,7 @@ public class StorageHandler {
         }
     }
 
+    // Updates the current humidity level for a given plant
     public void humidityReading(int id, Float humidity){
         ArrayList<String> original = originalFile(plantsFile);
 
@@ -543,6 +567,7 @@ public class StorageHandler {
         }
     }
 
+    // Updates the current water level for a given reservoir
     public void storeWaterLevel(int id, float level){
         ArrayList<String> original = originalFile(reservoirsFile);
 
@@ -568,6 +593,7 @@ public class StorageHandler {
         }
     }
 
+    // Returns the full text of a file broken up line by line into an ArrayList
     private ArrayList<String> originalFile(File file){
         ArrayList<String> original = new ArrayList<String>();
         try{
