@@ -140,7 +140,7 @@ public class UI {
 				return;
 			}
 			else{
-				System.out.print("Not a valid input");
+				System.out.println("Not a valid input");
 			}
 		}
 	}
@@ -441,16 +441,16 @@ public class UI {
 			scanner.nextLine();
 			if(menuChoice == 1){
 				PlantPot selectedPlant = selectPlant("Select a plant", selectedRoom);
-				System.out.print(selectedPlant.status_report());
+				System.out.println(selectedPlant.status_report());
 				plantMenu(selectedPlant, selectedRoom);
 			}
 			else if(menuChoice == 2){
 				WaterReservoir selectedRes = selectReservoir("Select a reservoir", selectedRoom);
-				System.out.print(selectedRes.status_report());
+				System.out.println(selectedRes.status_report());
 				reservoirMenu(selectedRes, selectedRoom);
 			}
 			else if(menuChoice == 3){
-				System.out.print("What would you like to call the room?");
+				System.out.println("What would you like to call the room?");
 				String name = scanner.nextLine();
 				selectedRoom.name = name;
 			}
@@ -472,10 +472,10 @@ public class UI {
 
 	private void plantMenu(PlantPot plant, Room room){
 		while(true){
-			System.out.print("Select an option: ");
-			System.out.print("1. Delete plant");
-			System.out.print("2. Rename plant");
-			System.out.print("3. Quit menu");
+			System.out.println("Select an option: ");
+			System.out.println("1. Delete plant");
+			System.out.println("2. Rename plant");
+			System.out.println("3. Quit menu");
 
 			int choice = scanner.nextInt();
 			scanner.nextLine();
@@ -485,7 +485,7 @@ public class UI {
 				return;
 			}
 			else if(choice == 2){
-				System.out.print("What would you like to call the plant?");
+				System.out.println("What would you like to call the plant?");
 				String name = scanner.nextLine();
 				plant.name = name;
 				storage.changePlantName(plant.id, name);
@@ -502,11 +502,11 @@ public class UI {
 
 	private void reservoirMenu(WaterReservoir reservoir, Room room){
 		while(true){
-			System.out.print("Select an option: ");
-			System.out.print("1. Delete reservoir");
-			System.out.print("2. Rename reservoir");
-			System.out.print("3. Refill reservoir");
-			System.out.print("4. Quit menu");
+			System.out.println("Select an option: ");
+			System.out.println("1. Delete reservoir");
+			System.out.println("2. Rename reservoir");
+			System.out.println("3. Refill reservoir");
+			System.out.println("4. Quit menu");
 
 			int choice = scanner.nextInt();
 			scanner.nextLine();
@@ -527,7 +527,7 @@ public class UI {
 				return;
 			}
 			else if(choice == 2){
-				System.out.print("What would you like to call the reservoir?");
+				System.out.println("What would you like to call the reservoir?");
 				String name = scanner.nextLine();
 				reservoir.name = name;
 				storage.changeReservoirName(reservoir.id, name);
