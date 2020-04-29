@@ -1,3 +1,8 @@
+/*
+Client for controller pattern
+Also employes some elements of the facade pattern
+*/
+
 import java.util.ArrayList; //Referenced https://www.w3schools.com/java/java_arraylist.asp
 
 class Room{
@@ -13,6 +18,8 @@ class Room{
   private AC ac;
   private Heater heater;
   private TempuratureSensor temp_sensor;
+
+  // since storage handler is a singleton, it's fine that room has a copy
   private StorageHandler store;
 
 
@@ -88,6 +95,8 @@ class Room{
     return false;
   }
 
+  // Adds a status report to show the status of the room
+  // and the reservoirs and plants in it
   public String status_report(){
     String report = "";
     report += "The room " + name + " is at " + temp_sensor.get_current_temp() + " degrees F.\n";
@@ -100,6 +109,9 @@ class Room{
     return report;
   }
 
+  // simulates an hour passing for tempurature changes and simulastes
+  // and hour passing for all plants in the room
+  // and checks level of reservoirs
   public void hour_passed(int temp_change){
     temp_sensor.set_temp_modification(temp_change);
     if(temp_change > 0){
@@ -124,7 +136,7 @@ class Room{
     System.out.println("");
   }
 
-//temp getter functions for PlantFactory.conditions_ok_for_plant()
+// temp getter functions for PlantFactory.conditions_ok_for_plant()
   public float get_lowest_temp(){
     return lowest_temp;
   }
@@ -132,6 +144,7 @@ class Room{
     return highest_temp;
   }
 // constructor
+  // regular constructor
   public Room(int new_id, String new_name, int new_lowest_temp, int new_highest_temp){
     id = new_id;
     name = new_name;
@@ -151,6 +164,7 @@ class Room{
     store = StorageHandler.getInstance();
   }
 
+  // constructor to be used by the storage handler when creating a room from the database
   public Room(int new_id, String new_name, int new_lowest_temp, int new_highest_temp, int current_temp){
     id = new_id;
     name = new_name;
