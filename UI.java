@@ -8,7 +8,7 @@ public class UI {
 	PlantFactory factory;
 
 	UI(){
-		scanner = new Scanner(System.in);
+		scanner = new Scanner(System.in); //For terminal input, reference: https://alvinalexander.com/java/edu/pj/pj010005/
 		storage = StorageHandler.getInstance();
 		factory = new PlantFactory();
 	}
@@ -535,6 +535,9 @@ public class UI {
 				System.out.println("Not a valid input");
 			}
 		}
-		
+	}
+
+	public void finalize(){
+		scanner.close();
 	}
 }
