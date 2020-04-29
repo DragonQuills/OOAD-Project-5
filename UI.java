@@ -423,6 +423,10 @@ public class UI {
 	}
 
 	private void viewRooms(){
+		if(user.numRooms() == 0){
+			System.out.println("You don't have any rooms currently.");
+			return;
+		}
 		Room selectedRoom = selectRoom("Select a room:");
 		//At this point a room has been selected
 		System.out.println(selectedRoom.status_report());
@@ -433,11 +437,11 @@ public class UI {
 		boolean quitSubmenu = false;
 		while(!quitSubmenu){
 			System.out.println("Select an option:");
-			System.out.println("1 View plants");
-			System.out.println("2 View reservoirs");
-			System.out.println("3 Rename room");
-			System.out.println("4 Delete room");
-			System.out.println("5 Return to main menu");
+			System.out.println("1. View plants");
+			System.out.println("2. View reservoirs");
+			System.out.println("3. Rename room");
+			System.out.println("4. Delete room");
+			System.out.println("5. Return to main menu");
 			int menuChoice = scanner.nextInt();
 			scanner.nextLine();
 			if(menuChoice == 1){
