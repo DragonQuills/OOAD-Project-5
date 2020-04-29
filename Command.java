@@ -1,12 +1,13 @@
-//Command Patttern
+/*
+Command pattern here!
+*/
 
 public interface Command {
   public void execute();
 }
 
-//Physical Objects used by Commands
 
-
+// simulation of hysical Objects used by Commands
 class Light{
   public void on(){
     System.out.println("The light is on.");
