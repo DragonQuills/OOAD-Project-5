@@ -192,6 +192,10 @@ public class UI {
 	}
 
 	private void addReservoir(){
+		if (user.numRooms() == 0){
+			System.out.println("You don't have any rooms currently. You must add a room before you can add a reservoir.\n");
+			return;
+		}
 		System.out.println("Enter reservoir name: ");
 		String reservoirName = scanner.next();
 		System.out.println("Max capacity: ");
