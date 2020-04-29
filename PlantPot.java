@@ -1,3 +1,8 @@
+/*
+Client for Controller pattern
+Also has some elements of the Facade pattern
+*/
+
 class PlantPot{
 //attributes
   public String name;
