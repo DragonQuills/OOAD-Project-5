@@ -419,7 +419,6 @@ public class UI {
 	}
 
 	private void viewRooms(){
-		boolean quitView = false;
 		Room selectedRoom = selectRoom("Select a room:");
 		//At this point a room has been selected
 		System.out.println(selectedRoom.status_report());
