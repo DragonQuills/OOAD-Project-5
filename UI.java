@@ -129,6 +129,12 @@ public class UI {
 			else if(intInput == 4){
 				viewRooms();
 			}
+			else if(intInput == 5){
+				return;
+			}
+			else{
+				System.out.print("Not a valid input");
+			}
 		}
 	}
 
