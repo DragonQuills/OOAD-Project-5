@@ -207,6 +207,10 @@ public class UI {
 	}
 
 	private Room selectRoom(String prompt){
+		if(user.numRooms() == 0){
+			System.out.println("You don't have any rooms currently.\n");
+			return null;
+		}
 		String roomNames = user.roomNames();
 		int selectedRoom = -1;
 		while(true){
@@ -226,6 +230,10 @@ public class UI {
 	}
 
 	private WaterReservoir selectReservoir(String prompt, Room room){
+		if(room.numRes() == 0){
+			System.out.println("This room doesn't have any reservoirs.\n");
+			return null;
+		}
 		String resNames = room.reservoirNames();
 		int selectedRes = -1;
 		while(true){
@@ -245,6 +253,10 @@ public class UI {
 	}
 
 	private PlantPot selectPlant(String prompt, Room room){
+		if(room.numPlants() == 0){
+			System.out.println("This room doesn't have any plants.\n");
+			return null;
+		}
 		String plantNames = room.plantNames();
 		int selectedPlant = -1;
 		while(true){
@@ -423,11 +435,10 @@ public class UI {
 	}
 
 	private void viewRooms(){
-		if(user.numRooms() == 0){
-			System.out.println("You don't have any rooms currently.");
+		Room selectedRoom = selectRoom("Select a room:");
+		if(selectedRoom == null){
 			return;
 		}
-		Room selectedRoom = selectRoom("Select a room:");
 		//At this point a room has been selected
 		System.out.println(selectedRoom.status_report());
 		roomMenu(selectedRoom);
@@ -446,13 +457,17 @@ public class UI {
 			scanner.nextLine();
 			if(menuChoice == 1){
 				PlantPot selectedPlant = selectPlant("Select a plant", selectedRoom);
-				System.out.println(selectedPlant.status_report());
-				plantMenu(selectedPlant, selectedRoom);
+				if(selectedPlant != null){
+					System.out.println(selectedPlant.status_report());
+					plantMenu(selectedPlant, selectedRoom);
+				}
 			}
 			else if(menuChoice == 2){
 				WaterReservoir selectedRes = selectReservoir("Select a reservoir", selectedRoom);
-				System.out.println(selectedRes.status_report());
-				reservoirMenu(selectedRes, selectedRoom);
+				if(selectedRes != null){
+					System.out.println(selectedRes.status_report());
+					reservoirMenu(selectedRes, selectedRoom);
+				}
 			}
 			else if(menuChoice == 3){
 				System.out.println("What would you like to call the room?");
