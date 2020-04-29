@@ -57,17 +57,17 @@ public class UI {
 	private int login(){
 		// int userId = -1;
 		System.out.println("Enter a username: ");
-        String username = scanner.next();
+        String username = scanner.nextLine();
         System.out.println("Enter a password: ");
-		String password = scanner.next();
+		String password = scanner.nextLine();
 		return storage.loginUser(username, password);
 	}
 
 	private int register(){
 		System.out.println("Enter a username: ");
-		String username = scanner.next();
+		String username = scanner.nextLine();
 		System.out.println("Enter a password: ");
-		String password = scanner.next();
+		String password = scanner.nextLine();
 		return storage.registerUser(username, password);
 	}
 
@@ -334,19 +334,13 @@ public class UI {
 				}
 				while(true){
 					System.out.println("Ideal/Maximum soil humidity percentage(0-100):");
-					String desired_soil_humidity = scanner.next();
-					try {
-						Float desired_soil = Float.parseFloat(desired_soil_humidity);
-						if (desired_soil < 1 || desired_soil > 99){
-							System.out.println("Humidity percentage must be between 0 and 100. Please try again.");
-						}
-						else{
-							new_plant.set_desired_soil_humidity(desired_soil);
-							break;
-						}
+					Float desired_soil = floatInput();
+					if (desired_soil < 1 || desired_soil > 99){
+						System.out.println("Humidity percentage must be between 0 and 100. Please try again.");
 					}
-					catch(NumberFormatException e) {
-						System.out.println("Input must be a number. Please try again:");
+					else{
+						new_plant.set_desired_soil_humidity(desired_soil);
+						break;
 					}
 				}
 				//User Input Light Time Input Validation
@@ -354,7 +348,7 @@ public class UI {
 					System.out.println("Number of hours of light per day:");
 					String light_hours = scanner.next();
 					try {
-						int light = Integer.parseInt(light_hours);
+						int light = intInput();
 						if (light < 1 || light > 24){
 							System.out.println("Lights must be on for 1-24 hours per day. Please try again.");
 						}
