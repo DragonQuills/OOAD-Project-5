@@ -580,6 +580,31 @@ public class StorageHandler {
         }
     }
 
+    public void changeRoomName(int id, String name){
+        ArrayList<String> original = originalFile(roomsFile);
+
+        try{
+            FileWriter fw = new FileWriter(roomsFile, false);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            for(int i = 0; i < original.size(); i++){
+                if(original.get(i).split(",")[0].equals(String.valueOf(id))){
+                    String[] splitLine = original.get(i).split(",");
+                    String line = splitLine[0]+","+name+","+splitLine[2]+","+splitLine[3]+","+splitLine[4];
+                    pw.println(line);
+                }
+                else{
+                    pw.println(original.get(i));
+                }
+
+            }
+            pw.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
     public void storeWaterLevel(int id, float level){
         ArrayList<String> original = originalFile(reservoirsFile);
 

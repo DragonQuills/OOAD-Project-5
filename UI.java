@@ -421,8 +421,9 @@ public class UI {
 			System.out.println("Select an option:");
 			System.out.println("1 View plants");
 			System.out.println("2 View reservoirs");
-			System.out.println("3 Delete room");
-			System.out.println("4 Return to main menu");
+			System.out.println("3 Rename room");
+			System.out.println("4 Delete room");
+			System.out.println("5 Return to main menu");
 			int menuChoice = scanner.nextInt();
 			scanner.nextLine();
 			if(menuChoice == 1){
@@ -436,13 +437,18 @@ public class UI {
 				reservoirMenu(selectedRes, selectedRoom);
 			}
 			else if(menuChoice == 3){
+				System.out.print("What would you like to call the room?");
+				String name = scanner.nextLine();
+				selectedRoom.name = name;
+			}
+			else if(menuChoice == 4){
 				System.out.println("Deleted room " +selectedRoom.name);
 
 				storage.deleteRoom(selectedRoom.id);
 				user.remove_room(selectedRoom.name);
 				return;
 			}
-			else if(menuChoice == 4){
+			else if(menuChoice == 5){
 				return;
 			}
 			else{
