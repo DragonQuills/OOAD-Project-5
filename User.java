@@ -41,7 +41,7 @@ class User{
   public String roomNames(){
     String roomString = "";
     for(int room = 0; room < rooms.size(); room++){
-      roomString+=(room+1)+" "+rooms.get(room).name+"\n";
+      roomString+=(room+1)+". "+rooms.get(room).name+"\n";
     }
     return roomString;
   }

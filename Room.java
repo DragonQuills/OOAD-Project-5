@@ -58,6 +58,14 @@ class Room{
     plants.remove(index);
   }
 
+  public void remove_plant_by_id(int id){
+    for( int i = 0; i < plants.size(); i++){
+      if (plants.get(i).id == id){
+        plants.remove(i);
+      }
+    }
+  }
+
   public boolean rename_plant(String old_name, String new_name){
     for( int i = 0; i < plants.size(); i++){
       if (plants.get(i).name == old_name){
@@ -81,6 +89,14 @@ class Room{
     return false;
   }
 
+  public void remove_reservoir_by_id(int id){
+    for( int i = 0; i < reservoirs.size(); i++){
+      if (reservoirs.get(i).id == id){
+        reservoirs.remove(i);
+      }
+    }
+  }
+
   public void remove_res(int index){
     reservoirs.remove(index);
   }
@@ -95,8 +111,33 @@ class Room{
     return false;
   }
 
+  public String reservoirNames(){
+    String resString = "";
+    for(int res = 0; res < reservoirs.size(); res++){
+      resString+=(res+1)+". "+reservoirs.get(res).name+"\n";
+    }
+    return resString;
+  }
+
+  public int numRes(){
+    return reservoirs.size();
+  }
+
+  public String plantNames(){
+    String plantsString = "";
+    for(int plant = 0; plant < plants.size(); plant++){
+      plantsString+=(plant+1)+". "+plants.get(plant).name+"\n";
+    }
+    return plantsString;
+  }
+
+  public int numPlants(){
+    return plants.size();
+  }
+
   // Adds a status report to show the status of the room
   // and the reservoirs and plants in it
+  
   public String status_report(){
     String report = "";
     report += "The room " + name + " is at " + temp_sensor.get_current_temp() + " degrees F.\n";

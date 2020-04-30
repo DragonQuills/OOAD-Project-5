@@ -3,7 +3,6 @@ Singleton pattern
 Handles all of the database saving and loading
 */
 
-import java.util.Scanner;
 import java.io.*; //reference: https://www.tutorialspoint.com/java/java_files_io.htm
 import java.util.ArrayList;
 
@@ -34,12 +33,8 @@ public class StorageHandler {
         return instance;
     }
 
-    // Create a new user and add them to the database.
-    public int registerUser(Scanner scanner){
-        System.out.println("Enter a username: ");
-        String username = scanner.next();
-        System.out.println("Enter a password: ");
-        String password = scanner.next();
+    //stores a new user in the database, makes sure no existing user shares the name
+    public int registerUser(String username, String password){
         //Ref: https://tutoref.com/how-to-read-and-write-files-in-java-8/
         int maxId;
 
@@ -91,15 +86,8 @@ public class StorageHandler {
         return maxId+1;
     }
 
-    // Log in a user by pulling their information form the database
-    public int loginUser(Scanner scanner){
-        System.out.println("Enter a username: ");
-        String username = scanner.next();
-        System.out.println("Enter a password: ");
-        String password = scanner.next();
-
-        // Try to find the user's name and password
-        // and returns the userid if they do.
+    //checks username and password, returns user id
+    public int loginUser(String username, String password){
         try{
             FileInputStream f = new FileInputStream(usersFile);
             BufferedReader br = new BufferedReader(new InputStreamReader(f));
@@ -227,6 +215,7 @@ public class StorageHandler {
 
     }
 
+    //wrapper for deleting a plant
     public void deletePlant(int id){
         deleteById(plantsFile, id);
     }
@@ -553,6 +542,84 @@ public class StorageHandler {
                 if(original.get(i).split(",")[0].equals(String.valueOf(id))){
                     String[] splitLine = original.get(i).split(",");
                     String line = splitLine[0]+","+splitLine[1]+","+splitLine[2]+","+splitLine[3]+","+splitLine[4]+","+splitLine[5]+","+splitLine[6]+","+splitLine[7]+","+String.valueOf(humidity)+","+splitLine[9];
+                    pw.println(line);
+                }
+                else{
+                    pw.println(original.get(i));
+                }
+
+            }
+            pw.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    //changes plant name
+    public void changePlantName(int id, String name){
+        ArrayList<String> original = originalFile(plantsFile);
+
+        try{
+            FileWriter fw = new FileWriter(plantsFile, false);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            for(int i = 0; i < original.size(); i++){
+                if(original.get(i).split(",")[0].equals(String.valueOf(id))){
+                    String[] splitLine = original.get(i).split(",");
+                    String line = splitLine[0]+","+splitLine[1]+","+name+","+splitLine[3]+","+splitLine[4]+","+splitLine[5]+","+splitLine[6]+","+splitLine[7]+","+splitLine[8]+","+splitLine[9];
+                    pw.println(line);
+                }
+                else{
+                    pw.println(original.get(i));
+                }
+
+            }
+            pw.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    //changes reservoir name
+    public void changeReservoirName(int id, String name){
+        ArrayList<String> original = originalFile(reservoirsFile);
+
+        try{
+            FileWriter fw = new FileWriter(reservoirsFile, false);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            for(int i = 0; i < original.size(); i++){
+                if(original.get(i).split(",")[0].equals(String.valueOf(id))){
+                    String[] splitLine = original.get(i).split(",");
+                    String line = splitLine[0]+","+splitLine[1]+","+name+","+splitLine[3]+","+splitLine[4]+","+splitLine[5];
+                    pw.println(line);
+                }
+                else{
+                    pw.println(original.get(i));
+                }
+
+            }
+            pw.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    //changes room name
+    public void changeRoomName(int id, String name){
+        ArrayList<String> original = originalFile(roomsFile);
+
+        try{
+            FileWriter fw = new FileWriter(roomsFile, false);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            for(int i = 0; i < original.size(); i++){
+                if(original.get(i).split(",")[0].equals(String.valueOf(id))){
+                    String[] splitLine = original.get(i).split(",");
+                    String line = splitLine[0]+","+name+","+splitLine[2]+","+splitLine[3]+","+splitLine[4];
                     pw.println(line);
                 }
                 else{
