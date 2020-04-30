@@ -1,13 +1,14 @@
-/*
-Command pattern here!
-*/
+//Command Patttern
+//Implemented to control the physical objects that actually maintain the plants.
+//This pattern was chosen because it provides encapsulation such that this system
+//could be implemented on real hardware without any restructuring of the classes.
+
 
 public interface Command {
   public void execute();
 }
 
-
-// simulation of hysical Objects used by Commands
+// Simulation of physical Objects used by Commands
 class Light{
   public void on(){
     System.out.println("The light is on.");
@@ -53,6 +54,7 @@ class Hose{
 
 
 //Specific Commands
+//Turn on the lights.
 class LightOnCommand implements Command {
   Light light;
 
@@ -65,7 +67,7 @@ class LightOnCommand implements Command {
   }
 }
 
-
+//Turn off the lights
 class LightOffCommand implements Command {
   Light light;
 
@@ -78,7 +80,7 @@ class LightOffCommand implements Command {
   }
 }
 
-
+//Start pumping water into plant(s)
 class WaterOnCommand implements Command {
   Hose hose;
 
@@ -91,7 +93,7 @@ class WaterOnCommand implements Command {
   }
 }
 
-
+//Stop pumping water into plant(s)
 class WaterOffCommand implements Command {
   Hose hose;
 
@@ -104,7 +106,8 @@ class WaterOffCommand implements Command {
   }
 }
 
-
+//Heat up the Room
+//Turns on Heater, turns off AC.
 class HeatUpCommand implements Command {
   AC ac;
   Heater heater;
@@ -120,7 +123,8 @@ class HeatUpCommand implements Command {
   }
 }
 
-
+//Cool down the Room
+//Turns off heater, turns on AC.
 class CoolDownCommand implements Command {
   AC ac;
   Heater heater;
@@ -136,7 +140,8 @@ class CoolDownCommand implements Command {
   }
 }
 
-
+//Keep Room the same temperature
+//Turns off heater, turns off AC.
 class SameTempCommand implements Command {
   AC ac;
   Heater heater;
