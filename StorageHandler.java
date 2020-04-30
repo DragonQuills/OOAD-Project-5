@@ -3,7 +3,6 @@ Singleton pattern
 Handles all of the database saving and loading
 */
 
-import java.util.Scanner;
 import java.io.*; //reference: https://www.tutorialspoint.com/java/java_files_io.htm
 import java.util.ArrayList;
 
