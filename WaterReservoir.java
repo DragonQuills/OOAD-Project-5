@@ -6,11 +6,12 @@ class WaterReservoir{
   private float max_capacity;
   private float current_water;
   private float warning_level;
+  private StorageHandler store;
 //methods
   // boolean so the plant can tell if watering was successful
   public boolean water_used(float amount_used){
     current_water -= amount_used;
-    StorageHandler.getInstance().storeWaterLevel(id, current_water);
+    store.storeWaterLevel(id, current_water);
     if(current_water <= 0){
       current_water = 0;
       return false;
@@ -21,7 +22,7 @@ class WaterReservoir{
   }
   public void water_refilled(){
     current_water = max_capacity;
-    StorageHandler.getInstance().storeWaterLevel(id, current_water);
+    store.storeWaterLevel(id, current_water);
   }
   public boolean refill_needed(){
     return current_water<=warning_level;
@@ -58,6 +59,7 @@ class WaterReservoir{
     current_water = max;
     warning_level = warning;
     id = newId;
+    store = StorageHandler.getInstance();
   }
 
   //Constructor for use when building from database
@@ -68,5 +70,6 @@ class WaterReservoir{
     warning_level = warning;
     current_water = current;
     id = inputId;
+    store = StorageHandler.getInstance();
   }
 }
